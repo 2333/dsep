@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-4 16:17:33 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<!-- 
+		private String id;
+		private String unitId;
+		private String discId;
+		private String viewUnitId;
+		private String viewDiscId;
+		private String userType;
+	 -->
+    <class name="com.dsep.entity.dsepmeta.PublicitySet" table="DSEP_F_PUBLICITY_SET_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="unitId" type="java.lang.String">
+            <column name="UNIT_ID" length="5"/>
+        </property>
+        <property name="discId" type="java.lang.String">
+            <column name="DISC_ID" length="4"/>
+        </property>
+        <property name="viewUnitId" type="java.lang.String">
+            <column name="VIEW_UNIT_ID" length="5"/>
+        </property>
+        <property name="viewDiscId" type="java.util.Date">
+            <column name="VIEW_DISC_ID" length="4" />
+        </property>
+        <property name="userType" type="java.lang.String">
+            <column name="USER_TYPE" length="1"/>
+       	</property>
+    </class>
+</hibernate-mapping>
+
+

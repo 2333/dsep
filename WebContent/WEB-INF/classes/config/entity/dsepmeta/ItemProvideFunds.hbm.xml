@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.dsep.entity.project.ItemProvideFunds" table="DSEP_P_ITEMPROVIDEFUNDS_2013">
+		<id name="id" type="java.lang.String">
+			<column name="ID" />
+			<generator class="guid" />
+		</id>
+		
+		<property name="provideTime" type="java.util.Date">
+			<column name="PROVIDE_TIME"></column>
+		</property>
+		<property name="provideAmount" type="java.lang.Double">
+			<column name="PROVIDE_AMOUNT"></column>
+		</property>
+		<property name="balance" type="java.lang.Double">
+			<column name="BALANCE"></column>
+		</property>
+		
+		<many-to-one name="passItem" class="com.dsep.entity.project.PassItem" 
+        column="ITEM_ID"
+        cascade="none"
+        outer-join="auto"
+        insert="true" update="true"
+        access="property"
+        not-null="true">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

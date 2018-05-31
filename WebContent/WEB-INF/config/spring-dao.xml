@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<!--以下为代理 -->
+	<bean id="userDao" class="com.dsep.dao.rbac.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="rightDao" class="com.dsep.dao.rbac.impl.RightDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="roleDao" class="com.dsep.dao.rbac.impl.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teacherDao" class="com.dsep.dao.rbac.impl.TeacherDaoImpl"> 
+		<property name="sessionFactory" ref="sessionFactory"></property> 
+	</bean>
+	<bean id="unitDao" class="com.dsep.dao.base.impl.UnitDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="disciplineDao" class="com.dsep.dao.base.impl.DisciplineDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaDomainDao" class="com.meta.dao.impl.MetaDomainDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaEntityDao" class="com.meta.dao.impl.MetaEntityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaAttributeDao" class="com.meta.dao.impl.MetaAttributeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaEntityStyleDao" class="com.meta.dao.impl.MetaEntityStyleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaAttrStyleDao" class="com.meta.dao.impl.MetaAttrStyleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaDicDao" class="com.meta.dao.impl.MetaDicDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaDicItemDao" class="com.meta.dao.impl.MetaDicItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaObjectDao" class="com.meta.dao.impl.MetaObjectDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaAttrTemplDao" class="com.meta.dao.impl.MetaAttrTemplDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaEntityCategoryDao" class="com.meta.dao.impl.MetaEntityCategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaCheckRuleDao" class="com.meta.dao.impl.MetaCheckRuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaAttrCheckRuleDao" class="com.meta.dao.impl.MetaAttrCheckRuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="metaEntityMapDao" class="com.meta.dao.impl.MetaEntityMapDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 流程的DAO -->
+	<bean id="evalFlowDao" class="com.dsep.dao.dsepmeta.flow.impl.EvalFlowDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="preFlowDao" class="com.dsep.dao.dsepmeta.flow.impl.PreFlowDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 学科门类Dao -->
+	<bean id="categoryCollectDao" class="com.dsep.dao.dsepmeta.base.impl.CategoryCollectDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="categoryDao" class="com.dsep.dao.dsepmeta.base.impl.CategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="indexDao" class="com.dsep.dao.dsepmeta.base.impl.IndexDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="indexMapDao" class="com.dsep.dao.dsepmeta.base.impl.IndexMapDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="indexAvgWtDao" class="com.dsep.dao.dsepmeta.calculate.impl.IndexAvgWtDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="ruleDao" class="com.dsep.dao.dsepmeta.expert.rule.impl.RuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="ruleDetailDao"
+		class="com.dsep.dao.dsepmeta.expert.rule.impl.RuleDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="ruleMetaDao" class="com.dsep.dao.dsepmeta.expert.rule.impl.RuleMetaDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- <bean id="selectionDao"
+		class="com.dsep.dao.dsepmeta.expert.selection.impl.SelectionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> -->
+
+	<bean id="expertDao"
+		class="com.dsep.dao.dsepmeta.expert.selection.impl.ExpertDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="outerExpertDao"
+		class="com.dsep.dao.dsepmeta.expert.selection.impl.OuterExpertDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="testDao" class="com.dsep.dao.dsepmeta.databackup.impl.TestDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<!-- <bean id="testSelectExpertDao" class="com.dsep.dao.expert.impl.TestSelectExpertDaoImpl"> -->
+	<!-- <property name="sessionFactory" ref="expSessionFactory"></property> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="ExpDAO" class="com.dsep.dao.common.impl.ExpDaoImpl"> -->
+	<!-- <property name="sessionFactory" ref="expSessionFactory"></property> -->
+	<!-- </bean> -->
+
+	<bean id="DAO" class="com.dsep.dao.common.impl.DaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="disciplineDataBackupDao"
+		class="com.dsep.dao.dsepmeta.databackup.impl.DisciplineDataBackupDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> <!-- 2014/01/13 by panlinjie 代理结束 -->
+
+	<bean id="evalIndicWtDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalIndicWtDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="evalAchvDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalAchvDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+
+	<bean id="evalBatchDao"
+		class="com.dsep.dao.dsepmeta.expert.batch.impl.EvalBatchDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="evalPaperDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalPaperDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="evalProgressDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalProgressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="evalResultDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+	</bean>
+	<bean id="discCategoryDao" class="com.dsep.dao.dsepmeta.base.impl.DiscCategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="evalQuestionDao"
+		class="com.dsep.dao.dsepmeta.expert.evaluation.impl.EvalQuestionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="logicCheckEntityResultDao"
+		class="com.dsep.dao.dsepmeta.check.impl.LogicCheckEntityResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="logicCheckAttrResultDao"
+		class="com.dsep.dao.dsepmeta.check.impl.LogicCheckAttrResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="logicCheckIdentityResultDao"
+		class="com.dsep.dao.dsepmeta.check.impl.LogicCheckIdentityResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- 新版查重DAO -->
+	<bean id="similarityEntryDao" class="com.dsep.dao.dsepmeta.check.impl.SimilarityEntryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="similarityResultDao"
+		class="com.dsep.dao.dsepmeta.check.impl.SimilarityResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="pubEntryDao" class="com.dsep.dao.dsepmeta.check.impl.PubEntryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="pubTableConfigDao" class="com.dsep.dao.dsepmeta.check.impl.PubTableConfigDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="pubFieldConfigDao" class="com.dsep.dao.dsepmeta.check.impl.PubFieldConfigDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="pubResultDao" class="com.dsep.dao.dsepmeta.check.impl.PubResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	 
+	<bean id="spotResultDao" class="com.dsep.dao.dsepmeta.check.impl.SpotResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	 
+	<bean id="backupManagementDao"
+		class="com.dsep.dao.dsepmeta.databackup.impl.BackupManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="originalObjectionDao"
+		class="com.dsep.dao.dsepmeta.publicity.objection.impl.OriginalObjectionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="centerDataBackupDao"
+		class="com.dsep.dao.dsepmeta.databackup.impl.CenterDataBackupDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="messageDao" class="com.dsep.dao.dsepmeta.base.impl.MessageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="publicityManagementDao"
+		class="com.dsep.dao.dsepmeta.publicity.objection.impl.PublicityManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	
+	<bean id="publicityObjectTypeDao"
+		class="com.dsep.dao.dsepmeta.publicity.objection.impl.PublicityObjectTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>	
+	</bean>
+	<!-- Lubin Descipline Calculate Dao  -->
+	<bean id="dataCalculateDao"
+		class="com.dsep.dao.dsepmeta.calculate.impl.DataCalculateDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="indexFactorDao"
+		class="com.dsep.dao.dsepmeta.calculate.impl.IndexFactorDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="discIndexValueDao"
+		class="com.dsep.dao.dsepmeta.calculate.impl.DiscIndexValueDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="indexScoreDao"
+		class="com.dsep.dao.dsepmeta.calculate.impl.IndexScoreDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="calResultDao"
+		class="com.dsep.dao.dsepmeta.calculate.impl.CalResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="normConfigDao"
+		class="com.dsep.dao.dsepmeta.process.impl.NormConfigDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="normConfigAttrDao"
+		class="com.dsep.dao.dsepmeta.process.impl.NormConfigAttrDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="normResultDao"
+		class="com.dsep.dao.dsepmeta.process.impl.NormResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Lubin Descipline Calculate Dao End -->
+	
+	<bean id="proveMaterialDao"
+		class="com.dsep.dao.dsepmeta.publicity.impl.ProveMaterialDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 教师学科Dao -->
+	<bean id="teachDiscDao" class="com.dsep.dao.dsepmeta.base.impl.TeachDiscDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="metaInnerStateDetailDao" class="com.meta.dao.impl.MetaInnerStateDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 公告dao -->
+	<bean id="newsDao"
+		class="com.dsep.dao.base.impl.NewsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="attachmentDao"
+		class="com.dsep.dao.base.impl.AttachmentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="storageDao"
+		class="com.dsep.dao.base.impl.StorageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="feedbackManagementDao"
+		class="com.dsep.dao.dsepmeta.publicity.feedback.impl.FeedbackManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="feedbackResponseDao"
+		class="com.dsep.dao.dsepmeta.publicity.feedback.impl.FeedbackResponseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="feedbackImportDao"
+		class="com.dsep.dao.dsepmeta.publicity.feedback.impl.FeedbackImportDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="dataModifyHistoryDao"
+		class="com.dsep.dao.dsepmeta.datamodify.impl.DataModifyHistoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!--问卷dao  -->
+	<bean id="questionnaireDao" class="com.dsep.dao.dsepmeta.survey.impl.QuestionnaireDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="answerDao" class="com.dsep.dao.dsepmeta.survey.impl.AnswerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="templateDao" class="com.dsep.dao.dsepmeta.survey.impl.TemplateDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="surveyUserDao" class="com.dsep.dao.dsepmeta.survey.impl.SurveyUserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 项目管理dao -->
+	<bean id="schoolProjectDao"
+		class="com.dsep.dao.dsepmeta.project.impl.SchoolProjectDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="applyItemDao"
+		class="com.dsep.dao.dsepmeta.project.impl.ApplyItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teamMemberDao"
+		class="com.dsep.dao.dsepmeta.project.impl.TeamMemberDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="itemFundsDao"
+		class="com.dsep.dao.dsepmeta.project.impl.ItemFundsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="itemProvideFundsDao"
+		class="com.dsep.dao.dsepmeta.project.impl.ItemProvideFundsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="itemExecuteDao"
+		class="com.dsep.dao.dsepmeta.project.impl.ItemExecuteDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="passItemDao"
+		class="com.dsep.dao.dsepmeta.project.impl.PassItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="judgeResultDao"
+		class="com.dsep.dao.dsepmeta.project.impl.JudgeResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!--admin dao的相关配置  -->
+	<bean id="sqlHelperDao" class="com.dsep.dao.admin.impl.SqlHelperDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dsep.entity.project.JudgeResult" table="DSEP_P_JUDGERESULT_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="32" />
+            <generator class="guid" />
+        </id>
+        <property name="score" type="java.lang.String">
+            <column name="SCORE" />
+        </property>
+        <property name="opinion" type="java.lang.String">
+            <column name="OPINION" />
+        </property>
+         <property name="isAccept" type="java.lang.String">
+            <column name="IS_ACCEPT" />
+        </property>
+        
+		<many-to-one name="attachment" class="com.dsep.entity.Attachment"
+			column="ATTACHMENT_ID" unique="true" />   
+		<many-to-one name="applyItem" class="com.dsep.entity.project.ApplyItem"
+			column="ITEM_ID" unique="true" />     
+	 </class>
+</hibernate-mapping>

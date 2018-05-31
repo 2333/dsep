@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="/question">
+		<div class="Q SCQ qWrapper" id="q" + n> 
+			<xsl:variable name="qId" select="qId" />
+			<div class="qStem">
+				<label class="QNum">Q+n</label>
+				<xsl:value-of select="qStem" />
+			</div>
+			<table class="">
+				<tr>
+					<xsl:for-each select="qItems/singleItem">
+						<td>
+							<xsl:if test="selectBoxNum='1'">
+								<input type="radio" class="value">
+									<xsl:attribute name="name">
+     							<xsl:value-of select="parentQRefId" />
+     						</xsl:attribute>
+									<xsl:attribute name="itemid">
+     							<xsl:value-of select="itemId" />
+     						</xsl:attribute>
+								</input>
+							</xsl:if>
+							<xsl:value-of select="str1"></xsl:value-of>
+						</td>
+					</xsl:for-each>
+				</tr>
+			</table>
+		</div>
+	</xsl:template>
+</xsl:stylesheet>

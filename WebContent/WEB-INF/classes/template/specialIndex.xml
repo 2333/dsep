@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 本xml中用于存储末级指标百分制转换时需要使用阈值的末级指标，例如生师比、专职教师总数、授予博士/硕士学位数 -->
+
+<root>
+	<!-- JSJ计算机门类  begin-->
+	<!-- 生师比 -->
+	<index indexId='JSJ000I010201' type='2' set='percent' c1='5%' c2='20%'></index>
+	<!-- 专职教师总数 -->
+	<index indexId='JSJ000I010202' type='1' set='percent' c1='20%'></index>
+	<!-- 授予博士/硕士学位数 -->
+	<index indexId='JSJ000I030301' type='1' set='number' c1='20'></index>
+	
+	<!-- JSJ计算机门类 end -->
+</root>
+
+
+
+<!-- 说明：
+type为1表示本指标项需要一个阈值，type为2表示本指标项需要两个阈值
+set属性如果设定为true,则表示在xml中手动的设置阈值
+c1属性，type为1，设置阈值，；type为2，设置两个阈值中较小那个
+c2属性，type为1，不用设置；type为2，设置两个阈值中较大那个
+set属性设定为expert,则不用填写c1、c2
+ -->

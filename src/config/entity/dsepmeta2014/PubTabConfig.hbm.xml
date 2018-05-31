@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.dsep.entity.dsepmeta.PubTabConfig" table="DSEP_D_PUB_TABCONFIG_2014">
+		<id name="id" type="java.lang.String">
+            <column name="ID" length="32" />
+        </id>
+		<property name="publibId" type="java.lang.String">
+			<column name="PUBLIB_ID" length="32"/>
+		</property>
+		<property name="entityId" type="java.lang.String">
+			<column name="ENTITY_ID" length="32"/>
+		</property>
+		<property name="querySql" type="java.lang.String">
+			<column name="QUERY_SQL" length="200"/>
+		</property>
+		<set name="pubFieldConfigs" table="DSEP_D_PUB_FIELDCONFIG_2013" lazy="true"> 
+			<key column="MAP_TABLE_ID"/> 
+			<one-to-many class="com.dsep.entity.dsepmeta.PubFieldConfig" />
+		</set>
+	</class>
+</hibernate-mapping>

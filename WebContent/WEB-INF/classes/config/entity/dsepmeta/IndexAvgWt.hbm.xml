@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.IndexAvgWt" dynamic-update="true" table="DSEP_O_INDEX_AVG_WT_2013">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="indexItemId" type="java.lang.String" >
+            <column name="INDEX_ID" length="20"/>
+        </property>
+        <property name="discId" type="java.lang.String" >
+            <column name="DISC_ID" length="100"/>
+        </property>
+        <property name="avgValue" type="double" >
+            <column name="AVG_VALUE" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>
+

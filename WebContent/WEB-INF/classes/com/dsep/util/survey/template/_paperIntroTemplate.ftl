@@ -1,0 +1,1 @@
+<div class="publishPaperIntro">${q.paperIntro}</div>

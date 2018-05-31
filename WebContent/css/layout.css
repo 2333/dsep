@@ -1,0 +1,281 @@
+/* @group commom style
+
+公共样式
+--------------------------------------------------------------*/
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.hidden {
+	display: none;
+}
+
+.scroll-x {
+	overflow-x: scroll;
+}
+
+.scroll-y {
+	overflow-y: scroll;
+}
+
+.layout_center {
+	margin: 0 auto;
+}
+
+.left_space{
+	padding-left:15px;
+}
+
+/* @group table style
+
+
+--------------------------------------------------------------*/
+.inner_table_holder {
+	overflow: hidden;
+}
+
+.layout_table {
+	padding-left: 10px;
+}
+
+.layout_table tr {
+	height: 33px;
+}
+
+/* @group layout style
+
+--------------------------------------------------------------*/
+.layout_holder {
+	min-height: 650px;
+	position: relative;
+}
+
+.left_block {
+	z-index: 1;
+	width: 200px;
+	min-height: 700px;
+	position: absolute;
+}
+
+.right_block {
+	margin-left: 220px;
+	min-height: 700px;
+	overflow-x: scroll;
+}
+
+#hide_tree {
+	width: 15px;
+	left: 200px;
+	min-height: 700px;
+	background-color: #eee;
+	border: 1px solid gray;
+	position: absolute;
+	z-index: 1;
+}
+
+.hide_tree {
+	width: 15px;
+	left: 200px;
+	min-height:700px;
+	background-color: #eee;
+	border: 1px solid gray;
+	position: absolute;
+	z-index: 1;
+}
+
+.spot_check_div {
+	font-size: 1.1em;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+.spot_check_div p {
+	line-height: 1.5em;
+	text-indent: 2em;
+}
+
+.singulardata_check_div {
+	font-size: 1.1em;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+.singulardata_check_div p {
+	line-height: 1.5em;
+	text-indent: 2em;
+}
+
+.logic_check_div {
+	font-size: 1.1em;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+.logic_check_div p {
+	line-height: 1.5em;
+	text-indent: 2em;
+}
+
+.right_block_tab {
+	margin-left: 220px;
+}
+
+.sim_check_first_block {
+	width: 300px;
+	min-height: 650px;
+	position: absolute;
+	background-color: #dfeffc;
+}
+
+.sim_check_second_block {
+	margin-left: 305px;
+	min-height: 650px;
+}
+
+.radiobutton_div {
+	border: 1px solid #ccc;
+	background-color: #dfeffc;
+}
+
+.radiobutton_div table {
+	padding-left: 10px;
+}
+
+.radiobutton_div tr {
+	line-height: 30px;
+}
+
+.operatetb {
+	background-color: #dfeffc;
+}
+
+.result_view_first_block {
+	width: 250px;
+	min-height: 650px;
+	position: absolute;
+	background-color: #dfeffc;
+}
+
+.result_view_second_block {
+	overflow-x: scroll;
+	margin-left: 252px;
+	min-height: 650px;
+}
+
+.pubLib_check_first_block {
+	width: 250px;
+	min-height: 650px;
+	position: absolute;
+	background-color: #dfeffc;
+}
+
+.result_view_first_block {
+	width: 250px;
+	min-height: 650px;
+	position: absolute;
+	background-color: #dfeffc;
+}
+
+.result_view_second_block {
+	overflow-x: scroll;
+	margin-left: 252px;
+	min-height: 650px;
+}
+
+.pubLib_check_first_block {
+	width: 250px;
+	min-height: 650px;
+	position: absolute;
+	background-color: #dfeffc;
+	border: 1px solid #aaeffc;
+}
+
+.pubLib_check_second_block {
+	overflow-x: scroll;
+	margin-left: 253px;
+	min-height: 650px;
+}
+
+.report_generate {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.data_normalize_css {
+	border-color: #878787;
+	border-style: solid;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	background-color: #dfeffc;
+	text-align: center;
+}
+
+.data_normalize_first {
+	width: 280px;
+	min-height: 650px;
+	position: absolute;
+	margin-top: 2px;
+	background-color: #dfeffc;
+}
+
+.data_normalize_second {
+	margin-left: 280px;
+	min-height: 650px;
+	margin-top: 2px;
+}
+
+.progress {
+	font-size: 1.1em;
+	line-height: normal;
+	font-weight: bold;
+	color: #2e6e9e;
+	text-align: center;
+}
+
+.percentdialog_div {
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	line-height: 30px;
+}
+
+.logic_left_block {
+	margin-left: 2px;
+	width: 300px;
+	min-height: 650px;
+	position: absolute;
+	background-color:#dfeffc;
+}
+
+.logic_right_block {
+	margin-left: 304px;
+	min-height: 650px;
+}
+
+table#logicRuleDetail {
+	border-collapse: collapse;
+	border: 1px solid ;
+}
+
+table#logicRuleDetail td {
+	border: 1px solid ;
+}
+
+table#logicRuleDetail th {
+	border: 1px solid ;
+}
+
+a#logicRuleDetailTitle {
+	font-size: 12px;
+}

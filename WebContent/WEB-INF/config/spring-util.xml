@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="Dictionaries" class="com.dsep.util.Dictionaries" init-method="init">
+		<property name="unitService" ref="unitService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+   </bean>	
+   
+   <bean id="emailMessage" class="com.dsep.util.EmailMessage" >
+   		<property name="IS_ENABLED_DEBUG_MOD" value="true"></property>
+   		<property name="mailServerHost" value="smtp.163.com"></property>
+   		<property name="mailServerPort" value="25"></property>
+   		<property name="fromAddress" value="dseptest@163.com"></property>
+   		<property name="userPass" value="patent"></property>
+   		<property name="validate" value="true"></property>
+   		<property name="isHTML" value="true"></property>
+   		<property name="isSSL" value="false"></property>
+   		<property name="MAX_NUMBER" value="40"></property>
+   </bean>
+   
+   <bean id="springContext" class="com.dsep.util.SpringContext"/>
+</beans>

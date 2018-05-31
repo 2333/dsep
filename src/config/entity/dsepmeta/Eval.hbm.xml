@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-4 11:07:09 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.Eval" table="DSEP_M_EVAL_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="unitId" type="java.lang.String">
+            <column name="UNIT_ID" />
+        </property>
+        <property name="discId" type="java.lang.String">
+            <column name="DISC_ID" />
+        </property>
+        <property name="insertUserId" type="java.lang.String">
+            <column name="INSERT_USER_ID" />
+        </property>
+        <property name="insertTime" type="java.util.Date">
+            <column name="INSERT_TIME" />
+        </property>
+        <property name="modifyUserId" type="java.lang.String">
+            <column name="MODIFY_USER_ID" />
+        </property>
+        <property name="modifyTime" type="java.util.Date">
+            <column name="MODIFY_TIME" />
+        </property>
+        <property name="isEval" type="boolean" access="field">
+            <column name="IS_EVAL" />
+        </property>
+        <property name="isReport" type="boolean" access="field">
+            <column name="IS_REPORT" />
+        </property>
+        <property name="discVersionNo" type="java.lang.String">
+            <column name="DISC_VERSION_NO" />
+        </property>
+        <property name="unitVersionNo" type="java.lang.String">
+            <column name="UNIT_VERSION_NO" />
+        </property>
+        <property name="discStreamNo" type="java.lang.String">
+            <column name="DISC_STREAM_NO" />
+        </property>
+        <property name="unitStreamNo" type="java.lang.String">
+            <column name="UNIT_STREAM_NO" />
+        </property>
+        <property name="state" type="int">
+            <column name="STATE" />
+        </property>
+        <property name="isUnitReport" type="boolean" access="field">
+            <column name="IS_UNIT_REPORT" />
+        </property>
+        <property name="briefId" type="java.lang.String">
+        	<column name="BRIEF_ID" length="32"></column>
+        </property>
+        <property name="discIntroduceId" type="java.lang.String">
+        	<column name="DISC_INTRODUCE_ID" length="32"></column>
+        </property>
+        
+        <property name="createBriefTime" type="java.util.Date">
+        	<column name="CREATE_BRIEF_TIME"></column>
+        </property>
+    </class>
+</hibernate-mapping>
+
+

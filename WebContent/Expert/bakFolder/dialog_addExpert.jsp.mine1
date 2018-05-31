@@ -1,0 +1,136 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 
+	
+	NOTIFICATION BY 方弘宇
+	该弹出窗口是由expert_select.jsp(同一目录下)里面的
+	addExpertDialog("${ContextPath}/expert/addExpert")方法弹出的
+	上述URL访问ExpertSelectController
+	
+	该弹出窗口的TITLE和几个按钮都在expert_select.jsp页面中的addExpertDialog方法中
+ -->
+<div id="addExpertInfo_div" class="form">
+	<form id="expertInfo_fm" class="fr_form">
+		<table id="rule_tb_dialog" class="fr_table" style="width:800px">
+			<tr>
+				<td width='100'><span class="TextBold">姓名/ID</span></td>
+				<td><input type="text" />
+				<input name="RadioGroup1" type="radio" id="RadioID" value="ID"
+						checked="checked" /> ID 
+					<input name="RadioGroup1" type="radio" id="RadioName" value="姓名" /> 姓名
+				</td> 
+				<td class="fr_right">
+				    <a id="searchExpertByNameOrId" class="button" href="#">
+				    <span class="icon icon-search"></span>按姓名或者查找</a>
+				</td>
+			</tr>
+			    <td width='100'><span class="TextBold">学校ID</span></td>
+				<td><input type="text" id="unitID"/></td>
+				<td width='100'><span class="TextBold">学科ID</span></td>
+				<td><input type="text" id="disciplineID"/></td>
+				<td class="fr_right">
+					<a id="searchExpert" class="button" href="#"><span class="icon icon-search"></span>根据学校学科查找</a>
+				</td>
+			<tr>
+		</table>
+		
+		<div>
+			<table id="expert_list"></table>
+			<div id="pager2"></div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	$("input[type=submit], a.button , button").button();
+	
+	/* 表格化表单布局*/
+	$(".fr_table td:nth-child(even)").addClass("fr_left");
+	$(".fr_table td:nth-child(odd)").addClass("fr_right");
+	
+	$(document).ready(
+			function() {
+				/********************  jqGrid ***********************/
+				$("#expert_list").jqGrid(
+						{							
+							url: '${ContextPath}/batchAddExpert/getExperts',
+							datatype : "json",
+							mtype: 'GET',
+							colNames : [ '专家编号', '专家姓名', '所属学科', '所在单位'
+							             ,'办公电话', '移动电话', '电子邮箱'
+									],
+							colModel : [ {
+								name : 'expert.zjbh',
+								index : 'number',
+								width : 100,
+								align : "center"
+							}, {
+								name : 'expert.zjxm',
+								index : 'name',
+								width : 200,
+								align : "center"
+							}, {
+								name : 'expert.zjxm',
+								index : 'disciplineName',
+								width : 100
+							}, {
+								name : 'expert.zjxm',
+								index : 'collegeName',
+								width : 100
+							  }, {
+								name : 'expert.zjxm',
+								index : 'officePhone',
+								width : 100,
+								align : "center"
+							}, {
+								name : 'expert.zjxm',
+								index : 'cellPhone',
+								width : 100,
+								align : "center"
+							}, {
+								name : 'expert.zjxm',
+								index : 'email',
+								width : 100,
+								align : "center" 
+							} ],
+							height : '100%',
+							width : 800,
+							rowNum : 10,
+							rowList : [ 10, 20, 30 ],
+							viewrecords : true,
+							sortorder : "desc",
+							sortname : "id",
+							pager : '#pager2',
+							multiselect : true,
+							multibodyonly : true,
+							caption : "专家检索结果",
+							jsonReader: {    //jsonReader来跟服务器端返回的数据做对应  
+			                    root: "rows",  //包含实际数据的数组  
+			                    page: "pageIndex",  //当前页  
+			                    total: "totalPage",//总页数  
+			                    records:"totalCount", //查询出的记录数  
+			                    repeatitems : false,
+			                }
+						});				
+			});
+	
+	        $('#searchExpertByNameOrId').click(function(){
+	        	var id=$('#RadioID').val();
+	        	var name=$('#RadioName').val();
+	        	if(name!=null){
+	        		url='${ContextPath}/batchAddExpert/selectExpertGetExpertByName?name='+name;
+	        		alert(url);
+	        		$.post(url,function(){
+	        			//$("#expert_list").setGridParam({url:'${ContextPath}/batchAddExpert/selectExpertGetExpertByName?name'+name}).trigger("reloadGrid");
+	        		});
+	        	}
+	        		
+	        });
+	
+			$('#searchExpert').click(function() {
+				$("#expert_list").setGridParam({url:'${ContextPath}/batchAddExpert/getExperts/'}).trigger("reloadGrid");
+			});
+			
+			
+</script>

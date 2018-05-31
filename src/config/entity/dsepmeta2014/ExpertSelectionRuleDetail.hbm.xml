@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.expert.ExpertSelectionRuleDetail" table="DSEP_E_RULE_DETAIL_2014">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+		<property name="itemName" type="java.lang.String">
+			<column name="ITEM_NAME" />
+		</property>
+		<property name="isNumber" type="java.lang.Boolean">
+			<column name="IS_NUMBER" />
+		</property>
+		<property name="sequ" type="java.lang.String">
+			<column name="SEQU"/>
+		</property>
+		<property name="operator" type="java.lang.String">
+			<column name="OPERATOR" />
+		</property>
+		<property name="isNecessary" type="java.lang.Boolean">
+			<column name="IS_NECESSARY" />
+		</property>
+		<property name="conditionChecked" type="java.lang.Boolean">
+			<column name="CONDITION_CHECKED" />
+		</property>
+		<property name="restrict1" type="java.lang.String">
+			<column name="RESTRICT1" />
+		</property>
+		<property name="restrict2" type="java.lang.String">
+			<column name="RESTRICT2" />
+		</property>
+		<property name="restrict3" type="java.lang.String">
+			<column name="RESTRICT3" />
+		</property>
+		<property name="restrict4" type="java.lang.String">
+			<column name="RESTRICT4" />
+		</property>
+		<property name="restrict5" type="java.lang.String">
+			<column name="RESTRICT5" />
+		</property>
+		<property name="restrict6" type="java.lang.String">
+			<column name="RESTRICT6" />
+		</property>
+		<property name="restrict7" type="java.lang.String">
+			<column name="RESTRICT7" />
+		</property>
+		<property name="restrict8" type="java.lang.String">
+			<column name="RESTRICT8" />
+		</property>
+		<property name="restrict9" type="java.lang.String">
+			<column name="RESTRICT9" />
+		</property>
+		<property name="restrict10" type="java.lang.String">
+			<column name="RESTRICT10" />
+		</property>
+        
+        <many-to-one name="rule" 
+        class="com.dsep.entity.expert.ExpertSelectionRule" 
+        cascade="none"
+        outer-join="auto"
+        insert="true" update="true"
+        access="property"
+        column="rule_id"
+        not-null="true">
+   		</many-to-one>
+    </class>
+</hibernate-mapping>

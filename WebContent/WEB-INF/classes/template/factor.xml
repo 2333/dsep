@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <JSJ>
+    <!--  专家团队 -->
+    <index IndexItemId='JSJ000I010101' Type='normal' IndicWtId='ZSALL0101,ZSALL0102,
+    ZSALL0103,ZSALL0104,ZSALL0105,ZSALL0106,ZSALL0107,ZSALL0108,ZSALL0109'
+    CatId='JSJ'>
+    </index>
+    <!-- 生师比 -->
+    <index IndexItemId='JSJ000I010201' Type='normal' IndicWtId='ZSALL0501'
+    CatId='JSJ'>
+    </index>
+    <!--  专职教师总数 -->
+    <index IndexItemId='JSJ000I010202' Type='normal' IndicWtId='ZSALL0301'
+    CatId='JSJ'>
+    </index>
+    <!-- 国家与省部级科研获奖数 -->
+    <index IndexItemId='JSJ000I020401' Type='award' IndicWtId='ZSALL0203,
+    ZSALL0204'
+    CatId='JSJ'>
+    </index>
+    <!-- 授予博士/硕士学位数 -->
+    <index IndexItemId='JSJ000I030301' Type='normal' IndicWtId='ZSALL0401'
+    CatId='JSJ'>
+    </index>
+  </JSJ>
+</root>
+

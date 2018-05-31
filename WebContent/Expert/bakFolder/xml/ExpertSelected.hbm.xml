@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.ExpertSelected" table="DSEP_E_EXPERT_SELECTED_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="expertName" type="java.lang.String">
+            <column name="EXPERT_NAME" />
+        </property>
+        <property name="expertNumber" type="java.lang.String">
+            <column name="EXPERT_NUMBER" />
+        </property>
+        
+        <property name="expertType" type="java.lang.String">
+            <column name="EXPERT_TYPE" />
+        </property>
+        <property name="source" type="java.lang.Integer">
+            <column name="SOURCE" />
+        </property>
+        <property name="discId" type="java.lang.String">
+            <column name="DISC_ID" />
+        </property>
+       	<property name="discId2" type="java.lang.String">
+            <column name="DISC_ID2" />
+        </property>
+       	<property name="unitId" type="java.lang.String">
+            <column name="UNIT_ID" />
+        </property>
+        <property name="expertEmail1" type="java.lang.String">
+            <column name="EXPERT_EMAIL1" />
+        </property>
+        <property name="expertEmail2" type="java.lang.String">
+            <column name="EXPERT_EMAIL2" />
+        </property>
+        <property name="expertEmail3" type="java.lang.String">
+            <column name="EXPERT_EMAIL3" />
+        </property>
+        <property name="validateCode1" type="java.lang.String">
+            <column name="VALIDATE_CODE1" />
+        </property>
+        <property name="validateCode2" type="java.lang.String">
+            <column name="VALIDATE_CODE2" />
+        </property>
+        <property name="validateCode3" type="java.lang.String">
+            <column name="VALIDATE_CODE3" />
+        </property>
+        <property name="officePhone" type="java.lang.String">
+            <column name="OFFICE_PHONE" />
+        </property>
+        <property name="personalPhone" type="java.lang.String">
+            <column name="PERSONAL_PHONE" />
+        </property>
+         <property name="currentStatus" type="java.lang.Integer">
+            <column name="CURRENT_STATUS" />
+        </property>
+         <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        
+        <many-to-one name="evalBatch" 
+        class="com.dsep.entity.dsepmeta.EvalBatch" 
+        cascade="none"
+        outer-join="auto"
+        insert="true" update="true"
+        access="property"
+        column="batch_id"
+        not-null="true">
+   		</many-to-one>
+    </class>
+</hibernate-mapping>

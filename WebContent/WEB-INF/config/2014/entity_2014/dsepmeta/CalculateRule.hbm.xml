@@ -1,0 +1,20 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">	
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.CalculateRule" dynamic-update="true" table="DSEP_O_CAL_RULE_2014">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="ruleName" type="java.lang.String" >
+            <column name="RULE_NAME" length="100"/>
+        </property>
+        <property name="remark" type="java.lang.String" >
+            <column name="REMARK" length="200"/>
+        </property>
+        <property name="calClass" type="java.lang.String" >
+            <column name="CAL_CLASS" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>
+

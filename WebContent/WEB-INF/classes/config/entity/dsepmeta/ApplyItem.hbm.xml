@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.project.ApplyItem" table="DSEP_P_APPLY_ITEM_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="32" />
+            <generator class="guid" />
+        </id>
+        <property name="unitId" type="java.lang.String">
+            <column name="UNIT_ID" />
+        </property>
+        <property name="discId" type="java.lang.String">
+            <column name="DISC_ID" />
+        </property>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" />
+        </property>
+        <property name="itemName" type="java.lang.String">
+            <column name="ITEM_NAME" />
+        </property>
+        <property name="contactInfo" type="java.lang.String">
+            <column name="CONTACT_INFO" />
+        </property>
+        <property name="funds" type="java.lang.Double">
+            <column name="FUNDS" />
+        </property>
+        
+        <property name="itemTarget" type="java.lang.String">
+            <column name="ITEM_TARGET" length="2000"/>
+        </property>
+        <property name="itemContent" type="java.lang.String">
+             <column name="ITEM_CONTENT" length="2000"/>
+        </property>
+        <property name="teamIntro" type="java.lang.String">
+             <column name="TEAM_INTRO" length="2000"/>
+        </property>
+          <property name="currentState" type="java.lang.Integer">
+            <column name="CURRENT_STATE" />
+        </property>
+        
+       <many-to-one name="schoolProject" 
+        class="com.dsep.entity.project.SchoolProject" 
+        cascade="none"
+        outer-join="auto"
+        lazy="false"
+        insert="true" update="true"
+        access="property"
+        column="project_id"
+        not-null="true">
+   		</many-to-one> 
+   		
+   		<many-to-one name="attachment" class="com.dsep.entity.Attachment"
+			column="ATTACHMENT_ID" unique="true" />    
+		<many-to-one name="judgeResult" class="com.dsep.entity.project.JudgeResult"
+		    column="Result_ID" unique="true" />
+        
+        <set
+        	name="teamMembers"
+        	table="DSEP_P_APPLY_MEM_2013"
+        	lazy="false"
+        	inverse="false"
+        	cascade="all">
+        	<key 
+        		column="APPLY_ID"></key>
+        	<many-to-many 
+        		class="com.dsep.entity.project.TeamMember" 
+        		column="MEMBER_ID">
+        	</many-to-many>	
+        </set>
+    </class>
+</hibernate-mapping>

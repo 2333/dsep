@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="false">
+	<bean id="configuration" class="com.dsep.util.Configurations" init-method="initMethod">
+		<property name="domainId" value="D201301"/>
+		<property name="preFix" value="DSEP"/>
+		<property name="postFix" value="2013"/>
+		<property name="contextPath" value="DSEP"></property>
+		<property name="winCreateReportUrl" value="http://192.168.3.66:9878/ReportWS.asmx?wsdl"/>
+		<property name="templatePath" value="D:/temp/D201301/BRIEFTEMPLATES/"></property>
+	</bean>
+	<bean id="textconfiguration" class="com.dsep.util.TextConfiguration" init-method="initConfigMethod">
+		<property name="discInfoFill" value="学科信息填报"/>
+		<property name="discReportManage" value="学科申报汇总"/>
+		<property name="discNumber" value="学科编号"/>
+		<property name="discName" value="学科名称"/>
+		<property name="discBaseInfo" value="学科基本信息"></property>
+		<property name="discResultBackup" value="学科成果备份与还原"></property>
+		<property name="discPreManage" value="学科预参评信息管理"></property>
+		<property name="discResultManage" value="学科信息汇总"></property>
+		<property name="discResultQuery" value="学科成果查询"></property>
+		<property name="disc" value="学科"></property>
+	</bean>
+</beans>

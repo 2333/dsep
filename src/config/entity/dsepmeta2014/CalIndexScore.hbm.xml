@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">	
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.CalIndexScore" dynamic-update="true" table="DSEP_O_CAL_INDEX_SCORE_2014">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="unitId" type="java.lang.String" >
+            <column name="UNIT_ID" length="5"/>
+        </property>
+        <property name="discId" type="java.lang.String" >
+            <column name="DISC_ID" length="6"/>
+        </property>
+        <property name="indexId" type="java.lang.String" >
+            <column name="INDEX_ID" length="32"/>
+        </property>
+        <property name="value" type="double" >
+            <column name="VALUE" />
+        </property>
+        <property name="score" type="double" >
+            <column name="SCORE" />
+        </property>
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+	
+
+	<bean name="userService" class="com.dsep.service.rbac.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+		<property name="rightDao" ref="rightDao"></property>
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+	</bean>
+	<bean name="roleService" class="com.dsep.service.rbac.impl.RoleServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="rightDao" ref="rightDao"></property>
+	</bean>
+	<bean name="rightService" class="com.dsep.service.rbac.impl.RightServiceImpl">
+		<property name="rightDao" ref="rightDao"></property>
+		<property name="roleDao" ref="roleDao"></property>
+	</bean>
+	<bean name="teacherService" class="com.dsep.service.rbac.impl.TeacherServiceImpl"> 
+		<property name="teacherDao" ref="teacherDao"></property> 
+		<property name="userService" ref="userService"></property>
+		<property name="roleService" ref="roleService"></property>
+		<property name="outerExpertDao" ref="outerExpertDao"></property>
+	</bean>
+
+	<bean name="unitService" class="com.dsep.service.base.impl.UnitServiceImpl">
+		<property name="unitDao" ref="unitDao"></property>
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+	</bean>
+
+	<bean name="disciplineService" class="com.dsep.service.base.impl.DisciplineServiceImpl">
+		<property name="unitDao" ref="unitDao"></property>
+		<property name="disciplineDao" ref="disciplineDao"></property>
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+	</bean>
+
+	<bean id="sqlBuilder" class="com.meta.service.sql.impl.SqlBuilderImpl">
+	</bean>
+	<bean id="sqlExecutor" class="com.meta.service.sql.impl.SqlExecutorImpl">
+		<property name="metaObjectDao" ref="metaObjectDao"></property>
+	</bean>
+	<bean id="baseDBOper" class="com.dsep.service.dsepmeta.BaseDBOper">
+		<property name="metaObjectDao" ref="metaObjectDao"></property>
+	</bean>
+
+	<bean name="metaDicService" class="com.meta.service.impl.MetaDicServiceImpl">
+		<property name="metaDicDao" ref="metaDicDao"></property>
+	</bean>
+	<bean name="metaDomainService" class="com.meta.service.impl.MetaDomainServiceImpl">
+		<property name="metaDomainDao" ref="metaDomainDao"></property>
+		<property name="metaEntityDao" ref="metaEntityDao"></property>
+		<property name="metaAttributeDao" ref="metaAttributeDao"></property>
+	</bean>
+	<bean name="metaCheckRuleService" class="com.meta.service.impl.MetaCheckRuleServiceImpl">
+		<property name="metaCheckRuleDao" ref="metaCheckRuleDao"></property>
+		<property name="metaAttrCheckRuleDao" ref="metaAttrCheckRuleDao"></property>
+	</bean>
+	<bean name="metaEntityService" class="com.meta.service.impl.MetaEntityServiceImpl">
+		<property name="metaEntityDao" ref="metaEntityDao"></property>
+		<property name="metaAttributeDao" ref="metaAttributeDao"></property>
+		<property name="metaEntityStyleDao" ref="metaEntityStyleDao"></property>
+		<property name="metaAttrStyleDao" ref="metaAttrStyleDao"></property>
+		<property name="metaDicService" ref="metaDicService"></property>
+		<property name="metaCheckRuleService" ref="metaCheckRuleService"></property>
+	</bean>
+	<bean name="metaEntityMapService" class="com.meta.service.impl.MetaEntityMapServiceImpl">
+		<property name="metaEntityMapDao" ref="metaEntityMapDao"></property>  
+	</bean>
+	<bean name="metaEntityCategoryService" class="com.meta.service.impl.MetaEntityCategoryServiceImpl">
+		<property name="metaEntityCategoryDao" ref="metaEntityCategoryDao"></property>
+	</bean>
+
+	<bean name="dataBackupService"
+		class="com.dsep.service.databackup.impl.DataBackupServiceImpl">
+		<property name="disciplineDataBackupDao" ref="disciplineDataBackupDao"></property>
+		<property name="backupManagementDao" ref="backupManagementDao"></property>
+		<property name="backupService" ref="backupService"></property>
+	</bean>
+
+	<bean name="ruleService" class="com.dsep.service.expert.rule.impl.RuleServiceImpl">
+		<property name="ruleDao" ref="ruleDao"></property>
+		<property name="ruleDetailDao" ref="ruleDetailDao"></property>
+		<property name="evalBatchDao" ref="evalBatchDao"></property>
+	</bean>
+	
+	<bean name="ruleMetaService" class="com.dsep.service.expert.rule.impl.RuleMetaServiceImpl">
+		<property name="ruleMetaDao" ref="ruleMetaDao"></property>
+	</bean>
+	
+	<bean name="selectService" class="com.dsep.service.expert.select.impl.SelectServiceImpl">
+		<!-- <property name="selectExpertDao" ref="selectExpertDao"></property> -->
+		<property name="ruleDetailDao" ref="ruleDetailDao"></property>
+		<property name="ruleDao" ref="ruleDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="outerExpertDao" ref="outerExpertDao"></property>
+		<property name="unitDivisionSelectionStrategyService"
+			ref="unitDivisionSelectionStrategyService"></property>
+		<property name="expertCRUDService" ref="expertCRUDService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="expertUtilService" ref="expertUtilService"></property>
+	</bean>
+	
+	<!-- 遴选重构 -->
+	<bean name="selectReConstructService" class="com.dsep.service.expert.select.impl.SelectReConstructServiceImpl">
+		<!-- <property name="selectExpertDao" ref="selectExpertDao"></property> -->
+		<property name="ruleDetailDao" ref="ruleDetailDao"></property>
+		<property name="ruleDao" ref="ruleDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="outerExpertDao" ref="outerExpertDao"></property>
+		<property name="unitDivisionSelectionStrategyService"
+			ref="unitDivisionSelectionStrategyService"></property>
+		<property name="expertCRUDService" ref="expertCRUDService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="reConstructService" ref="reConstructService"></property>
+	</bean>
+	
+	<bean name="reConstructService" class="com.dsep.service.expert.select.impl.ReConstructServiceImpl">
+		<property name="ruleMetaService" ref="ruleMetaService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="unitService" ref="unitService"></property>
+	</bean>
+	<!-- 遴选重构 -->
+	
+	<bean name="expertCRUDService"
+		class="com.dsep.service.expert.select.impl.ExpertCRUDServiceImpl">
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="outerExpertDao" ref="outerExpertDao"></property>
+		<property name="evalIndicIdxService" ref="evalIndicIdxService"></property>
+		<property name="evalIndicWtService" ref="evalIndicWtService"></property>
+		<property name="evalRepuService" ref="evalRepuService"></property>
+		<property name="evalAchvService" ref="evalAchvService"></property>
+		<property name="evalBatchService" ref="evalBatchService"></property>
+	</bean>
+	<bean name="expertUtilService"
+		class="com.dsep.service.expert.select.impl.ExpertUtilServiceImpl">
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="outerExpertDao" ref="outerExpertDao"></property>
+	</bean>
+
+
+	<bean name="expertEmailRegisterValidationService"
+		class="com.dsep.service.expert.email.impl.ExpertEmailRegisterValidationServiceImpl">
+		<property name="emailSendService" ref="emailSendService"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="evalService" ref="evalService"></property>
+		<property name="evalBatchDao" ref="evalBatchDao"></property>
+	</bean>
+	
+	<bean name="projectEmailService"
+		class="com.dsep.service.project.email.impl.ProjectEmailServiceServiceImpl">
+		<property name="emailSendService" ref="emailSendService"></property>
+		<property name="schoolProjectService" ref="schoolProjectService"></property>
+	</bean>
+	
+	<bean name="surveyUserEmailRegisterValidationService"
+		class="com.dsep.service.survey.impl.SurveyUserEmailRegisterValidationServiceImpl">
+		<property name="emailSendService" ref="emailSendService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="surveyUserDao" ref="surveyUserDao"></property>
+	</bean>
+	
+
+	<bean name="unitDivisionSelectionStrategyService"
+		class="com.dsep.service.expert.select.impl.UnitDivisionSelectionStrategyServiceImpl">
+		<property name="ruleMetaService" ref="ruleMetaService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="unitService" ref="unitService"></property>
+	</bean>
+
+	<bean name="collectService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMCollectServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="metaEntityMapService" ref="metaEntityMapService"></property>
+		<property name="teachDiscService" ref="teachDiscService"></property>
+		<property name="evalFlowService" ref="evalFlowService"></property>
+		<property name="dataModifyService" ref="dataModifyService"></property>
+		<property name="centerDataBackupDao" ref="centerDataBackupDao"></property>
+	</bean>
+	<bean name="exportService" class="com.dsep.service.file.impl.ExportServiceImpl">
+		<property name="dMExportService" ref="dMExportService"></property>
+		<property name="preFlowService" ref="preFlowService"></property>
+		<property name="evalFlowService" ref="evalFlowService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+	</bean>
+	<bean name="dMExportService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMExportServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	<bean name="importService" class="com.dsep.service.file.impl.ImportServiceImpl">
+		<property name="dMImportService" ref="dMImportService"></property>
+	</bean>
+	<bean name="dMImportService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMImportServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="dmViewConfigService" ref="dmViewConfigService"></property>
+	</bean>
+	<bean name="dmViewConfigService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMViewConfigServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	<bean name="backupService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMBackupServiceImpl">
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="disciplineDataBackupDao" ref="disciplineDataBackupDao"></property>
+		<property name="centerDataBackupDao" ref="centerDataBackupDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	<bean name="discIndexService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMDiscIndexServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+		<property name="indexDao" ref="indexDao"></property>
+		<property name="indexMapDao" ref="indexMapDao"></property>
+	</bean>
+	<bean name="logicCheckService"
+		class="com.dsep.service.check.logic.impl.LogicCheckServiceImpl">
+		<property name="checkLogicRule" ref="checkLogicRule"></property>
+		<property name="logicCheckAttrResultDao" ref="logicCheckAttrResultDao"></property>
+		<property name="logicCheckEntityResultDao" ref="logicCheckEntityResultDao"></property>
+		<property name="logicCheckIdentityResultDao" ref="logicCheckIdentityResultDao"></property>
+		<property name="messageDao" ref="messageDao"></property>
+		<property name="queueService" ref="queueService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="unitService" ref="unitService"></property>
+	</bean>
+	<bean name="briefManageService" class="com.dsep.service.briefManage.impl.BriefManageServiceImpl">
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+		<property name="attachmentService" ref="attachmentService"></property>
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+	<bean name="evalFlowService" class="com.dsep.service.flow.impl.EvalFlowServiceImpl">
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+		<property name="similarityCheckService" ref="similarityCheckService"></property>
+		<property name="checkLogicRule" ref="checkLogicRule"></property>
+	</bean>
+	<bean name="preFlowService" class="com.dsep.service.flow.impl.PreFlowServiceImpl">
+		<property name="preFlowDao" ref="preFlowDao"></property>
+		<property name="evalFlowDao" ref="evalFlowDao"></property>
+	</bean>
+	<bean name="dsepMainFlowService" class="com.dsep.service.flow.impl.DsepMainFlowServiceImpl">
+		<property name="metaDomainDao" ref="metaDomainDao"></property>
+	</bean>
+	<bean name="emailSendService" class="com.dsep.service.email.impl.EmailSendServiceImpl">
+		<property name="emailMessage" ref="emailMessage"></property>
+		<property name="MAX_NUMBER" value="40"></property>
+	</bean>
+
+	<bean name="checkLogicRule" id="checkLogicRule"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMCheckLogicRuleServiceImpl">
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="logicCheckAttrResultDao" ref="logicCheckAttrResultDao"></property>
+		<property name="logicCheckEntityResultDao" ref="logicCheckEntityResultDao"></property>
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="collectService" ref="collectService"></property>
+		<property name="exportService" ref="exportService"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="logicCheckIdentityResultDao" ref="logicCheckIdentityResultDao"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+	</bean>
+
+
+	<bean name="testService" class="com.dsep.service.databackup.impl.TestServiceImpl">
+		<property name="testDao" ref="testDao"></property>
+	</bean>
+
+	<bean name="similarityCheckService"
+		class="com.dsep.service.check.similarity.impl.SimilarityCheckServiceImpl">
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="dmSimilarityCheckService" ref="dmSimilarityCheckService"></property>
+		<property name="dmViewConfigService" ref="dmViewConfigService"></property>
+		<property name="exportService" ref="exportService"></property>
+		
+		<property name="similarityEntryDao" ref="similarityEntryDao"></property>
+		<property name="similarityResultDao" ref="similarityResultDao"></property>
+	</bean>
+
+	<bean name="dmSimilarityCheckService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMSimilarityCheckServiceImpl">
+
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="similarityEntryDao" ref="similarityEntryDao"></property>
+		<property name="similarityResultDao" ref="similarityResultDao"></property>
+	</bean>
+
+	<bean name="publicLibService"
+		class="com.dsep.service.check.publiclib.impl.PublicLibServiceImpl">
+		<property name="dmViewConfigService" ref="dmViewConfigService"></property>
+		<property name="dmPublicLibService" ref="dmPublicLibService"></property>
+		<property name="pubEntryDao" ref="pubEntryDao"></property>
+		<property name="pubTableConfigDao" ref="pubTableConfigDao"></property>
+		<property name="pubFieldConfigDao" ref="pubFieldConfigDao"></property>
+		<property name="pubResultDao" ref="pubResultDao"></property>
+		<property name="exportService" ref="exportService"></property>
+
+	</bean>
+
+	<bean name="dmPublicLibService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMPublicLibServiceImpl">
+		<property name="pubEntryDao" ref="pubEntryDao"></property>
+		<property name="pubTableConfigDao" ref="pubTableConfigDao"></property>
+		<property name="pubFieldConfigDao" ref="pubFieldConfigDao"></property>
+		<property name="pubResultDao" ref="pubResultDao"></property>
+
+		<property name="baseDBOper" ref="baseDBOper"></property>
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	   
+	<bean name="paperInspectionService"
+		class="com.dsep.service.check.paperInspect.impl.PaperInspectionServiceImpl">
+		<property name="unitService" ref="unitService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="spotResultDao" ref="spotResultDao"></property>
+	  	<property name="exportService" ref="exportService"></property>  
+	</bean>
+	<bean name="evalIndicWtService"
+		class="com.dsep.service.expert.evaluation.impl.EvalIndicWtServiceImpl">
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="evalIndicWtDao" ref="evalIndicWtDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+	</bean>
+	<bean name="evalAchvService"
+		class="com.dsep.service.expert.evaluation.impl.EvalAchvServiceImpl">
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="evalAchvDao" ref="evalAchvDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+	</bean>
+	<bean name="evalRepuService"
+		class="com.dsep.service.expert.evaluation.impl.EvalRepuServiceImpl">
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+	</bean>
+	
+	
+	
+	<bean name="evalBatchService"
+		class="com.dsep.service.expert.batch.impl.EvalBatchServiceImpl">
+		<property name="evalBatchDao" ref="evalBatchDao"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalAchvDao" ref="evalAchvDao"></property>
+	</bean>
+	
+	<bean name="evalService"
+		class="com.dsep.service.expert.evaluation.impl.EvalServiceImpl">
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalAchvDao" ref="evalAchvDao"></property>
+		<property name="evalFlowService" ref="evalFlowService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="evalBatchDao" ref="evalBatchDao"></property>
+		<property name="evalProgService" ref="evalProgService"></property>
+		<property name="evalIndicWtDao" ref="evalIndicWtDao"></property>
+	</bean>
+	
+	
+	<bean name="evalProgService"
+		class="com.dsep.service.expert.evaluation.impl.EvalProgServiceImpl">
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="evalAchvDao" ref="evalAchvDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="evalAchvService" ref="evalAchvService"></property>
+		<property name="evalIndicIdxService" ref="evalIndicIdxService"></property>
+		<property name="evalIndicWtService" ref="evalIndicWtService"></property>
+		<property name="evalRepuService" ref="evalRepuService"></property>
+	</bean>
+	
+
+	<bean name="evalRankService"
+		class="com.dsep.service.expert.evaluation.impl.EvalRankServiceImpl">
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="evalFlowService" ref="evalFlowService"></property>
+		<property name="evalService" ref="evalService"></property>
+	</bean>
+
+	<bean name="originalObjectionService"
+		class="com.dsep.service.publicity.objection.impl.OriginalObjectionServiceImpl">
+		<property name="originalObjectionDao" ref="originalObjectionDao"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="collectService" ref="collectService"></property>
+		<property name="exportService" ref="exportService"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="publicityManagementDao" ref="publicityManagementDao"></property>
+		<property name="publicityObjectTypeDao" ref="publicityObjectTypeDao"></property>
+		<property name="proveMaterialDao" ref="proveMaterialDao"></property>
+		<property name="attachmentDao" ref="attachmentDao"></property>
+	</bean>
+
+	<bean name="prePublicityService"
+		class="com.dsep.service.publicity.prepublic.impl.PrePublicityServiceImpl">
+		<property name="backupManagementDao" ref="backupManagementDao"></property>
+		<property name="backupService" ref="backupService"></property>
+		<property name="dmPrePublicService" ref="dmPrePublicService"></property>
+		<property name="publicityManagementDao" ref="publicityManagementDao"></property>
+	</bean>
+
+
+	<bean name="discCategoryService" class="com.dsep.service.base.impl.DiscCategoryServiceImpl">
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+
+	<bean name="queueService" class="com.dsep.service.queue.impl.QueueServiceImpl" />
+
+	<bean name="dmPrePublicService"
+		class="com.dsep.service.dsepmeta.dsepmetas.publicity.impl.DMPrePublicServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+
+	<bean name="publicityService"
+		class="com.dsep.service.publicity.objection.impl.PublicityServiceImpl">
+		<property name="publicityManagementDao" ref="publicityManagementDao"></property>
+	</bean>
+
+	<bean name="evalIndicIdxService"
+		class="com.dsep.service.expert.evaluation.impl.EvalIndicIdxServiceImpl">
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="expertDao" ref="expertDao"></property>
+		<property name="evalQuestionDao" ref="evalQuestionDao"></property>
+		<property name="evalPaperDao" ref="evalPaperDao"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="evalFlowService" ref="evalFlowService"></property>
+	</bean>
+	<!-- Lubin Descipline Calculate Service  -->
+		
+	<!-- Lubin Descipline Calculate Service End -->
+	<!-- 教师学科Service -->
+	<bean name="teachDiscService" class="com.dsep.service.base.impl.TeachDiscServiceImpl">
+		<property name="userService" ref="userService"></property>
+		<property name="teachDiscDao" ref="teachDiscDao"></property>
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+	
+	<bean name="dsepInnerStateService" class="com.dsep.service.flow.impl.DsepInnerStateServiceImpl">
+		<property name="metaInnerStateDetailDao" ref="metaInnerStateDetailDao"></property>
+	</bean>
+	
+	<!-- 公告Service -->
+	<bean name="newsService"
+		class="com.dsep.service.base.impl.NewsServiceImpl">
+		<property name="newsDao" ref="newsDao"></property>
+		<property name="attachmentService" ref="attachmentService"></property>
+	</bean>
+	
+	<!-- 附件Service -->
+	<bean name="attachmentService"
+		class="com.dsep.service.base.impl.AttachmentServiceImpl">
+		<property name="storageDao" ref="storageDao"></property>
+		<property name="attachmentDao" ref="attachmentDao"></property>
+	</bean>
+	
+	<!--存储设备Service -->
+	<bean name="storageService"
+		class="com.dsep.service.base.impl.StorageServiceImpl">
+		<property name="storageDao" ref="storageDao"></property>
+	</bean>
+	
+	<bean name="feedbackManagementService"
+		class="com.dsep.service.publicity.feedback.impl.FeedbackManagementServiceImpl">
+		<property name="feedbackManagementDao" ref="feedbackManagementDao"></property>
+		<property name="feedbackResponseDao" ref="feedbackResponseDao"></property>
+		<property name="backupManagementDao" ref="backupManagementDao"></property>
+		<property name="backupService" ref="backupService"></property>
+		
+	</bean>
+	<bean name="feedbackResponseService"
+		class="com.dsep.service.publicity.feedback.impl.FeedbackResponseServiceImpl">
+		<property name="feedbackResponseDao" ref="feedbackResponseDao"></property>
+		<property name="attachmentDao" ref="attachmentDao"></property>
+		<property name="dataModifyService" ref="dataModifyService"></property>
+		<property name="collectService" ref="collectService"></property>
+		<property name="centerDataBackupDao" ref="centerDataBackupDao"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+	</bean>
+	<bean name="feedbackImportService"
+		class="com.dsep.service.publicity.feedback.impl.FeedbackImportServiceImpl">
+		<property name="publicityService" ref="publicityService"></property>
+		<property name="feedbackImportDao" ref="feedbackImportDao"></property>
+		<property name="feedbackResponseDao" ref="feedbackResponseDao"></property>
+	</bean>
+	<bean name="dataModifyService"
+		class="com.dsep.service.datamodify.impl.DataModifyServiceImpl">
+		<property name="dataModifyHistoryDao" ref="dataModifyHistoryDao"></property>	
+		<property name="collectService" ref="collectService"></property>
+	</bean>
+	
+	<!--问卷Service  -->
+	<bean name="surveyService"
+		class="com.dsep.service.survey.impl.SurveyServiceImpl">
+		<property name="questionnaireDao" ref="questionnaireDao"></property>
+		<property name="answerDao" ref="answerDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="templateDao" ref="templateDao"></property>
+	</bean>
+	
+	<bean name="xmlCache"
+		class="com.dsep.service.datacalculate.FactorAndWeight.XmlCache">
+	</bean>
+	
+	<bean name="surveyUserService"
+		class="com.dsep.service.survey.impl.SurveyUserServiceImpl">
+		<property name="surveyUserDao" ref="surveyUserDao"></property>
+	</bean>
+	
+	<!--数据折算Service  -->
+	<bean name="indexFactorService"
+		class="com.dsep.service.datacalculate.FactorAndWeight.impl.IndexFactorServiceImpl">
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="indexFactorDao" ref="indexFactorDao"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="evalIndicWtDao" ref="evalIndicWtDao"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="xmlCache" ref="xmlCache"></property>
+	</bean>
+	
+	<bean name="indexWeightService"
+		class="com.dsep.service.datacalculate.FactorAndWeight.impl.IndexWeightServiceImpl">
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="indexAvgWtDao" ref="indexAvgWtDao"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="xmlCache" ref="xmlCache"></property>
+	</bean>
+	
+	 <bean name="dataCalculateService"
+		class="com.dsep.service.datacalculate.impl.DataCalculateServiceImpl">
+		<property name="dataCalculateDao" ref="dataCalculateDao"></property>
+		<property name="discIndexValueDao" ref="discIndexValueDao"></property>
+		<property name="calResultDao" ref="calResultDao"></property>
+	 	<property name="indexScoreDao" ref="indexScoreDao"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="unitService" ref="unitService"></property>
+	 	<property name="exportService" ref="exportService"></property>
+		<property name="dmDataCalculateService" ref="dmDataCalculateService"></property>
+	</bean>
+	
+	<bean name="dmDataCalculateService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMDataCalculateServiceImpl">
+		<property name="discIndexValueDao" ref="discIndexValueDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="calResultDao" ref="calResultDao"></property>
+		<property name="indexAvgWtDao" ref="indexAvgWtDao"> </property>
+		<property name="indexScoreDao" ref="indexScoreDao"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="objectCalculateService" ref="objectCalculateService"></property>
+		<property name="subjectCalculateService" ref="subjectCalculateService"></property>
+		<property name="xmlCache" ref="xmlCache"></property>
+	</bean>
+	
+	<!-- <bean name="viewCalculateResultService"
+		class="com.dsep.service.datacalculate.impl.ViewCalculateResultServiceImpl">
+	 	<property name="dataCalculateDao" ref="dataCalculateDao"></property>
+	 	<property name="calResultDao" ref="calResultDao"></property>
+	 	<property name="indexScoreDao" ref="indexScoreDao"></property>
+	 	<property name="disciplineService" ref="disciplineService"></property>
+	 	<property name="unitService" ref="unitService"></property>
+	 	<property name="exportService" ref="exportService"></property>
+	 </bean> -->
+	
+	<bean name="subjectCalculateService"
+		class="com.dsep.service.datacalculate.RuleEngine.impl.SubjectCalculateServiceImpl">
+		<property name="evalResultDao" ref="evalResultDao"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="xmlCache" ref="xmlCache"></property>
+	</bean>
+	
+	<bean name="objectCalculateService"
+		class="com.dsep.service.datacalculate.RuleEngine.impl.ObjectCalculateServiceImpl">
+		<property name="getRuleEngineDataService" ref="getRuleEngineDataService"></property>
+	</bean>
+	
+	<bean name="getRuleEngineDataService"
+		class="com.dsep.service.datacalculate.RuleEngine.getdata.GetRuleEngineDataService">
+		<property name="baseDBOper" ref="baseDBOper"></property>
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>	
+	<!--数据折算Service  end-->
+	
+	<bean name="normalizationService"
+		class="com.dsep.service.dataprocess.normalization.impl.NormalizationServiceImpl">
+		<property name="normConfigDao" ref="normConfigDao"></property>
+		<property name="normConfigAttrDao" ref="normConfigAttrDao"></property>
+		<property name="normResultDao" ref="normResultDao"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="discIndexService" ref="discIndexService"></property>
+		<property name="exportService" ref="exportService"></property>
+	</bean>
+	<!-- 项目管理Service -->
+	<bean name="schoolProjectService"
+		class="com.dsep.service.project.impl.SchoolProjectServiceImpl">
+		<property name="schoolProjectDao" ref="schoolProjectDao"></property>
+		<property name="applyItemDao" ref="applyItemDao"></property>
+		<property name="passItemDao" ref="passItemDao"></property>
+		<property name="judgeResultDao" ref="judgeResultDao"></property>
+	</bean>	
+	
+	<bean name="applyItemService"
+		class="com.dsep.service.project.impl.ApplyItemServiceImpl">
+		<property name="applyItemDao" ref="applyItemDao"></property>
+		<property name="teamMemberDao" ref="teamMemberDao"></property>
+	</bean>	
+	<bean name="teamMemberService"
+		class="com.dsep.service.project.impl.TeamMemberServiceImpl">
+		<property name="teamMemberDao" ref="teamMemberDao"></property>
+	</bean>	
+	<bean name="itemFundsService"
+		class="com.dsep.service.project.impl.ItemFundsServiceImpl">
+		<property name="itemFundsDao" ref="itemFundsDao"></property>
+		<property name="passItemDao" ref="passItemDao"></property>
+	</bean>
+	<bean name="itemProvideFundsService"
+		class="com.dsep.service.project.impl.ItemProvideFundsServiceImpl">
+		<property name="itemProvideFundsDao" ref="itemProvideFundsDao"></property>
+		<property name="passItemDao" ref="passItemDao"></property>
+	</bean>
+	<bean name="itemExecuteService"
+		class="com.dsep.service.project.impl.ItemExecuteServiceImpl">
+		<property name="itemExecuteDao" ref="itemExecuteDao"></property>
+	</bean>
+	<bean name="passItemService"
+		class="com.dsep.service.project.impl.PassItemServiceImpl">
+		<property name="passItemDao" ref="passItemDao"></property>
+	</bean>	
+	<bean name="judgeResultService"
+		class="com.dsep.service.project.impl.JudgeResultServiceImpl">
+		<property name="judgeResultDao" ref="judgeResultDao"></property>
+	</bean>	
+	<bean name="dmCommonService"
+		class="com.dsep.service.dsepmeta.dsepmetas.impl.DMCommonServiceImpl">
+		<property name="metaDomainService" ref="metaDomainService"></property>
+		<property name="metaEntityService" ref="metaEntityService"></property>
+		<property name="metaEntityCategoryService" ref="metaEntityCategoryService"></property>
+		<property name="sqlExecutor" ref="sqlExecutor"></property>
+		<property name="sqlBuilder" ref="sqlBuilder"></property>
+		<property name="discCategoryDao" ref="discCategoryDao"></property>
+		<property name="categoryCollectDao" ref="categoryCollectDao"></property>
+		<property name="categoryDao" ref="categoryDao"></property>
+		<property name="metaEntityMapService" ref="metaEntityMapService"></property>
+	</bean>
+	<bean name="briefsheetService"
+		class="com.dsep.service.file.impl.BriefsheetServiceImpl">
+		<property name="collectService" ref="collectService"></property>
+		<property name="dmCommonService" ref="dmCommonService"></property>
+	</bean>
+	<!-- admin 相关配置 -->
+	<bean id="sqlHelperService" class="com.dsep.service.admin.impl.SqlHelperServiceImpl">
+		<property name="sqlHelperDao" ref="sqlHelperDao"></property>
+	</bean>
+</beans>

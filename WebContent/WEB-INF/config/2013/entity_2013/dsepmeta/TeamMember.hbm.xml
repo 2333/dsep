@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.project.TeamMember" table="DSEP_P_TEAM_MEMBER_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="MEMBER_NAME" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="info" type="java.lang.String">
+            <column name="MEMBER_INFO" />
+        </property>
+        
+		<set
+        	name="applyItems"
+        	table="DSEP_P_APPLY_MEM_2013"
+        	lazy="false"
+        	inverse="true"
+        	cascade="save-update"
+        	sort="unsorted">
+        	<key 
+        		column="MEMBER_ID"></key>
+        	<many-to-many 
+        		class="com.dsep.entity.project.ApplyItem" 
+        		column="APPLY_ID"
+        		outer-join="auto">
+        	</many-to-many>	
+        </set>
+        
+        <set
+        	name="passItems"
+        	table="DSEP_P_PASS_MEM_2013"
+        	lazy="false"
+        	inverse="true"
+        	cascade="save-update"
+        	sort="unsorted">
+        	<key 
+        		column="MEMBER_ID"></key>
+        	<many-to-many 
+        		class="com.dsep.entity.project.PassItem" 
+        		column="PASS_ID"
+        		outer-join="auto">
+        	</many-to-many>	
+        </set>
+    </class>
+</hibernate-mapping>

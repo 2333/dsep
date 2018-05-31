@@ -1,0 +1,341 @@
+/* @group hotfix
+！！！！！！！！重要！！！！！！！！
+为统一样式风格，现在将系统CSS文件根据不同类型样式分文件保存，具体文件存放如下：
+主体页面样式： index.css
+表单样式：         Form.css
+布局样式:   layout.css
+字体样式:   Font.css
+图标样式:   icons.css
+
+如果需要增加css文件，请在此补充说明。
+*/
+
+
+/* @group index.html
+--------------------------------------------------------------*/
+*
+{
+	margin:0px;
+	padding:0px;
+}
+
+html, body
+{
+	min-width:900px;
+	font-size:13px;
+	/*margin:0px 40px;*/
+	font-family:宋体, Helvetica, Arial, sans-serif;
+}
+
+/* 页面头部 */
+#header
+{
+	height:60px;
+	background:#FFFFFF url(../images/redmond_bg.png) repeat-x;
+}
+
+#logo
+{
+	float:left;
+	height:60px;
+	width:635px;
+}
+
+#logoZ{
+	float:left;
+	height:60px;
+	width:635px;
+}
+
+#status
+{
+	font-size:12px;
+	font-weight:bold;
+	
+	margin-left:635px;
+	height:36px;
+	padding:12px 20px 12px 0;
+	
+	color:white;
+}
+
+/*横向菜单*/
+#hori_menu{
+	position:relative;
+	border: 1px solid #4297d7;
+	z-index:6;
+}
+
+#menu_holder
+{
+	list-style:none;
+	background:#ddd url('../images/hori_bg.png') repeat left top;
+}
+
+/* 子菜单动态显示 */
+.display
+{
+	display:block;
+	border:1px solid #2972d9;
+	position:absolute;
+}
+
+#menu_holder a
+{
+	text-align:center;
+	padding:5px;
+	display:block;
+	line-height:21px;
+	text-decoration:none;
+	font-family:宋体;
+}
+
+.hori_lvl1
+{
+	color:white;
+	font-weight: bold;
+	font-size:14px;
+	width:120px;
+	background: url(../images/devide.png) repeat-y left top;
+}
+
+.hori_lvl2
+{
+	list-style:none;
+	width:130px;
+	background-color:#FFF;
+}
+
+.hori_lvl1:hover
+{
+	background: url(../images/menu_ho.png) center;
+}
+
+.hori_lvl2 a
+{
+	color:#3974a0;
+}
+
+.hori_lvl2 a:hover
+{
+	color:#e0861a;
+	background-color:#f2eada;
+}
+
+/*页面主体*/
+#main
+{
+	position:relative;
+	min-height:650px;
+}
+
+#content
+{
+	padding:5px;
+	min-height:650px;
+}
+
+/*页脚*/
+#footer
+{
+	height:50px;
+	border-top:solid 5px #7eaed2;
+	text-align:center;
+}
+
+#footer p
+{
+	padding:10px 0;
+	color:#aaa;
+	font-size:10px;
+	font-family:黑体;
+}
+
+/* @group common style
+--------------------------------------------------------------*/
+/* 主页信息栏样式 */
+.info_box
+{
+	 border:1px solid #c1c7e8;
+}
+
+.info_header
+{
+	border-bottom:1px solid #c1c7e8;
+	background-color: #dfeffc;
+	height:30px;
+	font-size:14px; 
+	color:#035376; 
+	font-weight:bold; 
+	line-height:30px; 
+	padding-left:10px;
+}
+
+.info_list
+{
+	list-style:none;
+	padding:10px;
+}
+
+.info_list li
+{
+	font-size:14px;
+	color:#3e3e3e; 
+	background: url('../images/list_bg.gif') no-repeat left top;
+	border-bottom:1px dashed #ccc;
+	line-height:28px;
+	padding-left:18px;
+}
+
+.info_list li .news-date
+{
+	float:right;
+	font-size:11px;
+}
+
+.info_more
+{
+	height:20px;
+	font-size:14px; 
+	color:#035376; 
+	font-weight:bold; 
+	line-height:20px; 
+	padding-right:10px;
+	text-align:right;
+}
+
+.news_important
+{
+	color:red;
+}
+
+.news_normal
+{
+	color:green;
+}
+
+.news_list:hover
+{
+	color:Red; 
+	cursor:pointer;
+}
+
+.express_entry a{
+	color:black;
+	text-decoration: none;
+}
+
+.express_entry:hover{
+	color:Red; 
+	cursor:pointer;
+}
+
+/*蓝色底*/
+.bg_color
+{
+	background-color: rgb(223, 239, 252);
+}
+
+
+/*子页面标题头*/
+.con_header
+{
+	height:32px;
+	border:1px solid #9fc3de;
+	background-color: rgb(223, 239, 252);
+}
+
+.con_header h3
+{
+	margin:6px 10px;
+	color:#2e6e9e;
+}
+
+/*下拉框*/
+.selectbar
+{
+	/* height:35px; */
+	background-color: rgb(223, 239, 252);
+	border-bottom:1px solid #9fc3de;
+	border-left:1px solid #9fc3de;
+	border-right:1px solid #9fc3de;
+}
+
+.selectbar p
+{
+	line-height:35px;
+	vertical-align:middle;
+	margin-left:10px;
+}
+
+/*操作栏*/
+.toolbar
+{
+	padding:5px 0px;
+	background-color: rgb(223, 239, 252);
+	border-bottom:1px solid #9fc3de;
+	border-left:1px solid #9fc3de;
+	border-right:1px solid #9fc3de;
+}
+
+.toolbar table
+{
+	margin:0px auto;
+}
+
+.table
+{
+	/*margin-left:5px;*/
+}
+
+/*注释栏，说明栏*/
+.comment
+{
+	padding:10px;
+	border:1px solid #ccc;
+}
+
+.comment p
+{
+	line-height:1.5em;
+    text-indent:2em; 
+}
+
+/*信息高亮*/
+
+.highlight_info
+{
+	color:yellow;
+}
+
+.alert_info
+{
+	color:red;
+}
+
+
+/*工具箱*/
+.tool_box
+{
+	padding:10px;
+	border:1px solid #ccc;
+}
+
+.tool_box input
+{
+	width:30px;
+}
+
+.hidden{
+	display:none;
+}
+
+.norecords 
+{ 
+	display:none;
+	font-weight: bold;
+	text-align: center; 
+	width: auto;
+	z-index: 102; 
+}
+

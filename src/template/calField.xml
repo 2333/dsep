@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 本xml中用于存储在以折算系数折算末级指标数值时，获奖等级和单位学科排名的字段名称 -->
+
+<root>
+	<!-- 获奖等级字段名称  begin-->
+	<award>
+		<field name="HJ_LEVEL"/>
+		<field name="HJDJ"/>
+		<field name="AWARD_GRADE"/>
+	</award>
+	<!-- 获奖等级字段名称  end -->
+	<!-- 学校学科排名占百分比字段名称  begin -->
+	<sort>
+		<field name="HJ_UNIT_NUM"/>
+		<field name="HJ_DISC_NUM"/>
+		<field name="CYDWS"/>
+		<field name="BDWXKS"/>
+		<field name="DEPT_AMOUT"/>
+		<field name="DISCIPLINE_AMOUT"/>
+		<field name="BRPX"/>
+	</sort>
+	<!-- 学校学科排名占百分比字段名称  end -->
+</root>

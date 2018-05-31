@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.BackupManagement" dynamic-update="true" table="DSEP_B_MANAGEMENT_2014">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="versionId" type="java.lang.String" >
+            <column name="VERSION_ID" length="32"/>
+        </property>
+        <property name="unitId" type="java.lang.String" >
+            <column name="UNIT_ID" length="5"/>
+        </property>
+        <property name="discId" type="java.lang.String" >
+            <column name="DISC_ID" length="6"/>
+        </property>
+        <property name="backupTime" type="java.util.Date">
+            <column name="BACKUP_TIME" />
+        </property>
+        <property name="restoreTime" type="java.util.Date">
+            <column name="RESTORE_TIME" />
+        </property>
+        <property name="backupType" type="java.lang.String" >
+            <column name="BACKUP_TYPE" length="2"/>
+        </property>
+        <property name="remark" type="java.lang.String" >
+            <column name="REMARK" length="255"/>
+        </property>
+    </class>
+</hibernate-mapping>

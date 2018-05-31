@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <JSJ>
+  
+  	<!-- 专家团队 -->
+    <index IndexItemId='JSJ000I010101' 
+    Formula='#SUMFACTOR(E:E20130101;F:ZJ_TYPE;)+
+    #SUMFACTOR(E:E20130102;F:TD_TYPE;)'>  
+    </index>
+    <!-- 生师比:硕士生师比=目前在校硕士生数/(硕士生导师数+全日制专业学位学生“校外硕导”数*0.5) -->
+    <index IndexItemId='JSJ000I010201'
+    Formula='#VALUE(E:E20130103;F:ZX_SSS;)/(#VALUE(E:E20130103;F:SSDS;)+#VALUE(E:E20130103;F:XWSD;)*0.5)'>
+    </index>
+    <!-- 专职教师总数 -->
+    <index IndexItemId='JSJ000I010202'
+    Formula='#VALUE(E:E20130103;F:ZZJS;)'>
+    </index>
+    <!-- 重点学科数 -->
+	<!-- 重点实验室 -->
+    <index IndexItemId='JSJ000I010302'
+    Formula='#SUMFACTOR(E:E20130105;F:SYS_TYPE;)'>
+    </index>
+    <!-- 国内它引论文次数和 -->
+    <index IndexItemId='JSJ000I020102'
+    Formula='#COUNT(E:E20130204;)'>
+    </index>
+    <!-- 国外它引论文次数和 -->
+    <index IndexItemId='JSJ000I020103'
+    Formula='#COUNT(E:E20130205;)'>
+    </index>
+     <!-- ESI高被引论文及SCIENCE、NATURE论文数 -->
+    <index IndexItemId='JSJ000I020104'
+    Formula='#COUNT(E:E20130206;C:SLLX="EI" or SLLX="SCI" or FBKWM="SCIENCE" or FBKWM="NATURE";)'>
+    </index>
+    <!-- 计算机A类论文数 -->
+    <index IndexItemId='JSJ000I020106'
+    Formula='#COUNT(E:E20130207;C:HYMC="ICCESS" or HYMC="ICES";)'>
+    </index>
+     <!-- 已转化或应用的专利数 -->
+    <index IndexItemId='JSJ000I020201'
+    Formula='#COUNT(E:E20130208;)'>
+    </index>
+    <!-- 国家与省部级科研获奖数 -->
+    <index IndexItemId='JSJ000I020401'
+    Formula='#SUMFACTOR(E:E20130201;F:HJ_NAME;)'>
+    </index>
+    <!-- 国家级科研项目经费 -->
+    <index IndexItemId='JSJ000I020302'
+    Formula='#SUMNUMBER(E:E20130203;F:BDWJF;L:ZJF;)'>
+    </index>
+    <!-- 人均科研总经费 -->
+    <index IndexItemId='JSJ000I020303'
+    Formula='(#SUMNUMBER(E:E20130202;F:BDWJF;L:ZJF;)+#SUMNUMBER(E:E20130203;F:BDWJF;L:ZJF;))/#VALUE(E:E20130103;F:ZZJS;)'>
+    </index>
+    <!-- 国家级与省部级科研获奖数  该末级指标项暂时还没有相应的折算系数？？  需要完成规范化-->
+    <index IndexItemId='JSJ000I020401'
+    Formula='#SUMFACTOR(E:E20130201;F:HJ_NAME;C:HJ_NAME="国家自然科学奖" or HJ_NAME="国家技术发明奖" or HJ_NAME="国家科技进步奖";)'>
+    </index>
+    <!-- 全国优博与计算机学会优博论文数 -->
+  <!--   <index IndexItemId='JSJ000I030101'
+    Formula='#SUMFACTOR(T:;F:;)'>
+    </index> -->
+    <!-- 学生境外交流人数 -->
+    <index IndexItemId='JSJ000I030201'
+    Formula='#COUNT(E:E20130303;)'>
+    </index>
+    <!-- 授予境外学生学位数 -->
+    <index IndexItemId='JSJ000I030202'
+    Formula='#COUNT(E:E20130304;)'>
+    </index>
+    <!-- 授予学位数 -->
+    <index IndexItemId='JSJ000I030301'
+    Formula='(#VALUE(E:E20130103;F:ZYXWS;)+#VALUE(E:E20130103;F:XSXWSSS;))*#FACTOR(I:授予博士/硕士学位数;)+#VALUE(E:E20130103;F:XSXWBSS;)*#FACTOR(I:授予博士/硕士学位数;)'>
+    </index>
+    <!-- 优秀教学成果奖 -->
+    <index IndexItemId='JSJ000I030401'
+    Formula='#SUMFACTOR(E:E20130301;F:HJLB;)'>
+    </index>
+    <!-- 国家级规划教材与精品教材数  该末级指标在计算方案中是用折算系数求和的，但是该表目前没有折算类型的字段，在折算系数表中也没有算出对应的折算系数，暂时用count指令代替-->
+    <index IndexItemId='JSJ000I030402'
+    Formula='#COUNT(E:E20130302;)'>
+    </index>
+    <!-- 博士学位论文抽查情况:：对于库中jg=“不合格”的论文，每一篇在总分中扣0.5分，扣完为止。 -->
+    <index IndexItemId='JSJ000I030102' deduct='true'
+    Formula='#COUNT(T:gg_rcpy_lwcj_test;C:jg="不合格";)*0.5' >
+    </index>
+  </JSJ>
+</root>
+

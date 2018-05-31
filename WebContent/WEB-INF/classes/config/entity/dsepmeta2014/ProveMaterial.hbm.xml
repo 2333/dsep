@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-6-17 14:42:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.ProveMaterial" table="DSEP_F_PROF_MATERIAL_2014">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="32"/>
+            <generator class="assigned" />
+        </id>
+        <property name="proveMaterialPath" type="java.lang.String">
+            <column name="PROVE_MATERIAL_PATH" length="100" />
+        </property>
+        <property name="materialType" type="java.lang.String">
+            <column name="MATERIAL_TYPE" length="1" />
+        </property>
+        <property name="proveItemId" type="java.lang.String">
+            <column name="PROVE_ITEM_ID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

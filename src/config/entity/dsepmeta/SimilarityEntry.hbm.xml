@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.dsep.entity.dsepmeta.SimilarityEntry" table="DSEP_D_SIMILARITY_ENTRY_2013">
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32"/>
+			<generator class="guid" />
+		</id>
+		<property name="entityId" type="java.lang.String">
+			<column name="ENTITY_ID" length="10"/>
+		</property>
+		<property name="entityChsName" type="java.lang.String">
+			<column name="ENTITY_CHS_NAME" length="100"/>
+		</property>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32"/>
+		</property>
+		<property name="checkDate" type="java.util.Date">
+			<column name="CHECK_DATE" />
+		</property>
+		<property name="simFlag" type="java.lang.Character">
+			<column name="SIM_FLAG" />
+		</property>
+	</class>
+</hibernate-mapping>
+
+
+

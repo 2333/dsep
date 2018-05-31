@@ -1,0 +1,31 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.DiscLastIndexValue" dynamic-update="true" table="DSEP_O_DISC_INDEX_VALUE_2013">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="unitId" type="java.lang.String" >
+            <column name="UNIT_ID" length="10"/>
+        </property>
+        <property name="discId" type="java.lang.String" >
+            <column name="DISC_ID" length="10"/>
+        </property>
+        <property name="indexId" type="java.lang.String" >
+            <column name="INDEX_ID" length="32"/>
+        </property>
+        <property name="indexContent" type="java.lang.String" >
+            <column name="INDEX_CONT" length="100"/>
+        </property>
+        <property name="value" type="double" >
+            <column name="VALUE"/>
+        </property>
+        <property name="transValue" type="double" >
+            <column name="TRANS_VALUE"/>
+        </property>
+        
+    </class>
+</hibernate-mapping>
+

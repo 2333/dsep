@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd" default-lazy-init="true">
+	<!-- 注解扫描包 -->
+	<context:component-scan base-package="com.dsep.controller" />
+	<!-- 开启注解 -->
+	<mvc:annotation-driven>
+		<!-- 解决@ResponseBody乱码 -->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+				<property name = "supportedMediaTypes">  
+                     <list>  
+                         <value>text/plain;charset=UTF-8</value>  
+                     </list>  
+                </property>  
+			</bean>  
+		</mvc:message-converters> 
+	</mvc:annotation-driven>
+	<!-- 静态资源(js/image)的访问 -->
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/ckeditor/" mapping="/ckeditor/**" />
+	<mvc:resources location="/upload/" mapping="/upload/**" />
+		<mvc:resources location="/ueditor/" mapping="/ueditor/**" />
+	<!-- 	下面这段用于本地缓存，必须允许静态资源访问，
+			在拦截中设置资源访问对于加载无效，
+			不过在后期缓存内容更新过程中应该还是有用的 
+	-->
+	<mvc:resources location="/appcache/" mapping="/appcache/**" />
+	
+	<!-- 拦截器注册 -->
+	<mvc:interceptors>
+        <bean id="DefaultInterceptor" class="com.dsep.common.interceptor.DefaultInterceptor"></bean> 
+	
+        <bean id="RightInterceptor" class="com.dsep.common.interceptor.RightInterceptor">
+         	<property name="excludedUrls">
+	             <list>
+	             	 <value>.*/MainFlow/.*</value>
+	             	 <value>.*/FlowActions/.*</value>
+	             	 <value>.*/pproject.*</value>
+	             	 <value>.*/papply.*</value>
+	             	 <value>.*/punit.*</value>
+	             	 <value>.*/briefManage/.*</value>
+	                 <value>.*/rbac/generatecode.*</value>
+	                 <value>.*/expert/expertReply.*</value>
+	                 <value>.*/expert/expertRefuse.*</value>
+	                 <value>.*/survey/surveyReply.*</value>
+	                 <value>.*/rbac/checkcode.*</value>
+	                 <value>.*/rbac/login.*</value>
+	                 <value>.*/rbac/tologin.*</value>
+	                 <value>.*/rbac/logout.*</value>
+	                 <value>.*/rbac/modify_password.*</value>
+	                 <value>.*/rbac/save_password.*</value>
+	                 <value>.*/rbac/check_password.*</value>
+	                 <value>.*/ExceptionHandle/.*</value>
+	                 <value>.*.js</value>
+	                 <value>.*.css</value>
+	                 <value>.*.png</value>
+	                 <value>.*.appcache</value>
+	                 <value>.*.gif</value>
+	                 <value>.*.jpg</value>
+	                 <value>.*.swf</value>
+	             </list>
+         	</property>
+        </bean> 
+	</mvc:interceptors>
+	<!-- 拦截器注册 -->
+	<!-- 定义视图解析器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- 系统日志的配置 -->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>failure</value>
+		</property>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.sql.SQLException">showDBError</prop>
+				<prop key="java.lang.RuntimeException">showError</prop>
+			</props>
+		</property>
+		<property name="warnLogCategory" value="WARN"></property>
+		<property name="defaultStatusCode" value="500"></property>
+	</bean>
+	<!--  这里申明的id必须为multipartResolver,用于文件上传-->
+	<bean id="multipartResolver"
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	
+	    <!-- one of the properties available; the maximum file size in bytes -->
+	    <property name="maxUploadSize" value="100000000000"/>
+	</bean>	
+<!-- 	<bean id="viewResolver" -->
+<!--        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> -->
+<!--         <property name="prefix" value=""/> -->
+<!--         <property name="suffix" value=".ftl"/> -->
+<!--         <property name="contentType" value="text/html;charset=UTF-8"/> -->
+<!--     </bean> -->
+</beans>

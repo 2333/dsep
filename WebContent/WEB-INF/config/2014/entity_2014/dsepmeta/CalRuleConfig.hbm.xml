@@ -1,0 +1,45 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.CalRuleConfig" dynamic-update="true" table="DSEP_O_CAL_RULE_CONFIG_2014">
+        <id name="id" type="java.lang.String" >
+            <column name="ID" length="32"/>
+            <generator class="guid" />
+        </id>
+        <property name="ruleId" type="java.lang.String" >
+            <column name="RULE_ID" length="10"/>
+        </property>
+        <property name="entityId1" type="java.lang.String" >
+            <column name="ENTITYID1" length="100"/>
+        </property>
+        <property name="keyField1" type="java.lang.String" >
+            <column name="KEY_FIELD1" length="100"/>
+        </property>
+        <property name="entityId2" type="java.lang.String" >
+            <column name="ENTITYID2" length="100"/>
+        </property>
+        <property name="keyField2" type="java.lang.String" >
+            <column name="KEY_FIELD2" length="100"/>
+        </property>
+        <property name="entityId3" type="java.lang.String" >
+            <column name="ENTITYID3" length="100"/>
+        </property>
+        <property name="keyField3" type="java.lang.String" >
+            <column name="KEY_FIELD3" length="100"/>
+        </property>
+        <property name="entityId4" type="java.lang.String" >
+            <column name="ENTITYID4" length="100"/>
+        </property>
+        <property name="keyField4" type="java.lang.String" >
+            <column name="KEY_FIELD4" length="100"/>
+        </property>
+        <property name="entityId5" type="java.lang.String" >
+            <column name="ENTITYID5" length="100"/>
+        </property>
+        <property name="keyField5" type="java.lang.String" >
+            <column name="KEY_FIELD5" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>
+

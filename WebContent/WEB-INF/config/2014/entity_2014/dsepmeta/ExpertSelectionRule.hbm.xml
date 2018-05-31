@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.expert.ExpertSelectionRule" table="DSEP_E_RULE_2014">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        
+        <property name="ruleName" type="java.lang.String">
+			<column name="RULE_NAME" />
+		</property>
+		<property name="createDate" type="java.sql.Timestamp">
+			<column name="CREATE_DATE" />
+		</property>
+		<property name="modifyDate" type="java.sql.Timestamp">
+			<column name="MODIFY_DATE" />
+		</property>
+		<property name="lastUsed" type="java.lang.Boolean">
+			<column name="LAST_USED" />
+		</property>
+		<property name="commentForRule" type="java.lang.String">
+			<column name="COMMENT_FOR_RULE" />
+		</property>
+
+		<bag name="expertSelectionRuleDetails" table="DSEP_E_RULE_DETAIL_2014"
+		lazy="false" inverse="true" cascade="all">
+			<key column="rule_id"></key>
+			<one-to-many class="com.dsep.entity.expert.ExpertSelectionRuleDetail"></one-to-many>
+		</bag>
+		
+		<many-to-one name="evalBatch" 
+        class="com.dsep.entity.expert.EvalBatch" 
+        cascade="none"
+        outer-join="auto"
+        insert="true" update="true"
+        access="property"
+        column="batch_id"
+        not-null="true">
+   		</many-to-one>
+    </class>
+</hibernate-mapping>

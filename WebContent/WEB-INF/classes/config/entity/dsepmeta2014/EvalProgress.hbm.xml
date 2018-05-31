@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dsep.entity.expert.EvalProgress" table="DSEP_E_EVAL_PROGRESS_2014">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="expertId" type="java.lang.String">
+            <column name="EXPERT_ID" length="32" />
+        </property>
+        <property name="questionType" type="java.lang.Integer">
+            <column name="QUESTION_TYPE" length="1" />
+        </property>
+        <property name="subQuestionChName" type="java.lang.String">
+            <column name="SUB_QUESTION_CH_NAME" />
+        </property>
+        <property name="subQuestionId" type="java.lang.String">
+            <column name="SUB_QUESTION_ID" length="32" />
+        </property>
+        <property name="totalNumber" type="java.lang.Integer">
+            <column name="TOTAL_NUMBER" />
+        </property>
+        <property name="finishedNumber" type="java.lang.Integer">
+            <column name="FINISHED_NUMBER" />
+        </property>
+        <property name="sequ" type="java.lang.Integer">
+            <column name="SEQU" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.EvalBatch" table="DSEP_E_EVAL_BATCH_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="32" />
+            <generator class="guid" />
+        </id>
+        <property name="batchChName" type="java.lang.String">
+            <column name="BATCH_CH_NAME" length="200" />
+        </property>
+        <property name="batchNum" type="java.lang.Integer">
+            <column name="BATCH_NUM" />
+        </property>
+		<set name="papers" table="DSEP_X_EVAL_PAPER_2013"
+		lazy="true" inverse="true" cascade="all">
+			<key column="batch_id"></key>
+			<one-to-many class="com.dsep.entity.dsepmeta.EvalPaper"></one-to-many>
+		</set>   
+		
+		<set name="experts" table="DSEP_E_EXPERT_SELECTED_2013"
+		lazy="false" inverse="true"  cascade="all">
+			<key column="batch_id"></key>
+			<one-to-many class="com.dsep.entity.dsepmeta.ExpertSelected"></one-to-many>
+		</set>    
+		
+		<set name="rules" table="DSEP_E_RULE_2013"
+		lazy="false" inverse="true" cascade="all">
+			<key column="batch_id"></key>
+			<one-to-many class="com.dsep.entity.dsepmeta.ExpertSelectionRule"></one-to-many>
+		</set>      
+    </class>
+</hibernate-mapping>

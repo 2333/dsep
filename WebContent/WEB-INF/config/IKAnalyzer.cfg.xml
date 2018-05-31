@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">  
+<properties>  
+	<comment>IK Analyzer 扩展配置</comment>
+	<!--用户可以在这里配置自己的扩展字典 -->
+	<entry key="ext_dict">ext.dic;地理CN.txt;电子CN.txt;方剂.txt;计算机CN.txt;化学CN.txt;建筑CN.txt;农学CN.txt;石油CN.txt;数学CN.txt;心理学CN.txt;医学CN.txt;中医CN.txt;</entry> 
+	
+	<!--用户可以在这里配置自己的扩展停止词字典-->
+	<entry key="ext_stopwords">stopword.dic;</entry> 
+	
+</properties>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-6-17 14:47:32 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.dsep.entity.dsepmeta.OriginalObjection" table="DSEP_F_ORIGINAL_OBJECTION_2013">
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32" />
+		</property>
+		<property name="currentPublicRoundId" type="java.lang.String">
+			<column name="CURRENT_PUBLIC_ROUND_ID" length="32" />
+		</property>
+		<!-- <property name="objectCollectEntityId" type="java.lang.String"> <column 
+			name="OBJECT_COLLECT_ENTITY_ID" length="32"/> </property> -->
+		<property name="objectCollectEntityId" type="java.lang.String"> <column 
+			name="OBJECT_COLLECT_ENTITY_ID" length="32"/> </property>
+		<property name="objectCollectEntityName" type="java.lang.String"> <column 
+			name="OBJECT_COLLECT_ENTITY_NAME" length="32"/> </property>
+		<!-- <many-to-one name="objectCollectEntity" class="com.meta.entity.MetaEntity"
+			fetch="select">
+			<column name="OBJECT_COLLECT_ENTITY_ID" unique="true" length="32"></column>
+		</many-to-one> -->
+		<property name="objectCollectItemId" type="java.lang.String">
+			<column name="OBJECT_COLLECT_ITEM_ID" length="32" />
+		</property>
+		<property name="objectCollectAttrId" type="java.lang.String"> <column 
+			name="OBJECT_COLLECT_ATTR_ID" length="32"/> </property>
+		<property name="objectCollectAttrName" type="java.lang.String"> <column 
+			name="OBJECT_COLLECT_ATTR_NAME" length="32"/> </property>			
+		<!-- <many-to-one name="objectCollectAttr" class="com.meta.entity.MetaAttribute"
+			fetch="select">
+			<column name="OBJECT_COLLECT_ATTR_ID" unique="true" length="32"></column>
+		</many-to-one> -->
+		<property name="objectUnitId" type="java.lang.String">
+			<column name="OBJECT_UNIT_ID" length="5" />
+		</property>
+		<property name="objectDiscId" type="java.lang.String">
+			<column name="OBJECT_DISC_ID" length="4" />
+		</property>
+		<property name="problemUnitId" type="java.lang.String">
+			<column name="PROBLEM_UNIT_ID" length="5" />
+		</property>
+		<property name="problemDiscId" type="java.lang.String">
+			<column name="PROBLEM_DISC_ID" length="4" />
+		</property>
+		<property name="status" type="java.lang.String">
+			<column name="STATUS" length="1" />
+		</property>
+		<property name="objectContent" type="java.lang.String">
+			<column name="OBJECT_CONTENT" />
+		</property>
+		<property name="objectType" type="java.lang.String">
+			<column name="OBJECT_TYPE" length="20" />
+		</property>
+		<property name="beginTime" type="java.util.Date">
+			<column name="BEGIN_TIME" />
+		</property>
+		<property name="checkTime" type="java.util.Date">
+			<column name="CHECK_TIME" />
+		</property>
+		<property name="seqNo" type="java.lang.Integer">
+			<column name="SEQ_NO" default="0" />
+		</property>
+	</class>
+</hibernate-mapping>

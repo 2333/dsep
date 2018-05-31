@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+    <!-- ============================= Spring Quartz ================================ -->
+   <!-- 定义调度任务，targetObject为调度的bean，targetMethod为调度的方法 -->
+   <bean id="beginPubJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+        <property name="targetObject" ref="publicityService"/> 
+        <property name="targetMethod" value="autoBeginPublicityRound"/> 
+        <property name="concurrent" value="false"/> 
+   </bean> 
+   <bean id="closePubJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+        <property name="targetObject" ref="publicityService"/> 
+        <property name="targetMethod" value="autoClosePublicityRound"/> 
+        <property name="concurrent" value="false"/> 
+   </bean>
+   <bean id="closeFeedJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+        <property name="targetObject" ref="feedbackManagementService"/> 
+        <property name="targetMethod" value="autoCloseFeedbackRound"/> 
+        <property name="concurrent" value="false"/> 
+   </bean>
+   <!-- 调度任务定义结束 -->
+   
+   <!-- 定义任务的触发时间 -->
+   <bean id="beginPubTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="beginPubJobDetail"></property>
+        <property name="cronExpression">   
+           <value>0 0 12 * * ?</value>
+           <!-- <value>0/1 * * * * ?</value> -->
+        </property>
+   </bean>
+   <bean id="closePubTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="closePubJobDetail"></property>
+        <property name="cronExpression">   
+           <value>10 0 12 * * ?</value>
+           <!-- <value>0/1 * * * * ?</value> -->
+        </property>
+   </bean>
+   <bean id="closeFeedTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="closeFeedJobDetail"></property>
+        <property name="cronExpression">   
+           <value>20 0 12 * * ?</value>
+           <!-- <value>0/1 * * * * ?</value> -->
+        </property>
+   </bean>
+   <!-- 触发时间定义结束 -->
+   
+   
+    <!-- 总调配中心 -->    
+    <bean id="quartzFacotory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+            	<ref bean="beginPubTrigger" /> 
+            	<ref bean="closePubTrigger" />
+            	<ref bean="closeFeedTrigger" />
+             </list>
+        </property>
+        <property name="quartzProperties">  
+            <props>
+                <!-- 去除quartz更新 -->
+                <prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>  
+            </props>
+        </property>
+    </bean>   
+     
+</beans>
+

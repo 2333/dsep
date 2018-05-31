@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+.TextFont
+{  
+   font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+   font-size: 1.17em;
+   line-height: normal;
+   font-weight: bold;
+   color: #2e6e9e;
+   text-align: center;
+   /* padding: .4em 1em; */
+}
+.smallTextFont
+{  
+   font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+   font-size: 0.5em;
+   /*line-height: normal;*/
+   font-weight: bold;
+   color: #2e6e9e;
+   text-align: center;
+  /*  padding: .4em 1em; */
+}
+.TextBold
+{  
+   font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+   font-weight: bold;
+}

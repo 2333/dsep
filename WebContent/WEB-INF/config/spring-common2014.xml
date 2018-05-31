@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/cache 
+	http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+	http://www.springframework.org/schema/aop           
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd            
+	http://www.springframework.org/schema/tx            
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	">
+
+	<!-- 配置数据源 -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+		> <property name="driverClassName" value="com.mysql.jdbc.Driver"></property> 
+		<property name="url" value="jdbc:mysql://localhost:3306/test_ssh"></property> 
+		<property name="username" value="root"></property> <property name="password" 
+		value="root"></property> </bean> -->
+		
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@39.104.90.238:1521:ORCL</value>
+		</property>
+		<property name="username" value="degree_eval_user" />
+		<property name="password" value="patent" />
+		<!-- 指定连接数据库连接池的初始化连接数 -->
+		<property name="initialSize" value="1" />
+		<!-- 最大连接数据库连接数 -->
+		<property name="maxActive" value="100" />
+		<!-- 最大等待连接中的数量 -->
+		<property name="maxIdle" value="5" />
+		<!-- 最小等待连接中的数量 -->
+		<property name="minIdle" value="2" />
+	</bean>
+	
+	<bean id="dataSourceExp" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<!-- <property name="url">
+			<value>jdbc:oracle:thin:@192.168.3.112:1521/pangeneral</value>
+		</property>
+		<property name="username" value="pgsh" />
+		<property name="password" value="patent" /> -->
+		<property name="url">
+			<!-- <value>jdbc:oracle:thin:@192.168.3.112:1521:ORCL</value> -->
+			<value>jdbc:oracle:thin:@39.104.90.238:1521:ORCL</value>
+		</property>
+		<property name="username" value="pgsh" />
+		<property name="password" value="patent" /> 
+		<!-- 指定连接数据库连接池的初始化连接数 -->
+		<property name="initialSize" value="1" />
+		<!-- 最大连接数据库连接数 -->
+		<property name="maxActive" value="100" />
+		<!-- 最大等待连接中的数量 -->
+		<property name="maxIdle" value="5" />
+		<!-- 最小等待连接中的数量 -->
+		<property name="minIdle" value="2" />
+	</bean>
+	
+	<bean id="jdbcTemplate" 
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSourceExp"></property>
+	</bean>
+	
+
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor" />
+
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">
+		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor" />
+	</bean>
+
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hiberate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.dsep.entity.survey.QuesTemplate</value>
+				<value>com.dsep.entity.survey.Questionnaire</value>
+				<value>com.dsep.entity.survey.Answer</value>
+				<value>com.dsep.entity.User</value>
+				<value>com.dsep.entity.Teacher</value>
+				<value>com.dsep.entity.Unit</value>
+				<value>com.dsep.entity.Leader</value>
+				<value>com.dsep.entity.Province</value>
+				<value>com.dsep.entity.DiscContent</value>
+				<value>com.dsep.entity.Right</value>
+				<value>com.dsep.entity.Role</value>
+				<value>com.dsep.entity.News</value>
+				<value>com.dsep.entity.Attachment</value>
+				<value>com.dsep.entity.Storage</value>
+				<value>com.dsep.entity.Discipline</value>
+				<value>com.meta.entity.MetaDomain</value>
+				<value>com.meta.entity.MetaEntity</value>
+				<value>com.meta.entity.MetaEntityMap</value>
+				<value>com.meta.entity.MetaAttributeMap</value>
+				<value>com.meta.entity.MetaEntityStyle</value>
+				<value>com.meta.entity.MetaEntityCategory</value>
+				<value>com.meta.entity.MetaAttribute</value>
+				<value>com.meta.entity.MetaAttrStyle</value>
+				<value>com.meta.entity.MetaAttrTempl</value>
+				<value>com.meta.entity.MetaDic</value>
+				<value>com.meta.entity.MetaDicItem</value>
+				<value>com.meta.entity.MetaDicItemUionPK</value>
+				<value>com.meta.entity.MetaCheckRule</value>
+				<value>com.meta.entity.MetaAttrCheckRule</value>
+				<value>com.dsep.entity.dsepmeta.Eval</value>
+				<value>com.dsep.entity.MessageEntity</value>
+				<value>com.dsep.entity.Teacher</value>
+				<value>com.meta.entity.MetaInnerStateDetail</value>
+			</list>
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<!-- web应用的加载方式 -->
+				 <!-- <value>WEB-INF/config/entity/dsepmeta/</value> -->
+				<!-- Junit测试的加载方式 -->
+				<value>classpath:/config/entity/dsepmeta2014</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- <bean id="expSessionFactory" 
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource2" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hiberate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+			</list>
+		</property>
+	</bean> -->
+
+	<!-- 配置一个事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 开启注解缓存 -->
+	<cache:annotation-driven />
+	
+	<!-- cacheManager工厂类，指定ehcache.xml的位置 -->
+	<bean id="cacheManagerFactory"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"></property>
+		<!-- <property name="configLocation" value="/WEB-INF/config/dsep_ehcache.xml"></property> -->
+		<property name="shared" value="true"></property>
+	</bean>
+
+	<!-- 声明cacheManager -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="cacheManagerFactory">
+		</property>
+	</bean>
+
+	<!-- 配置事务，使用代理的方式 -->
+	<!-- <bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" 
+		abstract="true"> <property name="transactionManager" ref="transactionManager"></property> 
+		<property name="transactionAttributes"> <props> <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop> 
+		<prop key="modify*">PROPAGATION_REQUIRED,-myException</prop> <prop key="del*">PROPAGATION_REQUIRED</prop> 
+		<prop key="get*">PROPAGATION_REQUIRED</prop> <prop key="*">PROPAGATION_REQUIRED</prop> 
+		</props> </property> </bean> -->
+
+</beans>

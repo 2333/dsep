@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.dsep.entity.dsepmeta.SimilarityResult" table="DSEP_D_SIMILARITY_RESULT_2013">
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="32"/>
+			<generator class="guid" />
+		</id>
+		
+		<property name="entityId" type="java.lang.String">
+			<column name="ENTITY_ID" length="10"/>
+		</property>
+		<property name="entityChsName" type="java.lang.String">
+			<column name="ENTITY_CHS_NAME" length="100"/>
+		</property>
+		
+		<property name="unitId" type="java.lang.String">
+			<column name="UNIT_ID" length="10"/>
+		</property>
+		<property name="discId" type="java.lang.String">
+			<column name="DISC_ID" length="10"/>
+		</property>
+		
+		<property name="dataId" type="java.lang.String">
+			<column name="DATA_ID" length="32"/>
+		</property>
+		
+		<property name="field" type="java.lang.String">
+			<column name="FIELD" length="20"/>
+		</property>
+		<property name="fieldName" type="java.lang.String">
+			<column name="FIELD_NAME" length="30"/>
+		</property>
+		
+		<property name="dataValue" type="java.lang.String">
+			<column name="DATA_VALUE" length="300"/>
+		</property>
+		<property name="keyValue" type="java.lang.String">
+			<column name="KEY_VALUE" length="300"/>
+		</property>
+		
+		
+		<property name="similarityIds" type="java.lang.String">
+			<column name="SIMILARITY_IDS" length="1600"/>
+		</property>
+		
+		<property name="userId" type="java.lang.String">
+			<column name="USER_ID" length="32"/>
+		</property>
+		<property name="seqNo" type="java.lang.Integer">
+			<column name="SEQ_NO"/>
+		</property>
+	</class>
+</hibernate-mapping>
+
+
+
+

@@ -1,0 +1,319 @@
+/* @group icons style
+--------------------------------------------------------------*/
+
+/********************************/
+.icon-login
+{
+	background-position : -144px -48px;
+}
+
+.icon-logout
+{
+	background-position : -128px -48px;
+}
+
+.icon-home{               /**主页*/
+	background-position: 0px -80px;
+}
+
+.icon-menu
+{
+	background-position : -192px -48px;
+
+}
+
+.icon-email
+{
+	background-position : -48px -112px;
+}
+
+.icon-file             /*文件*/
+{
+	background-position : -128px -96px;
+}
+
+
+.icon-adduser      /**新建用户*/
+{
+	background-position : -16px -128px;
+}
+
+.icon-edituser         /**编辑用户*/
+{    
+	background-position: -112px -96px;
+}
+
+.icon-deleteuser     /**删除用户*/
+{
+	background-position: -32px -128px;
+}
+
+.icon-usermanager    /**管理用户*/
+{
+	background-position: -176px -112px;
+}
+
+.icon-add        /**新建 添加*/
+{
+	background-position : -16px -128px;
+}
+
+.icon-edit       /**编辑*/
+{
+	background-position : 0px -144px;
+}
+
+.icon-del        /**删除*/
+{
+	background-position : 0px -128px;
+}
+
+.icon-up         /**上移*/
+{
+	background-position : 0px -48px;
+}
+
+.icon-down       /**下移*/
+{
+	background-position : -64px -48px;
+}
+
+.icon-search   /**查找、查询*/
+{
+	background-position : -192px -64px;
+}
+
+.icon-see         /**查看、检 查、打开*/
+{
+	background-position : -112px -80px;
+}
+
+.icon-ensure        /**确定*/
+{
+	background-positin : -208px -16px;
+}
+
+.icon-import         /**导入*/
+{
+	background-position : -176px -64px;
+}
+
+.icon-export       /**导出*/
+{
+	background-position : -128px -64px;
+}
+
+.icon-filter       /**过滤、筛选*/
+{
+	background-position : -240px -80px;
+}
+
+.icon-uploading       /**上传*/
+{
+	background-position : -112px -64px;
+}
+
+.icon-commit       /**提交*/
+{
+	background-position : -240px -32px;
+}
+
+.icon-download    /**下载*/
+{
+	background-position : -64px -48px;
+}
+
+.icon-send          /**发送*/
+{
+	background-position : -64px -144px;
+}
+
+.icon-cancel        /**取消*/
+{
+	background-position : -192px -16px;
+}
+
+.icon-undo            /**撤销、还原*/
+{
+	background-position : -48px -144px;
+}
+
+.icon-store           /**保存*/
+{
+	background-position : -48px -80px;
+}
+
+.icon-backup           /**备份*/
+{
+	background-position: -16px -144px;
+}
+
+.icon-set          /**设置*/
+{
+	background-position : 0px -96px;
+}
+
+.icon-tool           /**工具、计算*/
+{
+	background-position : -16px -96px;
+}
+
+.icon-start          /**开始*/
+{
+	background-position : -128px -80px;
+}
+
+.icon-stop            /**停止*/
+{
+	background-position : -64px -128px;
+}
+
+.icon-user            /**用户*/
+{
+	background-position : -16px -80px;
+}
+
+.icon-expert            /**专家*/
+{         
+	background-position: -176px -112px;
+}
+
+.icon-web            /**页面标题*/
+{
+	background-position : -160px -112px;
+}
+
+.icon-report           /**生成文件、生成报告、生成清单*/
+{
+	background-position : -192px -96px;
+}
+
+.icon-replacexpert         /**替换专家*/
+{
+	background-position : -176px -128px;
+}
+
+/***************************************************/
+.icon-formtype
+{
+	background-position: -240px -96px;
+}
+
+.icon-sheettype
+{
+	background-position: -224px -96px;
+}
+
+.icon-departmentcollect
+{
+	background-position: -32px -144px;
+}
+
+.icon-departmentmanager
+{
+	background-position: 0px -144px;
+}
+
+.icon-personfruit    
+{
+	background-position: -176px -128px;
+}
+
+.icon-greenright
+{
+	background-position: -32px -48px;
+}
+
+.icon-sysmanage
+{
+	background-position: -16px -96px;
+}
+
+.icon-right
+{
+	background-position: -32px -16px;
+}
+
+.icon-left
+{
+	background-position: -96px -16px;
+}
+
+.icon-submitschool
+{
+	background-position: -240px -32px;
+}
+
+.icon-excel
+{
+	background-position: -208px -96px;
+}
+
+.icon-submitcenter
+{
+	background-position: 0px -48px;
+}
+
+.icon-allsubmitcenter
+{
+	background-position: 0px -48px;
+}
+
+.icon-disciplinecollect
+{
+	background-position: -144px -96px;
+}
+
+.icon-stopsubmit
+{
+	background-position: -176px -80px;
+}
+
+.icon-resubmit
+{
+	background-position: -160px -48px;
+}
+
+.icon-departmentexportrepeat
+{
+	background-position: -16px -48px;
+}
+
+.icon-exportrepeat
+{
+	background-position: 0px -48px;
+}
+
+.icon-repeatinsepect
+{
+	background-position: -224px -64px;
+}
+
+.icon-contrast
+{
+	background-position: -224px 0px;
+}
+
+.icon-makelist
+{
+	background-position: -128px -96px;
+}
+
+.icon-publiccontrast
+{
+	background-position: -224px -96px;
+}
+.icon-explanation
+{
+	background-position: -64px -80px;
+}
+
+.icon
+{
+	display:block;
+	height:16px;
+	width:16px;
+	float:left;
+	margin-right:5px;
+	background-image : url('../images/icons-color16.png') ;
+}

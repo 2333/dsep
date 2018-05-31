@@ -1,0 +1,41 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+	updateCheck="false">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<defaultCache maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="120" />
+		
+	<cache name="discCache" maxElementsInMemory="10000" eternal="false"
+		overflowToDisk="true" />
+	<cache name="unitCache" maxElementsInMemory="10000" eternal="false"
+		overflowToDisk="true" />
+	<cache name="xmlData" maxElementsInMemory="8000"  
+           maxElementsOnDisk="10000000"  
+           eternal="false"  
+           overflowToDisk="true"  
+           diskSpoolBufferSizeMB="20"  
+           memoryStoreEvictionPolicy="LFU"/>
+
+	<cache name="metaDomainCache" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" />
+	<cache name="metaEntityCache" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" />
+	<cache name="metaEntityDomainCache" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" />
+	<cache name="metaDicCache" maxElementsInMemory="1000"
+		eternal="false" overflowToDisk="true" />
+
+	<cache name="backupVersionCache" maxElementsInMemory="1000"
+		eternal="false" overflowToDisk="true" />
+
+	<cache name="expertFromOtherDBCache" maxElementsInMemory="1000"
+		eternal="false" overflowToDisk="true" />
+		
+	<cache name="expertEvalItem" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="true"></cache>
+	
+	
+</ehcache>

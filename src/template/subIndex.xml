@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <JSJ>
+    <!-- 高水平学术论文 -->
+    <index IndexItemId='JSJ000I020105' Sub='926B32E850254CF6A1D31CD34313E97D'>
+    </index>
+    <!--  优秀在校生与毕业生 -->
+    <index IndexItemId='JSJ000I030501' Sub='926B32E850254CF6A1D31CD34313E97R'>
+    </index>
+    <!-- 学科声誉 -->
+    <index IndexItemId='JSJ000I040101' Sub=''>
+    </index>
+  </JSJ>
+</root>
+

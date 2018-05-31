@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.Category" table="DSEP_X_CATEGORY_20133">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="indexId" type="java.lang.String">
+            <column name="INDEX_ID" />
+        </property>
+        <property name="collectId" type="java.lang.String">
+            <column name="COLLECT_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="con_header" style="overflow: hidden">
+	<table class="layout_table left">
+		<tr>
+			<td><span class="icon icon-web"></span> <span
+				class="TextFont">指标体系评价</span></td>
+		</tr>
+	</table>
+</div>
+<table>
+	<tr>
+		<td>
+		指标体系评价
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		指标权重评价
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		学科成果评价
+		</td>
+		<td>
+		团队
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		学科成果评价
+		</td>
+		<td>
+		师生比
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		学科成果评价
+		</td>
+		<td>
+		论文
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		学科声誉评价
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		学校排名
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+</table>
+

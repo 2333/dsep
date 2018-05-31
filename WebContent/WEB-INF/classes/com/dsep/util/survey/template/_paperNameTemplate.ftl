@@ -1,0 +1,1 @@
+<div class="publishPaperName">${q.paperName}</div>

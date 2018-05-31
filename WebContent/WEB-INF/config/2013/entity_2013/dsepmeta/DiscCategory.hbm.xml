@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.DiscCategory" table="DSEP_X_CAT_DISC_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <many-to-one name="discipline" class="com.dsep.entity.Discipline" fetch="select">
+            <column name="DISC_ID" />
+        </many-to-one>
+        <many-to-one name="category" class="com.dsep.entity.dsepmeta.Category" fetch="select">
+            <column name="CAT_ID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

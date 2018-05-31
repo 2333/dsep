@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dsep.entity.expert.EvalAchv" table="DSEP_E_ACHV_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="collectId1" type="java.lang.String">
+            <column name="COLLECT_ID1"/>
+        </property>
+        <property name="collectId2" type="java.lang.String">
+            <column name="COLLECT_ID2"/>
+        </property>
+        <property name="collectId3" type="java.lang.String">
+            <column name="COLLECT_ID3"/>
+        </property>
+         <property name="collectId1Name" type="java.lang.String">
+            <column name="COLLECT_ID1_NAME"/>
+        </property>
+         <property name="collectId2Name" type="java.lang.String">
+            <column name="COLLECT_ID2_NAME"/>
+        </property>
+         <property name="collectId3Name" type="java.lang.String">
+            <column name="COLLECT_ID3_NAME"/>
+        </property>
+        <property name="questionName" type="java.lang.String">
+            <column name="QUESTION_NAME" />
+        </property>
+        <property name="discCatId" type="java.lang.String">
+            <column name="DISC_CAT_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

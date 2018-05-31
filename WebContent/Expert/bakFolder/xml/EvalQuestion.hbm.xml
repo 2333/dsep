@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-9 9:58:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dsep.entity.dsepmeta.EvalQuestion" table="DSEP_X_EVAL_QUESTION_2013">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="guid" />
+        </id>
+        <property name="evalItemName" type="java.lang.String">
+            <column name="NAME" length="50" />
+        </property>
+        <property name="collectId1" type="java.lang.String">
+            <column name="COLLECT_ID1" length="32" />
+        </property>
+        <property name="collectId2" type="java.lang.String">
+            <column name="COLLECT_ID2" length="32" />
+        </property>
+        <property name="collectId3" type="java.lang.String">
+            <column name="COLLECT_ID3" length="32" />
+        </property>
+        <property name="scoreType" type="int">
+            <column name="SCORE_TYPE" />
+        </property>
+		<property name="storageMode" type="int">
+			<column name="STORAGE_MODE"/>
+		</property>
+		<property name="indexItemId" type="java.lang.String">
+            <column name="INDEX_ITEM_ID" length="32"/>
+        </property>
+        <set
+        	name="evalPapers"
+        	table="DSEP_X_PAPER_QUES_2013"
+        	lazy="false"
+        	inverse="true"
+        	cascade="save-update"
+        	sort="unsorted">
+        	<key 
+        		column="QUESTION_ID"></key>
+        	<many-to-many 
+        		class="com.dsep.entity.dsepmeta.EvalPaper" 
+        		column="PAPER_ID"
+        		outer-join="auto">
+        	</many-to-many>	
+        </set>
+        <set name="evalResults" table="DSEP_E_RESULT_2013" lazy="false"
+        inverse="true" cascade="all" sort="unsorted" order-by="id asc">
+        	<key column="EVAL_ITEM_ID"></key>
+        	<one-to-many class="com.dsep.entity.dsepmeta.EvalResult"/>
+        </set>
+    </class>
+</hibernate-mapping>

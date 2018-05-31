@@ -1,0 +1,300 @@
+/* @group form style
+
+hotfix: ����ʽ
+ 
+--------------------------------------------------------------*/
+
+.fr_form
+{
+    padding:10px;
+}
+
+.fr_panel
+{
+    background-color:#eee;
+    border:1px solid gray;
+    height:300px;
+    width:200px;
+    overflow:auto;
+}
+
+.fr_table
+{
+    border:1px solid #ccc;
+    margin:10px;
+    padding:10px;
+	width:100%;
+}
+
+.fr_table tr
+{
+	line-height:30px;
+}
+
+.fr_table td
+{
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.fr_left
+{
+    text-align:left;
+}
+
+.fr_right
+{
+   text-align:right;
+}
+
+.center
+{
+    text-align:center;
+}
+
+label.error
+{
+/* 	font-size:9px; */
+	color:red;
+}
+
+/* @group form style
+
+by ���ٽ�
+ 
+--------------------------------------------------------------*/
+
+div .infofr_div
+{
+	margin:0 auto;
+	width:80%;
+}
+
+.smallTitle
+{
+   font-size:14px;
+   font-weight:bold;
+   color:#006699; 
+   padding-left: 7px;
+}
+
+.infofr_form
+{
+	padding:10px;
+	height:100%;
+}
+
+/*infofr_table����ʽ*/
+.infofr_table
+{
+    border:1px solid #ccc;
+    /* margin:10px; */
+    padding:10px;
+	width:100%;
+	text-align:center;
+}
+
+.infofr_table tr
+{
+	line-height:30px;
+}
+
+.infofr_table tr td label
+{
+	font-weight:600;
+	/* font-size: 11pt;  */
+}
+
+.infofr_table tr td input
+{
+    background: #ffffff; 
+    border: 1px solid #B7B7B7; 
+    /* color: #003366; */ 
+    cursor: text; 
+    font-family: "Arial"; 
+    font-size: 10pt; 
+    height: 18px; 
+    padding: 1px; 
+    width:100%;
+
+}
+
+.disable_select
+{
+	font-family:"Arial";
+	font-size:9pt;	
+	display:none;
+}
+
+.infofr_table tr td input.hidden_text
+{
+	
+}
+
+.infofr_table tr td select
+{
+	font-family:"Arial";
+	font-size:9pt;
+   	width:100%;
+   	height: 23px; 
+    padding: 1px;
+}
+
+.infofr_table tr td textarea
+{
+    border-bottom: #b7b7b7 1px solid;
+    border-left: #b7b7b7 1px solid;
+    border-right: #b7b7b7 1px solid;
+    border-top: #b7b7b7 1px solid;
+    color: #000000;
+    cursor: text;
+    font-family: "arial";
+    font-size: 9pt;
+    padding: 1px;
+    width:100%;
+}
+
+
+
+/*radio_table����ʽ*/
+.radio_table
+{
+	border:1px solid #ccc;
+	width:100%;
+	margin:10px;
+    padding:10px;
+}
+
+.radio_table tr td input
+{
+    background: #ffffff; 
+    border: 1px solid #B7B7B7; 
+    /* margin-left:20px; */
+    padding: 1px; 
+}
+
+.radio_table tr td textarea
+{
+    border-bottom: #b7b7b7 1px solid;
+    border-left: #b7b7b7 1px solid;
+    border-right: #b7b7b7 1px solid;
+    border-top: #b7b7b7 1px solid;
+    color: #000000;
+    cursor: text;
+    font-family: "arial";
+    font-size: 9pt;
+    padding: 1px;
+    width:100%;
+}
+
+#gbox_modify_object_list_tb
+{
+	float:left;
+}
+
+.infofr_fieldset{
+	margin-top:10px;
+	padding:5px;
+	width:100%;
+}
+.infoshow_fieldset{
+	border:1px solid #ccc;
+    margin:10px;
+    padding:10px;
+	width:98%;
+}
+.infofr_form{
+	margin-left:5%;
+	line-height:30px;
+}
+.info_label{
+	width: 150px;
+	display:inline-block;
+	text-align:right;
+	font-weight:600;
+	font-size: 11pt;
+}
+
+.info_label2{
+	width: 100px;
+	display:inline-block;
+	text-align:right;
+	font-size: 11pt;
+}
+.info_inputL{
+	width:22%;
+	height:24px;
+	text-align:left;
+	font-size: 11pt;
+}
+.info_inputR{
+	width:28%;
+	height:24px;
+	text-align:left;
+	font-size: 11pt;
+}
+.info_input_memo{
+	width:75%;
+	height:24px;
+	text-align:left;
+
+	font-size: 11pt;
+}
+.validSpan{
+	width:12%;
+	display:-moz-inline-box; 
+	display:inline-block;
+}
+.info_inputL_readonly{
+	width:22%;
+	height:24px;
+	text-align:left;
+	font-size: 11pt;
+	color:gray;
+}
+.info_inputR_readonly{
+	width:28%;
+	height:24px;
+	text-align:left;
+	font-size: 11pt;
+	color:gray;
+}
+.info_select_readonly{
+	width:20%;
+	text-align:left;
+	font-weight:600;
+	font-size: 11pt;
+	color:gray;
+}
+.info_span_edit{
+	padding:10px;
+	margin-left:85%;
+}
+.info_span_save{
+	margin-left:-190px;
+	width:10%;
+}
+.info_span_cancel{
+	margin-left:0;
+	width:10%;
+}
+.dialog_validSpan{
+	width:130px;
+	display:-moz-inline-box; 
+	display:inline-block;
+}
+.discAndUnitJqGridInputL{
+	width:100%;
+	height:20px;
+}
+.discAndUnitJqGridInputR{
+	width:60%;
+	height:20px;
+}
+.onlyread{
+	color:gray;
+}
+/*学校和学科用户管理页面的格式  */
+.uniAndDiscJqGridMemo{
+	width:82%;
+}
