@@ -1,8 +1,15 @@
 package com.dsep.controller.rbac;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -10,8 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import me.legrange.mikrotik.ApiConnection;
+import me.legrange.mikrotik.MikrotikApiException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +50,11 @@ import com.dsep.vm.UserVM;
 @RequestMapping("rbac")
 public class UserController {
 
+	
+	private Map<String,Integer> rosIPMap = UserIPMaps.getInstance().getMap();
+	//private Map<String,Set<String>> userAndObtainedIPsMaps = UserAndObtainedIPsMaps.getInstance().getMap();
+	
+	
 	@Resource(name = "userService")
 	private UserService userService;
 
@@ -149,7 +165,7 @@ public class UserController {
 
 	@RequestMapping("useredit")
 	public String useredit(String userId, Model model) {
-		User user = userService.getUser(userId);
+		User user = userService.getUser(Integer.valueOf(userId));
 		model.addAttribute("user", user);
 		Map<String,String> userTypes = Dictionaries.getUserType();
 		model.addAttribute("userTypes", userTypes);
@@ -159,14 +175,14 @@ public class UserController {
 	@RequestMapping("userroletree")
 	@ResponseBody
 	public String userroletree(String userId) {
-		String jsonString = JsonConvertor.obj2JSON(roleService.getroleTreeVMs(userId));
+		String jsonString = JsonConvertor.obj2JSON(roleService.getroleTreeVMs(Integer.valueOf(userId)));
 		return jsonString;
 	}
 
 	@RequestMapping("userallroletree")
 	@ResponseBody
 	public String userallroletree() {
-		String jsonString = JsonConvertor.obj2JSON(roleService.getroleTreeVMs(""));
+		String jsonString = JsonConvertor.obj2JSON(roleService.getroleTreeVMs(-1));
 		return jsonString;
 	}
 
@@ -185,6 +201,9 @@ public class UserController {
 	@ResponseBody
 	public boolean usersaveadd(User user,@RequestParam(value = "userRoles", required = false) List<String> userRoles) {	
 		try{
+			//String userId = UUID.randomUUID().toString().replaceAll("-", "");
+			//System.out.println(userId);
+			//user.setId(userId);
 			userService.newUser(user, userRoles);
 		}catch(Exception e){
 			return false;
@@ -196,7 +215,7 @@ public class UserController {
 	@ResponseBody
 	public boolean userdelete(String userId) {
 		try{
-			userService.deleteUser(userId);
+			userService.deleteUser(Integer.valueOf(userId));
 		}catch(Exception e){
 			return false;
 		}
@@ -264,6 +283,178 @@ public class UserController {
 			return false;
 		}
 		return true;
+	}
+	
+	
+	@RequestMapping(value = "/user_validate")
+	@ResponseBody
+	public String userValidate(@RequestBody List<UserValidator> list) {
+		// 最开始验证一下前端数据的合法性
+		//validateDataFromJSP(results);
+		
+		for (UserValidator ele : list) {
+			// 把前台参数解码
+			if (ele == null) {
+				return "";
+			}
+			System.out.println(ele.getLoginId());
+			System.out.println(ele.getPassword());
+			//System.out.println(ele.getLocation());
+			//System.out.println(ele.getRequestWinNum());
+		}
+		
+		// 从前台来的值，即将要存储到数据库中
+		ReturnInfo info = new ReturnInfo();
+		info.setAvaliableWinNum(100 - 10);
+		info.setIsValidate(true);
+		String jsonString = JsonConvertor.obj2JSON(info);
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/online")
+	@ResponseBody
+	public String online(@RequestBody List<UserOnLine> list) {
+		// 最开始验证一下前端数据的合法性
+		//validateDataFromJSP(results);
+		String currentIP = null;
+		System.out.println(rosIPMap.size());
+		for (UserOnLine ele : list) {
+			// 把前台参数解码
+			if (ele == null) {
+				return "";
+			}
+			System.out.println(ele.getLocation());
+			System.out.println(ele.getLoginId());
+			System.out.println(ele.getUseIP());
+			currentIP = ele.getUseIP();
+			
+		}
+		UserOnLineReturnInfo info = new UserOnLineReturnInfo();
+		info.setRet(true);
+		Integer res = rosIPMap.get(currentIP);
+		if (res == null) {
+			rosIPMap.put(currentIP, 1);
+			info.setInfo(currentIP + " now use num:" + 1);
+		} else {
+			rosIPMap.put(currentIP, res + 1);
+			info.setInfo(currentIP + " now use num:" + (res + 1));
+		}
+		String jsonString = JsonConvertor.obj2JSON(info);
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/offline")
+	@ResponseBody
+	public String offline(@RequestBody List<UserOffLine> list) {
+		// 最开始验证一下前端数据的合法性
+		//validateDataFromJSP(results);
+		String currentIP = null;
+		System.out.println(rosIPMap.size());
+		for (UserOffLine ele : list) {
+			// 把前台参数解码
+			if (ele == null) {
+				return "";
+			}
+			System.out.println(ele.getLocation());
+			System.out.println(ele.getLoginId());
+			System.out.println(ele.getReleaseIP());
+			currentIP = ele.getReleaseIP();
+			
+		}
+		UserOffLineReturnInfo info = new UserOffLineReturnInfo();
+		info.setRet(true);
+		Integer res = rosIPMap.get(currentIP);
+		if (res == null) {
+			rosIPMap.put(currentIP, 0);
+			info.setInfo(currentIP + " now use num:" + 0);
+		} else {
+			rosIPMap.put(currentIP, res - 1);
+			info.setInfo(currentIP + " now use num:" + (res - 1));
+		}
+		String jsonString = JsonConvertor.obj2JSON(info);
+		return jsonString;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * 从本地获得test.txt中的可用的一个ros的ip，利用Ros的API连上之后，获取10个，然后以json的形式传递到本地
+	 */
+	@RequestMapping(value = "/getRosIP")
+	@ResponseBody
+	public String getRosIP(HttpServletRequest req, @RequestBody List<UserValidator> list) {
+		
+		UsableIP10 usableIP10 = new UsableIP10();
+		
+		if (null == list || list.size() == 0) {
+			return "";
+		}
+		for (UserValidator ele : list) {
+			// 把前台参数解码
+			if (ele == null) {
+				usableIP10.info = "数据为空";
+				usableIP10.avaliableWinNum = -1;
+				return JsonConvertor.obj2JSON(usableIP10);
+			}
+			System.out.println(ele.getLoginId());
+			System.out.println(ele.getPassword());
+			//System.out.println(ele.getLocation());
+			//System.out.println(ele.getRequestWinNum());
+		}
+		
+		// 如果初始化没有可用的ROS IP
+		if (RosConnectionUtil.usableRosConnectionIPs.size() == 0) {
+			String ret = RosConnectionUtil.getCurrentRosConnectionIP();
+			if (ret.equals("ERROR")) {
+				usableIP10.info = "数据为空";
+				usableIP10.avaliableWinNum = -1;
+				return JsonConvertor.obj2JSON(usableIP10);
+			}
+		}
+		ArrayList<String> activePPPoEIpAddresses = new ArrayList<String>();
+		for (String r : RosConnectionUtil.usableRosConnectionIPs) {
+			activePPPoEIpAddresses.add(r);
+		}
+		
+        
+        
+        int requestNum = list.get(0).getRequestWinNum();
+        
+        int remainNum = UserAndObtainedIPsMaps.getInstance().guanliyuanIP;
+        
+        int allocateNum = 0;
+        if (remainNum >= requestNum) {
+        	allocateNum = requestNum;
+        	UserAndObtainedIPsMaps.getInstance().guanliyuanIP -= requestNum;
+        	usableIP10.info = "ok";
+        } else {
+        	allocateNum = remainNum;
+        	UserAndObtainedIPsMaps.getInstance().guanliyuanIP = 0;
+        	usableIP10.info = "request winnum more than remain winnum, allocate:" + allocateNum;
+        }
+        HashSet<Integer> set = new HashSet<Integer>();
+        while (set.size() < allocateNum) {
+        	int i = (int) ((Math.random())*RosConnectionUtil.usableRosConnectionIPs.size());
+            if (!set.contains(i)) {
+            	set.add(i);
+            }
+        }
+        usableIP10.username = list.get(0).getLoginId();
+        usableIP10.password = list.get(0).getPassword();
+        usableIP10.remainTime = UserAndObtainedIPsMaps.getInstance().myDate1.getTime() - new Date().getTime();
+        usableIP10.avaliableWinNum = UserAndObtainedIPsMaps.getInstance().guanliyuanIP;
+        usableIP10.isValidate = true;
+        usableIP10.location = "changzhou";
+        usableIP10.port = 1080;
+        for (Integer i : set) {
+        	System.out.println(activePPPoEIpAddresses.get(i));
+        	usableIP10.ips.add(activePPPoEIpAddresses.get(i)+ ":" + usableIP10.port + ",aa,bb" 
+        	+ "," + usableIP10.location);
+        }
+        
+        
+		String jsonString = JsonConvertor.obj2JSON(usableIP10);
+		return jsonString;
 	}
 	
 	/*

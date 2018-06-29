@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.collections.map.LinkedMap;
 import org.springframework.scheduling.annotation.Async;
 
+import com.dsep.controller.rbac.RosConnectionUtil;
 import com.dsep.dao.dsepmeta.publicity.objection.PublicityManagementDao;
 import com.dsep.domain.dsepmeta.publicity.PublicityMessage;
 import com.dsep.entity.dsepmeta.BackupManagement;
@@ -40,6 +41,17 @@ public class PublicityServiceImpl implements PublicityService{
 		this.publicityManagementDao = publicManagementDao;
 	}
 
+	public String checkRosIPActive() {
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		System.out.println("============================checkRosIPActive===============================================");
+		RosConnectionUtil.getCurrentRosConnectionIP();
+		return null;
+	}
 	@Override
 	public boolean publicityFinish() throws IllegalArgumentException, IllegalAccessException {
 		// TODO Auto-generated method stub

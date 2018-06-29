@@ -50,48 +50,47 @@
 				</select>
 			 </td>
           </tr> 
-           
           <tr>
-             <td>单位代码：</td>
+             <td>QQ：</td>
              <td>  
-                <input type="text" name="unitId" value="${user.unitId}"/>  
+                <input type="text" name="QQ" value="${user.QQ}"/>  
              </td>
-             <td>学科代码：</td>
+             <td>game：</td>
              <td>  
-                <input type="text" name="discId" value="${user.discId}"/>  
+                <input type="text" name="game" value="${user.game}"/>  
              </td>    
           </tr> 
           
           <tr>
-             <td>院系名称：</td>
+             <td>winnum数量：</td>
              <td>  
-                <input type="text" name="schoolName" value="${user.schoolName}"/>  
+                <input type="text" name="winnum" value="${user.winnum}"/>  
              </td>
-             <td>电子邮箱：</td>
+             <td>money：</td>
              <td>  
-                <input type="text" name="email" value="${user.email}"/>  
+                <input type="text" name="money" value="${user.money}"/>  
              </td>    
           </tr> 
           
           <tr>
-             <td>办公电话：</td>
+             <td>nownum数量：</td>
              <td>  
                 <input type="text" name="officePhone" value="${user.officePhone}"/>  
              </td>
-             <td>移动电话：</td>
+             <td>region：</td>
              <td>  
-                <input type="text" name="cellPhone" value="${user.cellPhone}"/>  
+                <input type="text" name="region" value="${user.region}"/>  
              </td>    
           </tr> 
           
           <tr>
-             <td>办公地址：</td>
+             <td>IPType：</td>
              <td>  
-                <input type="text" name="officeAddr" value="${user.officeAddr}"/>  
+                <input type="text" name="IPType" value="${user.IPType}"/>  
              </td>
-             <td>通信地址：</td>
+             <td>higherUserId：</td>
              <td>  
-                <input type="text" name="address" value="${user.address}"/>  
+                <input type="text" name="higherUserId" value="${user.higherUserId}"/>  
              </td>    
           </tr> 
           

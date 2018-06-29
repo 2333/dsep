@@ -14,11 +14,11 @@ import com.dsep.entity.User;
 import com.dsep.entity.expert.Expert;
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
- public class UserDaoImpl extends DaoImpl<User,String> implements UserDao {
+ public class UserDaoImpl extends DaoImpl<User,Integer> implements UserDao {
 	
-	public boolean validatorUser(String id,String password) {		
+	public boolean validatorUser(String userLoginId,String password) {		
 		String hql = "from User u where u.loginId=? and u.password=?";
-	    List<User> list=super.hqlFind(hql, new Object[]{id,password});
+	    List<User> list=super.hqlFind(hql, new Object[]{userLoginId,password});
 		return (list.size()>0);
 	}
 
@@ -80,21 +80,21 @@ import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 	}
 
 	@Override
-	public void updateLoginInfo(String loginIp, Date loginTime, String id) {
-		String sql = "update dsep_rbac_user set login_ip = ?,login_time = ? where id = ?";
-		super.sqlBulkUpdate(sql, new Object[]{loginIp, loginTime, id});
+	public void updateLoginInfo(String loginIp, Date loginTime, Integer id) {
+		String sql = "update dsep_rbac_user2 set login_ip = ? where id = ?";//,login_time = ? where id = ?";
+		super.sqlBulkUpdate(sql, new Object[]{loginIp,  id});
 	}
 	
 	@Override
-	public void updateUserPassword(String password, String id) {
-		String sql = "update dsep_rbac_user set password = ? where id = ?";
+	public void updateUserPassword(String password, Integer id) {
+		String sql = "update dsep_rbac_user2 set password = ? where id = ?";
 		super.sqlBulkUpdate(sql, new Object[]{password , id});
 	}
 
 	@Override
 	public int deleteUserBySource(int source) {
 		// TODO Auto-generated method stub
-		String sql = "delete from dsep_rbac_user where source = ?";
+		String sql = "delete from dsep_rbac_user2 where source = ?";
 		Object[] valueParameter = new Object[1];
 		valueParameter[0] = source;
 		int result = super.sqlBulkUpdate(sql, valueParameter);
@@ -105,7 +105,7 @@ import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 	public List<String> getUserIdsByUnitIdAndDiscId(String unitId, String discId) {
 		// TODO Auto-generated method stub
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select id from dsep_rbac_user u");
+		sqlBuffer.append("select id from dsep_rbac_user2 u");
 		List<Object> values=new ArrayList<Object>(0);
 		boolean bFirst= true;
 		if(StringUtils.isNotBlank(unitId)){

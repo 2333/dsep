@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <div class="info_box">
 	<div class="info_header">
-		中心公告
+		系统公告
 	</div>
 	<ul class="info_list news_list">
 		<c:if test="${!empty list}">

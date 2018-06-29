@@ -36,40 +36,42 @@
                   </select>  
 			  </td>
           </tr>
+          
+          
           <tr>
-             <td>单位代码：</td>
+             <td>QQ：</td>
              <td>  
-                <input type="text" name="unitId" />  
+                <input type="text" name="QQ" />  
              </td>
-             <td>学科代码：</td>
+             <td>game：</td>
              <td>  
-                <input type="text" name="discId" />  
+                <input type="text" name="game" />  
              </td>    
           </tr> 
           <tr>
-             <td>院系名称：</td>
+             <td>winnum：</td>
              <td>  
-                <input type="text" name="schoolName" />  
+                <input type="text" name="winnum" />  
              </td>
-             <td>电子邮箱：</td>
+             <td>money：</td>
              <td>  
-                <input type="text" name="email" />  
+                <input type="text" name="money" />  
              </td>    
           </tr> 
           <tr>
-             <td>办公电话：</td>
+             <td>region：</td>
              <td>  
-                <input type="text" name="officePhone" />  
+                <input type="text" name="region" />  
              </td>
-             <td>移动电话：</td>
+             <td>IPType：</td>
              <td>  
-                <input type="text" name="cellPhone" />  
+                <input type="text" name="IPType" />  
              </td>    
           </tr> 
           <tr>
-             <td>办公地址：</td>
+             <td>higherUserId：</td>
              <td>  
-                <input type="text" name="officeAddr" />  
+                <input type="text" name="higherUserId" />  
              </td>
              <td>通信地址：</td>
              <td>  

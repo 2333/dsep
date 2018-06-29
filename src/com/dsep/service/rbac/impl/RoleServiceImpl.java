@@ -53,13 +53,13 @@ public class RoleServiceImpl implements RoleService
 	}
 
 	@Override
-	public Set<Role> getUserRoles(String userId) {
+	public Set<Role> getUserRoles(Integer userId) {
 		return  userDao.get(userId).getRoles();
 	}
     
-	public List<CheckTreeVM> getroleTreeVMs(String userId) {
+	public List<CheckTreeVM> getroleTreeVMs(Integer userId) {
 		List<CheckTreeVM> allRight= new ArrayList<>();//瑶返回的TreeVM类型的list
-		if(userId!="")
+		if(userId!=-1)
 		{
 		   User user=userDao.get(userId);
 		   Set<Role> userRoles=user.getRoles();//得到该用户的角色
@@ -158,7 +158,7 @@ public class RoleServiceImpl implements RoleService
 	}
 
 	@Override
-	public List<CheckTreeVM> getUserRolesTree(String userId) {
+	public List<CheckTreeVM> getUserRolesTree(Integer userId) {
 		List<Role> allRoles = roleDao.getAll();
 		Set<Role> userRoles = null;
 		User user = userDao.get(userId);

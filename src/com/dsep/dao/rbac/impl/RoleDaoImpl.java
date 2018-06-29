@@ -17,10 +17,10 @@ public class RoleDaoImpl extends DaoImpl<Role,String> implements RoleDao{
 	}
 	
 	@Override
-	public List<Role> getUserRole(String userId) {
+	public List<Role> getUserRole(Integer userId) {
 		// TODO Auto-generated method stub
 		String sql = "select * from dsep_rbac_role where id in"
-				+ "(select role_id from dsep_rbac_user_role where user_id=?)";
+				+ "(select role_id from dsep_rbac_user_role2 where user_id=?)";
 		List<Role> list = super.sqlFind(sql, new Object[]{userId});
 		return list;
 	}

@@ -60,6 +60,13 @@
 	                 <value>.*/rbac/modify_password.*</value>
 	                 <value>.*/rbac/save_password.*</value>
 	                 <value>.*/rbac/check_password.*</value>
+	                 <value>.*/rbac/user_validate.*</value>
+	                 <value>.*/rbac/getRosIP.*</value>
+	                 <value>.*/rbac/offline.*</value>
+	                 <value>.*/rbac/online.*</value>
+	                 
+	                 
+	                 
 	                 <value>.*/ExceptionHandle/.*</value>
 	                 <value>.*.js</value>
 	                 <value>.*.css</value>

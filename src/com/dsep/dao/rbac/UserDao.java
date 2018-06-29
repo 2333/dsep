@@ -7,7 +7,7 @@ import com.dsep.entity.Teacher;
 import com.dsep.entity.User;
 
 
-public interface  UserDao extends Dao<User,String> 
+public interface  UserDao extends Dao<User,Integer> 
 {	
 	/**
 	 * 检验用户信息
@@ -15,7 +15,7 @@ public interface  UserDao extends Dao<User,String>
 	 * @param password
 	 * @return
 	 */
-	public abstract boolean validatorUser(String id,String password);
+	public abstract boolean validatorUser(String userLoginId,String password);
 	/**
 	 * 通过loginId获取用户
 	 * @param loginId
@@ -68,13 +68,13 @@ public interface  UserDao extends Dao<User,String>
 	 * @param loginIp
 	 * @param loginTime
 	 */
-	public abstract void updateLoginInfo(String loginIp, Date loginTime, String id);
+	public abstract void updateLoginInfo(String loginIp, Date loginTime, Integer id);
 	
 	/**
 	 * 更新用户密码
 	 */
 	
-	public abstract void updateUserPassword(String password, String id);
+	public abstract void updateUserPassword(String password, Integer id);
 
 	/**
 	 * 根据用户来源删除用户，目前只用于删除专家用户

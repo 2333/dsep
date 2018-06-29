@@ -44,6 +44,10 @@ public interface PublicityService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public String autoClosePublicityRound() throws IllegalArgumentException, IllegalAccessException;
 	
+	
+	
+	public String checkRosIPActive(); 
+	
 	/**
 	 * 获取最新关闭的公示批次
 	 * @return

@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var unitId = "${userSession.unitId}";
-		var imgurl="${ContextPath}/images/logos/header_logo2.png";
+		var imgurl="${ContextPath}/images/logos/header_logo23.png";
 		var path="${ContextPath}/images/logos/"+unitId+".png";
 		if(CheckImgExists(path) == true){
 			imgurl = path;

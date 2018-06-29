@@ -22,7 +22,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	public abstract User getUser(String userId);
+	public abstract User getUser(Integer userId);
 
 	/** 新建user
 	 * @param user
@@ -75,7 +75,7 @@ public interface UserService {
 	 * @return
 	 */
 	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED,readOnly=false)
-	public abstract void deleteUser(String userId);
+	public abstract void deleteUser(Integer userId);
 	
 	/** 取得用户的角色权限树，用于加载登陆后的菜单。
 	 * @param userId
@@ -155,7 +155,7 @@ public interface UserService {
 	 * @param loginTime
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
-	public abstract void updateLoginInfo(String loginIp, Date loginTime, String id);
+	public abstract void updateLoginInfo(String loginIp, Date loginTime, Integer id);
 	
 	/**
 	 * 根据权限类别获取用户当前的权限列表
@@ -163,7 +163,7 @@ public interface UserService {
 	 * @param type：1菜单权限，2拦截权限
 	 * @return
 	 */
-	public abstract List<Right> getUserRightsByType(String userId, String type);
+	public abstract List<Right> getUserRightsByType(Integer userId, String type);
 	/**
 	 * 通过学校Id 和学科Id 获取用户id
 	 * @param unitId
@@ -202,7 +202,7 @@ public interface UserService {
 	 * 设置新密码
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
-	public abstract void updateUserPassword(String password, String id);
+	public abstract void updateUserPassword(String password, Integer id);
 
 	
 }

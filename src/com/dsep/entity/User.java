@@ -9,22 +9,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import com.dsep.entity.dsepmeta.TeachDisc;
-
 @Entity
-@Table(name="DSEP_RBAC_USER")
+@Table(name="DSEP_RBAC_USER2")
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonAutoDetect
 @JsonIgnoreProperties(value = {"roles"})
@@ -34,7 +33,7 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7807810285529048338L;
-	private String id;
+	private Integer id;
 	private String loginId;
 	private String password;
 	private String name;
@@ -54,9 +53,9 @@ public class User implements Serializable{
 	
 	private String QQ;
 	private String game;
-	private int winnum;
-	private float money;
-	private int nownum;
+	private Integer winnum;
+	private Integer money;
+	private Integer nownum;
 	private String region;
 	private String IPType;
 	private String higherUserId;
@@ -75,11 +74,12 @@ public class User implements Serializable{
 	
 	
 	@Id
-	@Column(name="ID" ,length=32)
-	public String getId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -253,26 +253,26 @@ public class User implements Serializable{
 	}
 	
 	@Column(name="WINNUM")
-	public int getWinnum() {
+	public Integer getWinnum() {
 		return winnum;
 	}
-	public void setWinnum(int winnum) {
+	public void setWinnum(Integer winnum) {
 		this.winnum = winnum;
 	}
 	
-	@Column(name="MONEY")
-	public float getMoney() {
+	@Column(name="MONEY", nullable=true)
+	public Integer getMoney() {
 		return money;
 	}
-	public void setMoney(float money) {
+	public void setMoney(Integer money) {
 		this.money = money;
 	}
 	
 	@Column(name="NOWNUM")
-	public int getNownum() {
+	public Integer getNownum() {
 		return nownum;
 	}
-	public void setNownum(int nownum) {
+	public void setNownum(Integer nownum) {
 		this.nownum = nownum;
 	}
 	
@@ -300,7 +300,8 @@ public class User implements Serializable{
 		this.higherUserId = higherUserId;
 	}
 	@ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.PERSIST)
-	@JoinTable(name = "DSEP_RBAC_USER_ROLE", 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JoinTable(name = "DSEP_RBAC_USER_ROLE2", 
 	inverseJoinColumns = { @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", nullable = false) }, 
 	joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false) }) 
 	public Set<Role> getRoles() {

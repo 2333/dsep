@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService{
     	this.rightDao=rightDao;
     }
 	
-    public User getUser(String id) 
+    public User getUser(Integer id) 
 	{
 		return userDao.get(id);
 	}
@@ -73,9 +73,9 @@ public class UserServiceImpl implements UserService{
 	}
 	public void newUser(User user, List<String> userRoleIds) 
 	{
-		if (null == user.getId()) {
-			user.setId(GUID.get());//添加用户ID
-		}
+		//if (null == user.getId()) {
+		//	user.setId(GUID.get());//添加用户ID
+		//}
 		String orgPassword=user.getPassword();
 		String md5Password=MD5.getMd5Str(orgPassword);		
 		user.setPassword(md5Password);
@@ -98,11 +98,11 @@ public class UserServiceImpl implements UserService{
 		return role;
 	}
 
-	public boolean validateUser(String id,String password) 
+	public boolean validateUser(String userLoginId,String password) 
 	{
 		//logger.info("验证用户信息！");
 		String Md5Password= MD5.getMd5Str(password);
-		return userDao.validatorUser(id,Md5Password);
+		return userDao.validatorUser(userLoginId,Md5Password);
 	}
 	
 	public void UpdateUser(User user,List<String> userRoleIds) 
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
-	public void deleteUser(String userId) 
+	public void deleteUser(Integer userId) 
 	{
 		userDao.deleteByKey(userId);
 	}
@@ -306,7 +306,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void insertByExpert(Expert expert,String email) {
 		User user = new User();
-		user.setId(expert.getId());
+		//user.setId(expert.getId());
 		user.setUserType("5");//5为专家类型
 		user.setLoginId(email);
 		user.setPassword("000000");
@@ -325,7 +325,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void insertBySurveyUser(SurveyUser surveyUser, String email) {
 		User user = new User();
-		user.setId(surveyUser.getId());
+		//user.setId(surveyUser.getId());
 		user.setUserType("6");//6为问卷调查用户类型
 		user.setLoginId(email);
 		user.setPassword("000000");
@@ -341,12 +341,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updateLoginInfo(String loginIp, Date loginTime, String id) {
+	public void updateLoginInfo(String loginIp, Date loginTime, Integer id) {
 		userDao.updateLoginInfo(loginIp, loginTime, id);
 	}
 	
 	@Override
-	public List<Right> getUserRightsByType(String userId, String type) {
+	public List<Right> getUserRightsByType(Integer userId, String type) {
 		
 		List<Role> roles = roleDao.getUserRole(userId);
 		
@@ -399,7 +399,7 @@ public class UserServiceImpl implements UserService{
 			roleSet.add(theUnitRole);
 			result++;
 			newUser.setRoles(roleSet);
-			newUser.setId(GUID.get());
+			//newUser.setId(GUID.get());
 			/*if( this.getUserByLoginId(theUnit.getId()) != null){
 				//continue;
 				//userDao.saveOrUpdate(newUser);
@@ -420,7 +420,7 @@ public class UserServiceImpl implements UserService{
 				//Role discRole = roleDao.get("t0002");
 				discRoleSet.add(theDiscRole);
 				discUser.setRoles(discRoleSet);
-				discUser.setId(GUID.get());
+				//discUser.setId(GUID.get());
 				/*if( this.getUserByLoginId(discUser.getLoginId()) != null){
 					//continue;
 					//userDao.saveOrUpdate(discUser);
@@ -482,7 +482,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void updateUserPassword(String password, String id) {
+	public void updateUserPassword(String password, Integer id) {
 		userDao.updateUserPassword(password, id);
 	}
 	

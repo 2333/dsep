@@ -29,12 +29,12 @@
 					<select id="userType" name="userType">
 			      		<option value="-">全部</option>
 			      		<option value="0">管理员用户</option>
-			      		<option value="1">中心用户</option>
-			      		<option value="2">学校用户</option>
-			      		<option value="3">学科用户</option>
-			      		<option value="4">教师用户</option>
-			      		<option value="5">专家用户</option>
-			      		<option value="6">问卷用户</option>
+			      		<option value="1">test用户</option>
+			      		<option value="2">高级代理</option>
+			      		<option value="3">普通代理</option>
+			      		<option value="4">普通用户</option>
+			      		<option value="5">other1用户</option>
+			      		<option value="6">other2用户</option>
 		               </select>
 				</td>
 				
@@ -46,7 +46,7 @@
 				</td>
 				
 				<td class="left_space">
-				    <span class="TextFont">学科码：</span>
+				    <span class="TextFont">用户码：</span>
 				</td>
 				<td >
 					<input id="discId" name="discId" type="text" value="" size="6"/>
@@ -81,7 +81,7 @@
 	 		url: '${ContextPath}/rbac/userlist',
 	        datatype: 'json',
 	        mtype: 'GET',
-			colNames:['用户ID','登陆ID','密码','姓名','身份证号','用户类型','单位代码','学科代码','院系代码','邮箱','办公电话','移动电话','办公地址','通信地址','邮政编码','备注'],
+			colNames:['用户ID','登陆ID','密码','姓名','身份证号','用户类型','用户代码','用户代码','院系代码','邮箱','办公电话','移动电话','办公地址','通信地址','邮政编码','备注'],
 			colModel:[
 	             	{name:'user.id',index:'id',width:60,align:"center", hidden:true},
 					{name:'user.loginId',index:'loginId', width:90,align:"center", sorttype:"String",editable:true },

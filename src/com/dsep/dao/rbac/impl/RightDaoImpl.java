@@ -8,21 +8,21 @@ import com.dsep.entity.Right;
 
 public class RightDaoImpl extends DaoImpl<Right,String> implements RightDao {
 
-	public List<Right> getUserRights(String userId) {				
+	public List<Right> getUserRights(String userLoginId) {				
 		String sql=String.format("select * from DSEP_RBAC_RIGHT  where ID in "+
-			 "(select distinct RIGHT_ID from DSEP_RBAC_ROLE_RIGHT left join DSEP_RBAC_USER_ROLE " +
-			 "on  DSEP_RBAC_ROLE_RIGHT.ROLE_ID = DSEP_RBAC_USER_ROLE.ROLE_ID "+
-			 "where USER_ID in "+"(select distinct ID from DSEP_RBAC_USER where LOGIN_ID= '%s')) " +
-			 "order by LEVEL_NO,SEQ_NO ASC",userId);
+			 "(select distinct RIGHT_ID from DSEP_RBAC_ROLE_RIGHT left join DSEP_RBAC_USER_ROLE2 " +
+			 "on  DSEP_RBAC_ROLE_RIGHT.ROLE_ID = DSEP_RBAC_USER_ROLE2.ROLE_ID "+
+			 "where USER_ID in "+"(select distinct ID from DSEP_RBAC_USER2 where LOGIN_ID= '%s')) " +
+			 "order by LEVEL_NO,SEQ_NO ASC",userLoginId);
 		return super.sqlFind(sql);
 	}
 	
 	//获取菜单权限
 	public List<Right> getMenuRights(String userId) {
 		String sql=String.format("select * from DSEP_RBAC_RIGHT  where ID in "+
-				 "(select distinct RIGHT_ID from DSEP_RBAC_ROLE_RIGHT left join DSEP_RBAC_USER_ROLE " +
-				 "on  DSEP_RBAC_ROLE_RIGHT.ROLE_ID = DSEP_RBAC_USER_ROLE.ROLE_ID "+
-				 "where USER_ID in "+"(select distinct ID from DSEP_RBAC_USER where LOGIN_ID= '%s')) " +
+				 "(select distinct RIGHT_ID from DSEP_RBAC_ROLE_RIGHT left join DSEP_RBAC_USER_ROLE2 " +
+				 "on  DSEP_RBAC_ROLE_RIGHT.ROLE_ID = DSEP_RBAC_USER_ROLE2.ROLE_ID "+
+				 "where USER_ID in "+"(select distinct ID from DSEP_RBAC_USER2 where LOGIN_ID= '%s')) " +
 				 "and CATEGORY = 1 " +
 				 "order by LEVEL_NO,SEQ_NO ASC",userId);
 			return super.sqlFind(sql);

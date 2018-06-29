@@ -14,5 +14,5 @@ public interface RoleDao extends Dao<Role,String>
 	 * @param userId
 	 * @return
 	 */
-	public abstract List<Role> getUserRole(String userId);
+	public abstract List<Role> getUserRole(Integer userId);
 }
