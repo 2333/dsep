@@ -383,7 +383,7 @@ public class UserController {
 		UserOffLine userOffLine = list.get(0);
 		String loginId = userOffLine.getLoginId();
 		String location = userOffLine.getLocation();
-		String useIp = userOffLine.getReleaseIP();
+		String useIp = userOffLine.getUserIp();
 		User user = userService.getUserByLoginId(loginId);
 		
 		info.setCurrent(0);
