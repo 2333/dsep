@@ -120,7 +120,7 @@ public class LogicCheckController {
 			order_flag = true;
 		}
 		String entityId = request.getParameter("entityId");
-		PageVM<?> pageVM = logicCheckService.showLogicResultData(
+		PageVM<?> pageVM = logicCheckService.showLogicResultData( 
 				user.getUnitId(), user.getDiscId(), entityId, user.getId(),
 				sidx, order_flag, page, pageSize);
 		return JsonConvertor.obj2JSON(pageVM.getGridData());
