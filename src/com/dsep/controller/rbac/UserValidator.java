@@ -4,7 +4,6 @@ public class UserValidator {
 	private String loginId;
 	private String password;
 	private String location;
-	private Integer requestWinNum;
 	public String getLoginId() {
 		return loginId;
 	}
@@ -23,11 +22,4 @@ public class UserValidator {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Integer getRequestWinNum() {
-		return requestWinNum;
-	}
-	public void setRequestWinNum(Integer requestWinNum) {
-		this.requestWinNum = requestWinNum;
-	}
-	
 }

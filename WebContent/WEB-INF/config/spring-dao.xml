@@ -16,6 +16,22 @@
 	<bean id="roleDao" class="com.dsep.dao.rbac.impl.RoleDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="ipDao" class="com.dsep.dao.rbac.impl.IpDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="ipInUseDao" class="com.dsep.dao.rbac.impl.IpInUseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="rosConnIpCacheDao" class="com.dsep.dao.rbac.impl.RosConnIpCacheDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userIpLogDao" class="com.dsep.dao.rbac.impl.UserIpLogDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userIpHeartDao" class="com.dsep.dao.rbac.impl.UserIpHeartDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
 	<bean id="teacherDao" class="com.dsep.dao.rbac.impl.TeacherDaoImpl"> 
 		<property name="sessionFactory" ref="sessionFactory"></property> 
 	</bean>

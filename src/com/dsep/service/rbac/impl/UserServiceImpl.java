@@ -4,43 +4,45 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
 import com.dsep.common.annotation.EnableLog;
+import com.dsep.dao.rbac.IpDao;
 import com.dsep.dao.rbac.RightDao;
 import com.dsep.dao.rbac.RoleDao;
 import com.dsep.dao.rbac.UserDao;
 import com.dsep.domain.MenuTreeNode;
 import com.dsep.entity.Discipline;
-import com.dsep.entity.News;
+import com.dsep.entity.Ip;
 import com.dsep.entity.Right;
 import com.dsep.entity.Role;
+import com.dsep.entity.RosConnIpCache;
 import com.dsep.entity.Unit;
 import com.dsep.entity.User;
 import com.dsep.entity.dsepmeta.SurveyUser;
 import com.dsep.entity.expert.Expert;
 import com.dsep.service.base.DisciplineService;
 import com.dsep.service.base.UnitService;
+import com.dsep.service.rbac.RosConnIpCacheService;
 import com.dsep.service.rbac.UserService;
 import com.dsep.util.Configurations;
-import com.dsep.util.GUID;
 import com.dsep.util.MD5;
-import com.dsep.vm.NewsVM;
 import com.dsep.vm.PageVM;
+import com.dsep.vm.UserIpOnLineVM;
 import com.dsep.vm.UserVM;
 
 
 public class UserServiceImpl implements UserService{
 
 	private UserDao userDao;
+	private IpDao ipDao;
 	private RightDao rightDao;
 	private RoleDao roleDao;
 	private UnitService unitService;
 	private DisciplineService disciplineService;
+	private RosConnIpCacheService rosConnIpCacheService;
 	
 	@EnableLog
 	private Logger logger;
@@ -49,6 +51,14 @@ public class UserServiceImpl implements UserService{
 	}
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
+	}
+	
+	public IpDao getIpDao() {
+		return ipDao;
+	}
+	
+	public void setIpDao(IpDao ipDao) {
+		this.ipDao = ipDao;
 	}
 	
 	public void setUserDao(UserDao userDao) 
@@ -70,6 +80,13 @@ public class UserServiceImpl implements UserService{
 	}
 	public void setDisciplineService(DisciplineService disciplineService) {
 		this.disciplineService = disciplineService;
+	}
+	
+	public RosConnIpCacheService getRosConnIpCacheService() {
+		return rosConnIpCacheService;
+	}
+	public void setRosConnIpCacheService(RosConnIpCacheService rosConnIpCacheService) {
+		this.rosConnIpCacheService = rosConnIpCacheService;
 	}
 	public void newUser(User user, List<String> userRoleIds) 
 	{
@@ -484,6 +501,53 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateUserPassword(String password, Integer id) {
 		userDao.updateUserPassword(password, id);
+	}
+	@Override
+	public void UpdateUserAndIps(User user) {
+		Set<Ip> ips = user.getIps();
+		for (Ip ip : ips) {
+			ipDao.saveOrUpdate(ip);
+		}
+		userDao.saveOrUpdate(user);
+	}
+	@Override
+	public PageVM<UserIpOnLineVM> userIpQuery(int pageIndex, int pageSize,
+			Boolean desc, String orderProperName, String userType) {
+		// TODO Auto-generated method stub
+		List<User> list=userDao.getPageUsersByUserType(pageIndex, pageSize,desc,orderProperName, userType);
+		int totalCount=userDao.getUsersByUserType(userType).size();
+		
+		List<UserIpOnLineVM> vmList= new ArrayList<UserIpOnLineVM>();
+		List<RosConnIpCache> caches = rosConnIpCacheService.getAllIpsByRosLocation("changzhou");
+		for(User u : list){
+			System.out.println(u.getUsedPppoeNumber());
+			Set<Ip> ips = u.getIps();
+			if (null != u.getUsedPppoeNumber() && u.getUsedPppoeNumber().length() != 0) {
+				String[] pppoeNumbers = u.getUsedPppoeNumber().split(",");
+				for (Ip ip : ips) {
+					boolean notChangedFlag = true;
+					for (String pppoe : pppoeNumbers) {
+						
+						if (ip.getPppoeName().equals(pppoe)) {
+							notChangedFlag = false;
+						} 
+					}	
+					UserIpOnLineVM vm= new UserIpOnLineVM();
+					vm.setOnlineIp(ip.getPppoeName());
+					if (notChangedFlag) {
+						vm.setStatus("off line");
+					} else {
+						vm.setStatus("on line");
+						vm.setOnlineIp(rosConnIpCacheService.getRosConnIpCacheByPppoeAndLocation(ip.getPppoeName(), "changzhou").getIpValue());
+					}
+					vm.setUser(u);
+					vmList.add(vm);
+				}	
+				
+			}
+		}
+		PageVM<UserIpOnLineVM> result=new PageVM<UserIpOnLineVM>(pageIndex,totalCount,pageSize,vmList);
+		return result;
 	}
 	
 }

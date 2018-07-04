@@ -26,6 +26,12 @@
         <property name="concurrent" value="false"/> 
    </bean>
    
+   <bean id="rollingHeartJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+        <property name="targetObject" ref="publicityService"/> 
+        <property name="targetMethod" value="rollingHeart"/> 
+        <property name="concurrent" value="false"/> 
+   </bean>
+   
    <!-- 调度任务定义结束 -->
    
    <!-- 定义任务的触发时间 -->
@@ -53,10 +59,18 @@
    <bean id="checkRosIPActiveTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="checkRosIPActiveJobDetail"></property>
         <property name="cronExpression">   
-           <value>0 */5 * * * ?</value>
+           <value>0 */30 * * * ?</value>
            <!-- <value>0/1 * * * * ?</value> -->
         </property>
    </bean>
+   <bean id="rollingHeartTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="rollingHeartJobDetail"></property>
+        <property name="cronExpression">   
+           <value>0 */20 * * * ?</value>
+           <!-- <value>0/1 * * * * ?</value> -->
+        </property>
+   </bean>
+   
    <!-- 触发时间定义结束 -->
    
    
@@ -68,6 +82,7 @@
             	<ref bean="closePubTrigger" />
             	<ref bean="closeFeedTrigger" />
             	<ref bean="checkRosIPActiveTrigger" />
+            	<ref bean="rollingHeartTrigger" />
              </list>
         </property>
         <property name="quartzProperties">  

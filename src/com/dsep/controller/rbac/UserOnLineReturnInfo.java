@@ -1,25 +1,25 @@
 package com.dsep.controller.rbac;
 
 public class UserOnLineReturnInfo {
-	private boolean ret;
-
-	private String info;
-	
-	public boolean isRet() {
-		return ret;
+	private Integer current;
+	private Integer avaliableWinNum;
+	private String userIp;
+	public Integer getCurrent() {
+		return current;
 	}
-
-	public void setRet(boolean ret) {
-		this.ret = ret;
+	public void setCurrent(Integer current) {
+		this.current = current;
 	}
-
-	public String getInfo() {
-		return info;
+	public Integer getAvaliableWinNum() {
+		return avaliableWinNum;
 	}
-
-	public void setInfo(String info) {
-		this.info = info;
+	public void setAvaliableWinNum(Integer avaliableWinNum) {
+		this.avaliableWinNum = avaliableWinNum;
 	}
-	
-	
+	public String getUserIp() {
+		return userIp;
+	}
+	public void setUserIp(String userIp) {
+		this.userIp = userIp;
+	}
 }

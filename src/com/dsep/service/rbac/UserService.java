@@ -13,6 +13,7 @@ import com.dsep.entity.User;
 import com.dsep.entity.dsepmeta.SurveyUser;
 import com.dsep.entity.expert.Expert;
 import com.dsep.vm.PageVM;
+import com.dsep.vm.UserIpOnLineVM;
 import com.dsep.vm.UserVM;
 
 @Transactional(propagation=Propagation.SUPPORTS)
@@ -39,6 +40,13 @@ public interface UserService {
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
 	public abstract void UpdateUser(User user,List<String> userRoleIds);
 	
+	
+	/** 更新User,包括该用户的ip
+	 * @param user，其中user中已经set了ip set
+	 * @return
+	 */
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
+	public abstract void UpdateUserAndIps(User user);
 	
 	/** 验证user用户名密码是否正确
 	 * @param user
@@ -69,6 +77,19 @@ public interface UserService {
 	 * @return
 	 */
 	public abstract PageVM<UserVM> getUsersByUserType(int pageIndex,int pageSize,Boolean desc,String orderProperName, String userType);
+	
+	
+	/**
+	 * 分页根据用户类型取用户
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param desc
+	 * @param orderProperName
+	 * @param userType
+	 * @return
+	 */
+	public abstract PageVM<UserIpOnLineVM> userIpQuery(int pageIndex,int pageSize,Boolean desc,String orderProperName, String userType);
+	
 	
 	/** 删除用户
 	 * @param userId

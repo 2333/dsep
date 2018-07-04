@@ -62,9 +62,12 @@
 	                 <value>.*/rbac/check_password.*</value>
 	                 <value>.*/rbac/user_validate.*</value>
 	                 <value>.*/rbac/getRosIP.*</value>
+	                 <value>.*/rbac/testBindUserAndIps.*</value>
 	                 <value>.*/rbac/offline.*</value>
 	                 <value>.*/rbac/online.*</value>
-	                 
+	                 <value>.*/rbac/addIps.*</value>
+	                 <value>.*/rbac/logger.*</value>
+	                 <value>.*/rbac/beat.*</value>
 	                 
 	                 
 	                 <value>.*/ExceptionHandle/.*</value>

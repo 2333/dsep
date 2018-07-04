@@ -7,26 +7,30 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.LinkedMap;
-import org.springframework.scheduling.annotation.Async;
 
+import com.dsep.controller.rbac.RollingHeart;
 import com.dsep.controller.rbac.RosConnectionUtil;
 import com.dsep.dao.dsepmeta.publicity.objection.PublicityManagementDao;
 import com.dsep.domain.dsepmeta.publicity.PublicityMessage;
-import com.dsep.entity.dsepmeta.BackupManagement;
 import com.dsep.entity.dsepmeta.PublicityManagement;
 import com.dsep.entity.enumeration.EnumModule;
 import com.dsep.entity.enumeration.publicity.OpenStatus;
 import com.dsep.entity.enumeration.publicity.PublicityStatus;
 import com.dsep.entity.enumeration.publicity.RecentClose;
 import com.dsep.service.publicity.objection.PublicityService;
+import com.dsep.service.rbac.RosConnIpCacheService;
+import com.dsep.service.rbac.UserIpHeartService;
+import com.dsep.service.rbac.UserService;
 import com.dsep.util.DateProcess;
 import com.dsep.util.StringProcess;
-import com.dsep.vm.BackupManageVM;
 import com.dsep.vm.PageVM;
 import com.dsep.vm.publicity.PublicityManagementVM;
 
 public class PublicityServiceImpl implements PublicityService{
 
+	private RosConnIpCacheService rosConnIpCacheService;
+	private UserIpHeartService userIpHeartService;
+	private UserService userService;
 	private PublicityManagementDao publicityManagementDao;
 	
 	private static int successCount = 0;
@@ -40,7 +44,44 @@ public class PublicityServiceImpl implements PublicityService{
 	public void setPublicityManagementDao(PublicityManagementDao publicManagementDao) {
 		this.publicityManagementDao = publicManagementDao;
 	}
+	
+	public UserService getUserService() {
+		return userService;
+	}
 
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public RosConnIpCacheService getRosConnIpCacheService() {
+		return rosConnIpCacheService;
+	}
+
+	public void setRosConnIpCacheService(RosConnIpCacheService rosConnIpCacheService) {
+		this.rosConnIpCacheService = rosConnIpCacheService;
+	}
+	
+
+	public UserIpHeartService getUserIpHeartService() {
+		return userIpHeartService;
+	}
+
+	public void setUserIpHeartService(UserIpHeartService userIpHeartService) {
+		this.userIpHeartService = userIpHeartService;
+	}
+
+	public String rollingHeart() {
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		System.out.println("============================rollingHeart===============================================");
+		new RollingHeart().rolling(rosConnIpCacheService, userIpHeartService, userService);
+		return null;
+		
+	}
 	public String checkRosIPActive() {
 		System.out.println("============================checkRosIPActive===============================================");
 		System.out.println("============================checkRosIPActive===============================================");
@@ -49,7 +90,7 @@ public class PublicityServiceImpl implements PublicityService{
 		System.out.println("============================checkRosIPActive===============================================");
 		System.out.println("============================checkRosIPActive===============================================");
 		System.out.println("============================checkRosIPActive===============================================");
-		RosConnectionUtil.getCurrentRosConnectionIP();
+		new RosConnectionUtil().getCurrentRosConnectionIP("changzhou", rosConnIpCacheService);
 		return null;
 	}
 	@Override

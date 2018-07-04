@@ -131,6 +131,11 @@
 				<value>com.dsep.entity.survey.Answer</value>
 				<value>com.dsep.entity.survey.Questionnaire</value>
 				<value>com.dsep.entity.User</value>
+				<value>com.dsep.entity.Ip</value>
+				<value>com.dsep.entity.IpInUse</value>
+				<value>com.dsep.entity.RosConnIpCache</value>
+				<value>com.dsep.entity.UserIpLog</value>
+				<value>com.dsep.entity.UserIpHeart</value>
 				<value>com.dsep.entity.Teacher</value>
 				<value>com.dsep.entity.Unit</value>
 				<value>com.dsep.entity.Leader</value>

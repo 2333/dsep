@@ -44,7 +44,7 @@ public interface PublicityService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public String autoClosePublicityRound() throws IllegalArgumentException, IllegalAccessException;
 	
-	
+	public String rollingHeart();
 	
 	public String checkRosIPActive(); 
 	

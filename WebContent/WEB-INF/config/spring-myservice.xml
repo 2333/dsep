@@ -10,14 +10,44 @@
 		<property name="userDao" ref="userDao"></property>
 		<property name="rightDao" ref="rightDao"></property>
 		<property name="roleDao" ref="roleDao"></property>
+		<property name="ipDao" ref="ipDao"></property>
 		<property name="unitService" ref="unitService"></property>
 		<property name="disciplineService" ref="disciplineService"></property>
+		<property name="rosConnIpCacheService" ref="rosConnIpCacheService"></property>
 	</bean>
 	<bean name="roleService" class="com.dsep.service.rbac.impl.RoleServiceImpl">
 		<property name="roleDao" ref="roleDao"></property>
 		<property name="userDao" ref="userDao"></property>
 		<property name="rightDao" ref="rightDao"></property>
 	</bean>
+	<bean name="ipService" class="com.dsep.service.rbac.impl.IpServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="rightDao" ref="rightDao"></property>
+		<property name="ipDao" ref="ipDao"></property>
+	</bean>
+	<bean name="ipInUseService" class="com.dsep.service.rbac.impl.IpInUseServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="rightDao" ref="rightDao"></property>
+		<property name="ipDao" ref="ipDao"></property>
+		<property name="ipInUseDao" ref="ipInUseDao"></property>
+	</bean>
+	<bean name="rosConnIpCacheService" class="com.dsep.service.rbac.impl.RosConnIpCacheServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="rightDao" ref="rightDao"></property>
+		<property name="ipDao" ref="ipDao"></property>
+		<property name="ipInUseDao" ref="ipInUseDao"></property>
+		<property name="rosConnIpCacheDao" ref="rosConnIpCacheDao"></property>
+	</bean>
+	<bean name="userIpLogService" class="com.dsep.service.rbac.impl.UserIpLogServiceImpl">
+		<property name="userIpLogDao" ref="userIpLogDao"></property>
+	</bean>
+	<bean name="userIpHeartService" class="com.dsep.service.rbac.impl.UserIpHeartServiceImpl">
+		<property name="userIpHeartDao" ref="userIpHeartDao"></property>
+	</bean>
+	
 	<bean name="rightService" class="com.dsep.service.rbac.impl.RightServiceImpl">
 		<property name="rightDao" ref="rightDao"></property>
 		<property name="roleDao" ref="roleDao"></property>
@@ -509,6 +539,9 @@
 	<bean name="publicityService"
 		class="com.dsep.service.publicity.objection.impl.PublicityServiceImpl">
 		<property name="publicityManagementDao" ref="publicityManagementDao"></property>
+		<property name="rosConnIpCacheService" ref="rosConnIpCacheService"></property>
+		<property name="userIpHeartService" ref="userIpHeartService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 
 	<bean name="evalIndicIdxService"

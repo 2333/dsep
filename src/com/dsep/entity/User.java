@@ -58,6 +58,7 @@ public class User implements Serializable{
 	private Integer nownum;
 	private String region;
 	private String IPType;
+	private String usedPppoeNumber;
 	private String higherUserId;
 	
 	
@@ -66,9 +67,11 @@ public class User implements Serializable{
 	
 	private String loginIp;
 	private Date loginTime;
+	private Date expiredTime;
 	private int source;
 	
 	private Set<Role> roles= new HashSet<Role>(0);
+	private Set<Ip> ips = new HashSet<Ip>(0); 
 	/*private Set<TeachDisc> teachDiscs= new HashSet<TeachDisc>(0);*/
 	/*private ExpertSelected expertSelected;*/
 	
@@ -227,6 +230,14 @@ public class User implements Serializable{
 		this.loginTime = loginTime;
 	}
 	
+	
+	@Column(name="EXPIRED_TIME")
+	public Date getExpiredTime() {
+		return expiredTime;
+	}
+	public void setExpiredTime(Date expiredTime) {
+		this.expiredTime = expiredTime;
+	}
 	@Column(name="SOURCE")
 	public int getSource() {
 		return source;
@@ -284,6 +295,13 @@ public class User implements Serializable{
 		this.region = region;
 	}
 	
+	@Column(name="USEDPPPOENUMBER", length=200)
+	public String getUsedPppoeNumber() {
+		return usedPppoeNumber;
+	}
+	public void setUsedPppoeNumber(String usedPppoeNumber) {
+		this.usedPppoeNumber = usedPppoeNumber;
+	}
 	@Column(name="IPTYPE")
 	public String getIPType() {
 		return IPType;
@@ -309,6 +327,19 @@ public class User implements Serializable{
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	
+	@ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.PERSIST)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JoinTable(name = "DSEP_RBAC_USER_IP", 
+	inverseJoinColumns = { @JoinColumn(name = "IP_ID", referencedColumnName = "ID", nullable = false) }, 
+	joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false) }) 
+	public Set<Ip> getIps() {
+		return ips;
+	}
+	public void setIps(Set<Ip> ips) {
+		this.ips = ips;
 	}
 	/*@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@JoinColumn(name="TEACH_ID")
