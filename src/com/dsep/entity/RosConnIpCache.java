@@ -1,21 +1,14 @@
 package com.dsep.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
 @Entity
@@ -32,6 +25,9 @@ public class RosConnIpCache implements Serializable{
 	private String rosLocation;
 	private String ipPppoeName;
 	private String ipValue;
+	private Date lastUpdateTime;
+	private String lastUpdateStr;
+	
 	
 	
 	@Id
@@ -79,6 +75,25 @@ public class RosConnIpCache implements Serializable{
 	public void setIpValue(String ipValue) {
 		this.ipValue = ipValue;
 	}
+	
+	@Column(name="LASTUPDATETIME")
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
 
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	@Column(name="LASTUPDATSTR",length=50)
+	public String getLastUpdateStr() {
+		return lastUpdateStr;
+	}
+
+	public void setLastUpdateStr(String lastUpdateStr) {
+		this.lastUpdateStr = lastUpdateStr;
+	}
+
+	
 	
 }

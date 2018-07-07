@@ -59,7 +59,7 @@
    <bean id="checkRosIPActiveTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="checkRosIPActiveJobDetail"></property>
         <property name="cronExpression">   
-           <value>0 */30 * * * ?</value>
+           <value>0 */20 * * * ?</value>
            <!-- <value>0/1 * * * * ?</value> -->
         </property>
    </bean>

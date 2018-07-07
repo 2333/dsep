@@ -2,18 +2,19 @@ package com.dsep.controller.rbac;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 
 import me.legrange.mikrotik.ApiConnection;
 import me.legrange.mikrotik.MikrotikApiException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.dsep.entity.RosConnIpCache;
@@ -76,6 +77,11 @@ public class RosConnectionUtil {
 					if (cacheFromDB.getIpPppoeName().equals(cacheFromRos.getIpPppoeName()) && 
 							cacheFromDB.getRosLocation().equals(cacheFromRos.getRosLocation())) {
 						cacheFromDB.setIpValue(cacheFromRos.getIpValue());
+						Date current_date = new Date();
+				        //设置日期格式化样式为：yyyy-MM-dd
+				        SimpleDateFormat  SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				        //格式化当前日期
+						cacheFromDB.setLastUpdateStr(SimpleDateFormat.format(new Date()));
 						System.out.println("cacheFromDB.getIpValue=" + cacheFromDB.getIpValue());
 					}
 				}
@@ -90,7 +96,7 @@ public class RosConnectionUtil {
 			for (RosConnIpCache ele : cacheIps) {
 				if (checkConnectionIsOK(ele.getIpValue())) {
 					System.out.println("找到可用IP：" + ele.getIpValue());
-					newConnectionIP = ele.getIpPppoeName();
+					newConnectionIP = ele.getIpValue();
 					break;
 				}
 			}
@@ -100,32 +106,70 @@ public class RosConnectionUtil {
 				for (RosConnIpCache cacheFromDB : cacheIps) {
 					for (RosConnIpCache cacheFromRos : allUsableRosIPs) {
 						if (cacheFromDB.getIpPppoeName().equals(cacheFromRos.getIpPppoeName()) && 
-								cacheFromDB.getRosLocation().equals(cacheFromRos.getRosLocation()))
+								cacheFromDB.getRosLocation().equals(cacheFromRos.getRosLocation())) {
+							Date current_date = new Date();
+					        //设置日期格式化样式为：yyyy-MM-dd
+					        SimpleDateFormat  SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					        //格式化当前日期
+							cacheFromDB.setLastUpdateStr(SimpleDateFormat.format(new Date()));
 							cacheFromDB.setIpValue(cacheFromRos.getIpValue());
+						}
+							
 					}
 				}
 				rosConnIpCacheService.updateAllConnIpByRosLocation(rosLocation, cacheIps);
 			} else {
 				System.out.println("彻底lost connection，需要管理员维护!");
-				return "error";
+				return "ERROR";
 			}
+			writeCurrentRosConnectionIPIntoFile(f, currentRosConnectionIP);
 			return currentRosConnectionIP;
 		}
 	}
+	private void writeCurrentRosConnectionIPIntoFile(File file, String currentRosConnectionIP) {
+		FileOutputStream fos = null;
+	    try {
+	      fos = new FileOutputStream(file);
+	      
+	      byte[] bytesArray = currentRosConnectionIP.getBytes();
+	      fos.write(bytesArray);
+	      fos.flush();
+	      System.out.println("File Written Successfully");
+	    } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    } finally {
+	      try {
+	        if (fos != null) {
+	          fos.close();
+	        }
+	      } catch (IOException ioe) {
+	        System.out.println("Error in closing the Stream");
+	      }
+	    }
+
+	}
 	private boolean checkConnectionIsOK(String connectionIP) {
-		ApiConnection rosConn = new Ros().getConn(connectionIP, "admin", "1qaz_xsW@");
+		ApiConnection rosConn = null;
 		try {
+			rosConn = new Ros().getConn(connectionIP, "admin", "1qaz_xsW@");
+			//if (rosConn == null) {
+				//return false;
+			//}
 			Object o = rosConn.execute("/ip/address/print");
 			if (o != null) {
 				return true;
 			} else {
 				return false;
 			}
-		} catch (MikrotikApiException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		} finally {
-			Ros.closeConn(rosConn);
+			if (rosConn != null) {
+				Ros.closeConn(rosConn);
+			}
 		}
 	}
 	
