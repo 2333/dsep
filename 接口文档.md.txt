@@ -1,0 +1,181 @@
+﻿# 项目说明
+
+## 接口简介
+
+接口目前应访问IP http://39.104.125.142
+
+## 接口说明
+
+###登录:
+
+/DSEP/rbac/getRosIP
+
+#### 请求类型
+
+GET
+
+####参数 ：
+
+JSON数组
+
+**String** loginid：登录程序的用户名
+
+**String** password：登录程序的密码
+
+传参示例：
+
+```java
+String validation = "[{
+    "loginId": "zhangsan",
+    "password": "password"
+}]"
+```
+
+返回值
+
+```java
+	{	"username":"zhangsan",
+		"password":"password",
+		"location":"changzhou",
+     	"ipType":"dynamic",
+     	"game":"menghuanxiyou"
+		"ips":[
+			"114.226.128.222:1080,aa,bb,changzhou",
+			"114.226.135.46:1080,aa,bb,changzhou",
+			"114.226.105.168:1080,aa,bb,changzhou",
+			"222.185.160.121:1080,aa,bb,changzhou",
+			"222.185.23.209:1080,aa,bb,changzhou",
+			"222.185.137.210:1080,aa,bb,changzhou",
+			"114.228.75.53:1080,aa,bb,changzhou",
+			"114.226.65.242:1080,aa,bb,changzhou"],
+		"isValidate":true,
+		"avaliableWinNum":5,
+		"port":1080,
+		"info":"ok",
+		"exptime":279624753
+	}
+```
+
+
+
+### 上线:
+
+/DSEP/rbac/online
+
+#### 请求类型
+
+POST
+
+####参数
+
+JSON数组
+
+传参示例：
+
+```java
+String userOnLine = "[{
+    "loginId": "zhangsan",
+    "location": "Beijing",
+	"userIp": "58.216.61.82"
+}]"
+```
+
+返回值：
+
+```java
+{
+    "current": "1",
+    "avaliableWinNum": "4",
+    "useIp": "58.216.61.82"
+}
+```
+
+
+
+###下线:
+
+/DSEP/rbac/offline
+
+#### 请求类型
+
+POST
+
+#### 参数
+
+JSON数组
+
+传参示例：
+
+```java
+String userOffLine = "[{
+    "loginId": "zhangsan",
+    "location": "Beijing",
+	"userIp": "58.216.61.82"
+}]"
+```
+
+返回值：
+
+```java
+{
+    "current": "0",
+    "avaliableWinNum": "5",
+    "releaseIp": "58.216.61.82"
+}
+```
+
+
+
+### 日志:
+
+/DSEP/rbac/logger
+
+#### 请求类型
+
+POST
+
+#### 参数
+
+JSON数组
+
+传参示例：
+
+```java
+String userLog = "[{
+    "loginId": "zhangsan",
+    "log":"2018-06-29 useip 58.216.61.82 login game menghuanxiyou....."
+}]"
+```
+
+无返回值
+
+
+
+#### 心跳(待讨论)：
+
+/DSEP/rbac/beat
+
+#### 请求类型
+
+POST
+
+#### 参数
+
+JSON数组
+
+传参示例：
+
+```java
+String heartBeat = "[{
+    "loginId": "zhangsan",
+    "machineId": "zhangsanNo1",
+	"useIp":"[58.216.61.82, 58.216.61.81, 58.216.61.83]"
+}]"
+```
+
+无返回值
+
+如果五分钟没有收到消息，就把该机器的ip全部下线。
+
+
+
