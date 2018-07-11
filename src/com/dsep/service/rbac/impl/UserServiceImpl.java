@@ -503,7 +503,21 @@ public class UserServiceImpl implements UserService{
 		userDao.updateUserPassword(password, id);
 	}
 	@Override
+	public void UpdateUserAndIps(List<User> list) {
+		for (User user : list) {
+			userDao.saveOrUpdate(user);
+		}
+		/*Set<Ip> ips = user.getIps();
+		for (Ip ip : ips) {
+			ipDao.saveOrUpdate(ip);
+		}*/
+		
+	}
+	
+	
+	@Override
 	public void UpdateUserAndIps(User user) {
+			
 		Set<Ip> ips = user.getIps();
 		for (Ip ip : ips) {
 			ipDao.saveOrUpdate(ip);

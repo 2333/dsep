@@ -626,32 +626,7 @@ public class UserController {
 		this.userIpLogService.save(userIpLog);
 	}
 	
-	@RequestMapping(value = "/beat")
-	public void beat(@RequestBody List<UserHeartBeat> list) {
-		if (null == list || list.size() == 0) {
-			return;
-		}
-		
-		UserHeartBeat beat = list.get(0);
-		String loginId = beat.getLoginId();
-		String machineId = beat.getMachineId();
-		List<String> ips = beat.getUseIp();
-		String myIps = "";
-		for (String ip : ips) {
-			myIps += (ip + ",");
-		}
-		if (null == myIps || myIps.length() == 0) {
-			
-		} else {
-			myIps = myIps.substring(0, myIps.length() - 2);
-		}
-		UserIpHeart userIpHeart = new UserIpHeart();
-		userIpHeart.setLoginId(loginId);
-		userIpHeart.setMachineId(machineId);
-		userIpHeart.setUseIp(myIps);
-		userIpHeart.setLastRecordTime(new Date());
-		this.userIpHeartService.save(userIpHeart);
-	}
+	
 	
 
 	@RequestMapping("userIpLog")
@@ -695,6 +670,34 @@ public class UserController {
 		String json = JsonConvertor.obj2JSON(m);
 		System.out.println(json);
 		return json;
+	}
+	
+	
+	@RequestMapping(value = "/beat")
+	public void beat(@RequestBody List<UserHeartBeat> list) {
+		System.out.println("beat====");
+		if (null == list || list.size() == 0) {
+			return;
+		}
+		
+		UserHeartBeat beat = list.get(0);
+		String loginId = beat.getLoginId();
+		String machineId = beat.getMachineId();
+		List<String> ips = beat.getUseIp();
+		String myIps = "";
+		for (String ip : ips) {
+			myIps += (ip + ",");
+			System.out.println(myIps);
+		}
+		System.out.println(myIps);
+		System.out.println(myIps);
+		System.out.println(myIps);
+		UserIpHeart userIpHeart = new UserIpHeart();
+		userIpHeart.setLoginId(loginId);
+		userIpHeart.setMachineId(machineId);
+		userIpHeart.setUseIp(myIps);
+		userIpHeart.setLastRecordTime(new Date());
+		this.userIpHeartService.save(userIpHeart);
 	}
 	
 }

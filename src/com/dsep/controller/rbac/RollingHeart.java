@@ -1,5 +1,6 @@
 package com.dsep.controller.rbac;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dsep.entity.RosConnIpCache;
@@ -12,7 +13,7 @@ import com.dsep.service.rbac.UserService;
 public class RollingHeart {
 	public void rolling(RosConnIpCacheService rosConnIpCacheService, UserIpHeartService userIpHeartService, UserService userService) {
 		List<UserIpHeart> list = userIpHeartService.getNoHeartData();
-		
+		List<User> userList = new ArrayList<User>();
 		for (UserIpHeart heart : list) {
 			String loginId = heart.getLoginId();
 			String ips = heart.getUseIp();
@@ -20,8 +21,9 @@ public class RollingHeart {
 				
 			} else {
 				User user = userService.getUserByLoginId(loginId);
+				String[] ipsSpliteArr = ips.split(",");
 				
-				for (String useIp : ips.split(",")) {
+				for (String useIp : ipsSpliteArr) {
 					RosConnIpCache rosConnIpCache = rosConnIpCacheService.getRosConnIpCacheByIpValue(useIp);
 					if (rosConnIpCache == null) continue;
 					String pppoeName = rosConnIpCache.getIpPppoeName();
@@ -44,9 +46,10 @@ public class RollingHeart {
 					user.setNownum(user.getNownum() + 1);
 					user.setUsedPppoeNumber(newNumbers);
 				}
-				
-				//userService.UpdateUserAndIps(user);
+				userList.add(user);
+				//
 			}
+			userService.UpdateUserAndIps(user);
 			
 		}
 		

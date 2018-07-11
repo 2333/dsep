@@ -46,6 +46,10 @@ public interface UserService {
 	 * @return
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
+	public abstract void UpdateUserAndIps(List<User> list);
+	
+	
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
 	public abstract void UpdateUserAndIps(User user);
 	
 	/** 验证user用户名密码是否正确
