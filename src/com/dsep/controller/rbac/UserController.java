@@ -1,5 +1,6 @@
 package com.dsep.controller.rbac;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -150,7 +151,7 @@ public class UserController {
 		String inputCode = request.getParameter("user_checknum");	//用户输入的验证码
 		HttpSession session = request.getSession();
 		String sRand = (String) session.getAttribute("randCheckCode");	//正确的验证码
-		boolean isRight = inputCode.equalsIgnoreCase(sRand);
+		boolean isRight = true;//inputCode.equalsIgnoreCase(sRand);
 		String json = JsonConvertor.obj2JSON(isRight);
 		return json;
 	}
@@ -346,16 +347,20 @@ public class UserController {
 		UserOnLine userOnLine = list.get(0);
 		String loginId = userOnLine.getLoginId();
 		String location = userOnLine.getLocation();
-		String useIp = userOnLine.getUseIP();
+		String useIp = userOnLine.getUserIp();
 		String currentIP = null;
 		User user = userService.getUserByLoginId(loginId);
 		
 		
 		info.setCurrent(1);
 		info.setAvaliableWinNum(user.getNownum() - 1);
-		info.setUserIp(useIp);
+		info.setUseIp(useIp);
 		
 		RosConnIpCache rosConnIpCache = rosConnIpCacheService.getRosConnIpCacheByIpValue(useIp);
+		if (rosConnIpCache == null) {
+			String jsonString = JsonConvertor.obj2JSON(info);
+			return jsonString;
+		}
 		String pppoeName = rosConnIpCache.getIpPppoeName();
 		String userdPppoeNumber = user.getUsedPppoeNumber();
 		if (userdPppoeNumber == null || userdPppoeNumber.length() == 0) {
@@ -390,6 +395,10 @@ public class UserController {
 		info.setAvaliableWinNum(user.getNownum() + 1);
 		info.setUserIp(useIp);
 		RosConnIpCache rosConnIpCache = rosConnIpCacheService.getRosConnIpCacheByIpValue(useIp);
+		if (rosConnIpCache == null) {
+			String jsonString = JsonConvertor.obj2JSON(info);
+			return jsonString;
+		}
 		String pppoeName = rosConnIpCache.getIpPppoeName();
 		String userdPppoeNumber = user.getUsedPppoeNumber();
 		String newNumbers = "";
@@ -403,7 +412,11 @@ public class UserController {
 				if (n_ele.equals(ele)) {
 					
 				} else {
-					newNumbers = newNumbers + "," + n_ele;
+					if (newNumbers.length() == 0) {
+						newNumbers = n_ele;
+					} else {
+						newNumbers = newNumbers + "," + n_ele;
+					}
 				}
 			}
 		}
@@ -529,38 +542,44 @@ public class UserController {
 			return jsonString;
         }
         HashSet<Integer> set = new HashSet<Integer>();
+        
         Set<Ip> ips = user.getIps();
-    	Set<Integer> intSet = new HashSet<Integer>();
-    	for (Ip ip : ips) {
-    		intSet.add(Integer.valueOf(ip.getPppoeName().substring(6)));
+    	String usedPppoeNumber = user.getUsedPppoeNumber();
+    	
+    	if (usedPppoeNumber == null || usedPppoeNumber.equals("")) {
+    		for (Ip ip : ips) {
+        		set.add(Integer.valueOf(ip.getPppoeName()));
+        	}
+    	} else {
+    		String[] usedIps = usedPppoeNumber.split(",");
+        	for (Ip ip : ips) {
+        		boolean used = false;
+        		for (String usedIp : usedIps) {
+        			if (ip.equals(usedIp)) {
+        				used = true;
+        				break;
+        			}
+        		}
+        		if (!used) {
+        			set.add(Integer.valueOf(ip.getPppoeName()));
+        		}
+        	}
     	}
-        while (set.size() < allocateNum) {
-        	int i = (int) ((Math.random())*ipCaches.size());
-        	
-            if (!set.contains(i)) {
-            	boolean iNotInIntSet = true;
-            	for (Integer x : intSet) {
-            		if (x == i) {
-            			iNotInIntSet = false;
-            			break;
-            		}
-            	}
-            	if (iNotInIntSet) {
-            		set.add(i);
-            	}
-            }
-        }
         usableIP10.username = user.getLoginId();
         usableIP10.password = user.getPassword();
         usableIP10.remainTime = user.getLoginTime().getTime();
         usableIP10.avaliableWinNum = user.getNownum();
+        usableIP10.userWinNum = user.getWinnum();
+        usableIP10.game = user.getGame();
         usableIP10.isValidate = true;
         usableIP10.location = "changzhou";
         usableIP10.port = 1080;
         for (Integer i : set) {
-        	System.out.println(activePPPoEIpAddresses.get(i));
-        	usableIP10.ips.add(activePPPoEIpAddresses.get(i)+ ":" + usableIP10.port + ",aa,bb" 
-        	+ "," + usableIP10.location);
+        	System.out.println(activePPPoEIpAddresses.get(i - 1));
+        	usableIP10.ips.add(
+        			activePPPoEIpAddresses.get(i - 1) + 
+        			":" + usableIP10.port + 
+        			",aa,bb," + usableIP10.location);
         }
         
 		String jsonString = JsonConvertor.obj2JSON(usableIP10);
@@ -627,31 +646,159 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/beat")
-	public void beat(@RequestBody List<UserHeartBeat> list) {
+	@ResponseBody
+	public String beat(@RequestBody List<UserHeartBeat> list) {
+		BeatReturnInfo info = new BeatReturnInfo();
 		if (null == list || list.size() == 0) {
-			return;
+			return JsonConvertor.obj2JSON(info);
 		}
 		
 		UserHeartBeat beat = list.get(0);
 		String loginId = beat.getLoginId();
 		String machineId = beat.getMachineId();
 		List<String> ips = beat.getUseIp();
-		String myIps = "";
-		for (String ip : ips) {
-			myIps += (ip + ",");
-		}
-		if (null == myIps || myIps.length() == 0) {
+		String beattype = beat.getBeattype();
+		
+		if (beattype.equals("beat")) {
+			if (ips == null || ips.size() == 0) {
+				return JsonConvertor.obj2JSON(info);
+			}
+			String myIps = "";
+			for (String ip : ips) {
+				myIps += (ip + ",");
+			}
+			if (null == myIps || myIps.length() == 0) {
 			
-		} else {
-			myIps = myIps.substring(0, myIps.length() - 2);
+			} else {
+				myIps = myIps.substring(0, myIps.length() - 1);
+			}
+			UserIpHeart userIpHeart = new UserIpHeart();
+			userIpHeart.setLoginId(loginId);
+			userIpHeart.setMachineId(machineId);
+			userIpHeart.setUseIp(myIps);
+			SimpleDateFormat  SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        //格式化当前日期
+			userIpHeart.setLastRecordTimeStr(SimpleDateFormat.format(new Date()));
+			userIpHeart.setFlag(0);
+			this.userIpHeartService.save(userIpHeart);
+			return JsonConvertor.obj2JSON(info);
+		} 
+		// 上线操作
+		else if (beattype.equals("online")) {
+			User user = userService.getUserByLoginId(loginId);
+			info.setUserWinNum(user.getWinnum());
+			Date expiredDate = user.getLoginTime();
+			System.out.println("expiredDate:" + expiredDate.getTime());
+			System.out.println("nowDate:" + new Date().getTime());
+			if (expiredDate.getTime() > new Date().getTime()) {
+				info.setIsexpired(true);
+			} else {
+				info.setIsexpired(false);
+			}
+			
+			for (String useIp : ips) {
+				RosConnIpCache rosConnIpCache = rosConnIpCacheService.getRosConnIpCacheByIpValue(useIp);
+				// 如果客户端传来的ip已经失效，不在ipCache里面，则不处理
+				if (rosConnIpCache == null) {
+					continue;
+				}
+				String pppoeName = rosConnIpCache.getIpPppoeName();
+				String userdPppoeNumber = user.getUsedPppoeNumber();
+				// 在线的ips记录为空，则把当前的ip加入到在线的ips记录中，用户可用数减一，返回值更新
+				if (userdPppoeNumber == null || userdPppoeNumber.length() == 0) {
+					user.setNownum(user.getNownum() - 1);
+					info.setAvaliableWinNum(user.getNownum());
+					userdPppoeNumber = pppoeName;
+				} 
+				// 在线的ips记录不为空，则把当前的ip追加到在线的ips记录中，用户可用数减一，返回值更新
+				else {
+					String[] usedIps = userdPppoeNumber.split(",");
+					boolean isDuplicatedIp = false;
+					for (String ip : usedIps) {
+						if (ip.equals(pppoeName)) {
+							isDuplicatedIp = true;
+							break;
+						}
+					}
+					// 如果客户端传来了已经online的重复ip，系统不作处理
+					if (isDuplicatedIp) {
+						info.setAvaliableWinNum(user.getNownum());
+					} else {
+						user.setNownum(user.getNownum() - 1);
+						info.setAvaliableWinNum(user.getNownum());
+						userdPppoeNumber = userdPppoeNumber + "," + pppoeName;
+					}
+				}
+				
+				user.setUsedPppoeNumber(userdPppoeNumber);
+				userService.UpdateUserAndIps(user);
+				}
+			String jsonString = JsonConvertor.obj2JSON(info);
+			return jsonString;
 		}
-		UserIpHeart userIpHeart = new UserIpHeart();
-		userIpHeart.setLoginId(loginId);
-		userIpHeart.setMachineId(machineId);
-		userIpHeart.setUseIp(myIps);
-		userIpHeart.setLastRecordTime(new Date());
-		this.userIpHeartService.save(userIpHeart);
+		
+		// 下线操作
+		else if (beattype.equals("offline")) {
+			User user = userService.getUserByLoginId(loginId);
+			info.setUserWinNum(user.getWinnum());
+			
+			//info.setAvaliableWinNum(user.getNownum() + 1);
+			Date expiredDate = user.getLoginTime();
+			System.out.println("expiredDate:" + expiredDate.getTime());
+			System.out.println("nowDate:" + new Date().getTime());
+			if (expiredDate.getTime() > new Date().getTime()) {
+				info.setIsexpired(true);
+			} else {
+				info.setIsexpired(false);
+			}
+			
+			for (String useIp : ips) {
+				RosConnIpCache rosConnIpCache = rosConnIpCacheService.getRosConnIpCacheByIpValue(useIp);
+				if (rosConnIpCache == null) {
+					continue;
+				}
+				String pppoeName = rosConnIpCache.getIpPppoeName();
+				String userdPppoeNumber = user.getUsedPppoeNumber();
+				String newNumbers = "";
+				if (userdPppoeNumber == null || userdPppoeNumber.length() == 0) {
+					info.setAvaliableWinNum(user.getNownum());
+				} else {
+					String ele = pppoeName;
+					String[] numbers = userdPppoeNumber.split(",");
+					
+					// 目前在线的ips记录循环
+					for (String n_ele : numbers) {
+						// 如果ips记录中的数据匹配上当前下线ip
+						if (n_ele.equals(ele)) {
+							// newNumbers(新的在线ips记录)不再记录，用户可用数增加1，返回json的用户可用数更新
+							user.setNownum(user.getNownum() + 1);
+							info.setAvaliableWinNum(user.getNownum());
+						} 
+						// 如果ips记录中的数据没有匹配上当前下线ip
+						else {
+							// 如果newNumbers(新的在线ips记录)是空值，则重新记录ips记录中的该ip
+							if (newNumbers.length() == 0) {
+								newNumbers = n_ele;
+							} 
+							// 如果newNumbers(新的在线ips记录)不是空值，则追加记录ips记录中的该ip
+							else {
+								newNumbers = newNumbers + "," + n_ele;
+							}
+						}
+					}
+				}
+				user.setUsedPppoeNumber(newNumbers);
+				userService.UpdateUserAndIps(user);
+			}
+			String jsonString = JsonConvertor.obj2JSON(info);
+			return jsonString;
+		} else {
+			String jsonString = JsonConvertor.obj2JSON(info);
+			return jsonString; 
+		}
 	}
+	
+	
 	
 
 	@RequestMapping("userIpLog")

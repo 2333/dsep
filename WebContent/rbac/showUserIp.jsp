@@ -81,13 +81,14 @@
 	 		url: '${ContextPath}/rbac/userIpQuery',
 	        datatype: 'json',
 	        mtype: 'GET',
-			colNames:['用户ID','登陆ID','密码','姓名','onlineIp'],
+			colNames:['用户ID','登陆ID','密码','姓名','PPPOE序号(在线显示实际IP)', '在线状态'],
 			colModel:[
 	             	{name:'user.id',index:'id',width:60,align:"center", hidden:true},
 					{name:'user.loginId',index:'loginId', width:90,align:"center", sorttype:"String",editable:true },
 					{name:'user.password',index:'password', width:100,align:"center", sorttype:"String",editable:true },	
 					{name:'user.name',index:'name', width:80,align:"center", align:"center",sorttype:"String",editable:true },
-					{name:'onlineIp',index:'onlineIp', width:80,align:"center", align:"center",sorttype:"String",editable:true}
+					{name:'onlineIp',index:'onlineIp', width:80,align:"center", align:"center",sorttype:"String",editable:true},
+					{name:'status',index:'status', width:80,align:"center", align:"center",sorttype:"String",editable:true}
 			],
 			height:'100%',
 			autowidth:true,
@@ -95,7 +96,7 @@
 			rowNum:20,
 			rowList:[20,30],
 			viewrecords: true,
-			sortname: 'name',
+			sortname: 'user.id, onlineIp',
 			sortorder: 'desc',
 			caption: "用户IP列表",
 		    jsonReader: {    //jsonReader来跟服务器端返回的数据做对应  

@@ -3,7 +3,7 @@ package com.dsep.controller.rbac;
 public class UserOnLine {
 	private String loginId;
 	private String location;
-	private String useIP;
+	private String userIp;
 	public String getLoginId() {
 		return loginId;
 	}
@@ -16,11 +16,10 @@ public class UserOnLine {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getUseIP() {
-		return useIP;
+	public String getUserIp() {
+		return userIp;
 	}
-	public void setUseIP(String useIP) {
-		this.useIP = useIP;
+	public void setUserIp(String userIp) {
+		this.userIp = userIp;
 	}
-	
 }

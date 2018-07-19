@@ -43,7 +43,7 @@ public class RosConnIpCacheDaoImpl extends DaoImpl< RosConnIpCache,Integer> impl
 	@Override
 	public RosConnIpCache getRosConnIpCacheByPppoeAndLocation(String pppoe,
 			String location) {
-		String sql = "select * from dsep_rbac_rosconnipcache where PPPOENAME=? AND ROSLOCATION =?";
+		String sql = "select * from dsep_rbac_rosconnipcache where IPPPPOENAME=? AND ROSLOCATION =?";
 		List<RosConnIpCache> list = super.sqlFind(sql, new Object[]{pppoe, location});
 		if (null == list || list.size() == 0) {
 			return null;

@@ -26,7 +26,8 @@ public class UserIpHeart implements Serializable{
 	private String loginId;
 	private String machineId;
 	private String useIp;
-	private Date lastRecordTime;
+	private String lastRecordTimeStr;
+	private Integer flag;
 	
 	
 	@Id
@@ -66,21 +67,23 @@ public class UserIpHeart implements Serializable{
 		this.useIp = useIp;
 	}
 
-	@Column(name="LASTRECORDTIME")
-	public Date getLastRecordTime() {
-		return lastRecordTime;
+
+	@Column(name="LASTRECORDTIMESTR", length=50)
+	public String getLastRecordTimeStr() {
+		return lastRecordTimeStr;
 	}
 
-	public void setLastRecordTime(Date lastRecordTime) {
-		this.lastRecordTime = lastRecordTime;
+	public void setLastRecordTimeStr(String lastRecordTimeStr) {
+		this.lastRecordTimeStr = lastRecordTimeStr;
 	}
 
 	
+	@Column(name="FLAG")
+	public Integer getFlag() {
+		return flag;
+	}
 
-
-	
-
-	
-
-	
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
 }

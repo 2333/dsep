@@ -34,22 +34,27 @@ public class RollingHeart {
 						String[] numbers = userdPppoeNumber.split(",");
 						
 						for (String n_ele : numbers) {
+							// 需要下线的ip命中在线ips列表
 							if (n_ele.equals(ele)) {
-								
+								user.setNownum(user.getNownum() + 1);
 							} else {
-								newNumbers = newNumbers + "," + n_ele;
+								if (newNumbers.length() == 0) {
+									newNumbers = n_ele;
+								} else {
+									newNumbers = newNumbers + "," + n_ele;
+								}
 							}
 						}
 					}
-					user.setNownum(user.getNownum() + 1);
+					
 					user.setUsedPppoeNumber(newNumbers);
 				}
 				
-				//userService.UpdateUserAndIps(user);
+				userService.UpdateUserAndIpsByMerge(user);
 			}
 			
 		}
-		
+		userIpHeartService.updateHeartDataMoreThan300SecondsNotAttendCalc();
 		
 		
 		

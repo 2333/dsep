@@ -510,26 +510,47 @@ public class UserServiceImpl implements UserService{
 		}
 		userDao.saveOrUpdate(user);
 	}
+	
+	@Override
+	public void UpdateUserAndIpsByMerge(User user) {
+		Set<Ip> ips = user.getIps();
+		for (Ip ip : ips) {
+			ipDao.saveOrUpdate(ip);
+		}
+		userDao.merge(user);
+	}
+	
 	@Override
 	public PageVM<UserIpOnLineVM> userIpQuery(int pageIndex, int pageSize,
 			Boolean desc, String orderProperName, String userType) {
 		// TODO Auto-generated method stub
 		List<User> list=userDao.getPageUsersByUserType(pageIndex, pageSize,desc,orderProperName, userType);
-		int totalCount=userDao.getUsersByUserType(userType).size();
+		
+		int totalCount=0;//userDao.getUsersByUserType(userType).size();
+		for (User u : list) {
+			totalCount += u.getIps().size();
+		}
 		
 		List<UserIpOnLineVM> vmList= new ArrayList<UserIpOnLineVM>();
 		List<RosConnIpCache> caches = rosConnIpCacheService.getAllIpsByRosLocation("changzhou");
 		for(User u : list){
 			System.out.println(u.getUsedPppoeNumber());
 			Set<Ip> ips = u.getIps();
-			if (null != u.getUsedPppoeNumber() && u.getUsedPppoeNumber().length() != 0) {
-				String[] pppoeNumbers = u.getUsedPppoeNumber().split(",");
+			// 实际有ips的 用户才循环
+			if (ips.size() != 0) {
+				String[] pppoeNumbers = new String[] {};
+				// 
+				if (null == u.getUsedPppoeNumber() || u.getUsedPppoeNumber().length() == 0) {
+					
+				} else {
+					pppoeNumbers = u.getUsedPppoeNumber().split(",");
+				}
 				for (Ip ip : ips) {
 					boolean notChangedFlag = true;
 					for (String pppoe : pppoeNumbers) {
-						
 						if (ip.getPppoeName().equals(pppoe)) {
 							notChangedFlag = false;
+							break;
 						} 
 					}	
 					UserIpOnLineVM vm= new UserIpOnLineVM();

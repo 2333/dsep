@@ -3,7 +3,7 @@ package com.dsep.controller.rbac;
 public class UserOnLineReturnInfo {
 	private Integer current;
 	private Integer avaliableWinNum;
-	private String userIp;
+	private String useIp;
 	public Integer getCurrent() {
 		return current;
 	}
@@ -16,10 +16,10 @@ public class UserOnLineReturnInfo {
 	public void setAvaliableWinNum(Integer avaliableWinNum) {
 		this.avaliableWinNum = avaliableWinNum;
 	}
-	public String getUserIp() {
-		return userIp;
+	public String getUseIp() {
+		return useIp;
 	}
-	public void setUserIp(String userIp) {
-		this.userIp = userIp;
+	public void setUseIp(String useIp) {
+		this.useIp = useIp;
 	}
 }

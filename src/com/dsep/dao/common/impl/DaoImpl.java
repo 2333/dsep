@@ -151,6 +151,10 @@ public class DaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 	public void saveOrUpdate(T entity) {
 		getSession().saveOrUpdate(entity);
 	}
+	
+	public void merge(T entity) {
+		getSession().merge(entity);
+	}
 
 	public int Count() {
 		String hql = "select count(*) from " + this.entityClass.getSimpleName();

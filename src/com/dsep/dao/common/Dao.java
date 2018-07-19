@@ -79,6 +79,14 @@ public interface Dao<T, PK> {
 	 * @param 实体
 	 */
 	public abstract void saveOrUpdate(T entity);
+	
+	
+	/**
+	 * 持久化或更新实体
+	 * 
+	 * @param 实体
+	 */
+	public abstract void merge(T entity);
 
 	/**
 	 * 取得该实体的数量

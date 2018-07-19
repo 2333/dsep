@@ -66,7 +66,7 @@
    <bean id="rollingHeartTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="rollingHeartJobDetail"></property>
         <property name="cronExpression">   
-           <value>0 */20 * * * ?</value>
+           <value>0 */5 * * * ?</value>
            <!-- <value>0/1 * * * * ?</value> -->
         </property>
    </bean>

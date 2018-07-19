@@ -48,6 +48,14 @@ public interface UserService {
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
 	public abstract void UpdateUserAndIps(User user);
 	
+	
+	/** 更新User,包括该用户的ip
+	 * @param user，其中user中已经set了ip set
+	 * @return
+	 */
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED,readOnly=false)
+	public abstract void UpdateUserAndIpsByMerge(User user);
+	
 	/** 验证user用户名密码是否正确
 	 * @param user
 	 * @return

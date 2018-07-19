@@ -29,4 +29,11 @@ public interface UserIpHeartService {
 		```
 	 */
 	public abstract List<UserIpHeart> getNoHeartData();
+	
+	/***
+	 * // 300s，即5分钟以上的数据全部设置为标记位，不再参与运算
+	 * @return
+	 */
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED,readOnly=false)
+	public abstract List<UserIpHeart> updateHeartDataMoreThan300SecondsNotAttendCalc();
 }

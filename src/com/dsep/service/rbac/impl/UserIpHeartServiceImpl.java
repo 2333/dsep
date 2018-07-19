@@ -38,6 +38,13 @@ public class UserIpHeartServiceImpl implements UserIpHeartService
 
 	@Override
 	public List<UserIpHeart> getNoHeartData() {
-		return userIpHeartDao.getNoHeartData();
+		List<UserIpHeart> list = userIpHeartDao.getNoHeartData();
+		return list;
+	}
+
+	@Override
+	public List<UserIpHeart> updateHeartDataMoreThan300SecondsNotAttendCalc() {
+		userIpHeartDao.updateHeartDataMoreThan300SecondsNotAttendCalc();
+		return null;
 	}
 }
