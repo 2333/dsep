@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .settings/
 build/
 .classpath
@@ -6,3 +7,14 @@ WebContent/WEB-INF/lib/
 WebContent/TEMPLATES/
 WebContent/WEB-INF/classes/
 src/config/fonts/
+=======
+.settings/
+build/
+.classpath
+.project
+WebContent/WEB-INF/lib/
+WebContent/TEMPLATES/
+WebContent/WEB-INF/classes/
+src/config/fonts/
+/bin/
+>>>>>>> 53593b19682c66f74c0864b8aeaafd7eb6f35d12

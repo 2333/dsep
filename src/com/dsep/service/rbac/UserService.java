@@ -234,4 +234,5 @@ public interface UserService {
 	public abstract void updateUserPassword(String password, Integer id);
 
 	
+
 }
